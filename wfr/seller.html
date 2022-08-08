@@ -3,10 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Seller Portal</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="css/seller.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="js/seller.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="/wfr/img/favicon/favicon.ico">
 </head>
 <body>
-    <iframe frameborder="0" src="user.html" width="540" height="365">
-        Your browser does not support IFrames
-    </iframe>
+
+<div style="display: flex">
+    <button onclick="window.document.location='products.html'" class="btn btn-secondary top-button">Back</button>
+    <button onclick="window.document.location='edit_profile.html'" class="btn btn-secondary top-button">Edit Profile</button>
+</div>
+
+<iframe src="user.html" width="540" height="365">
+    Your browser does not support IFrames
+</iframe>
+
+<div class="form-box">
+    <h1><b>Product</b></h1>
+    <br>
+    <form class="form-display" action="seller.php">
+        <label for="pname" class="form-label">Name</label>
+        <input maxlength="20" required type="text" id="pname" name="pname" class="form-control">
+
+        <div class="spacing"></div>
+
+        <label for="pdesc" class="form-label">Description</label>
+        <textarea maxlength="200" required id="pdesc" name="pdesc" class="form-control"></textarea>
+
+        <div class="spacing"></div>
+
+        <label for="price" class="form-label">Price</label>
+        <div style="display: flex">
+            <div style="margin: auto 10px;">RM</div>
+            <input required type="number" id="price" name="price" min="0" max="999" step="0.01" class="form-control">
+        </div>
+
+        <div class="spacing"></div>
+
+        <label for="images" class="form-label">Images</label>
+        <input class="form-control" type="file" id="images" multiple accept="image/png, image/jpeg, image/jpg">
+        <small>Select upto 5 images to display (optional)</small>
+        <div class="spacing"></div>
+
+        <label for="mcode" class="form-label">Modification Code</label>
+        <input minlength="5" maxlength="200" required type="text" id="mcode" name="mcode" class="form-control">
+        <small>Enter a secret code to allow you to modify the product details in the future.
+        Be careful, <b>losing this code means you will not be able to modify the product details.</b><br>
+        The product listing will be automatically deleted in <b>10 days</b>.</small>
+
+        <div class="spacing"></div>
+
+        <input class="btn btn-secondary" type="submit" value="Submit">
+    </form>
+</div>
+
 </body>
 </html>
