@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/products.css" rel="stylesheet">
     <link href="css/cards.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
@@ -19,25 +19,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
             integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
 
-    <link rel="apple-touch-icon" sizes="76x76" href="/wfr/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/wfr/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/wfr/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/wfr/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/wfr/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/wfr/img/favicon/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Community Market">
-    <meta name="application-name" content="Community Market">
-    <meta name="msapplication-TileColor" content="#00aba9">
-    <meta name="msapplication-config" content="/img/browserconfig.xml">
-
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/x-icon" href="/wfr/img/favicon/favicon.ico">
 </head>
 
 <body>
 
     <div id="fadein"></div>
+
+    <div class="nav">
+        <div class="nav-title">Waterfront Residence</div>
+        <button onclick="window.location.href='help.html'" class="nav-button">HELP</button>
+        <button onclick="window.location.href='seller.html'" class="nav-button">SELL STUFF</button>
+    </div>
+
+    <div class="nav-space"></div>
 
     <!-- Contact details popup -->
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
@@ -50,11 +47,11 @@
                 <div class="modal-body">
                     The seller contact details are displayed below.
                     Keep in mind the seller will be notified of your interest.
-                    However, your identity will be kept a secret.
+                    However, your identity will be kept a secret.<br>
+                    <button onclick="contactWhatsapp()" class="contact-whatsapp"><i class="fa fa-whatsapp"></i>   Whatsapp</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -92,6 +89,11 @@
                 <button id="unlike0" onclick="unlike(0)" class="product-button hidden"><i class="fa fa-heart"></i></button>
                 <button id="desc0" onclick="toggleDesc(0)" class="product-button"><i class="fa fa-navicon"></i></button>
                 <button id="link0" onclick="openLink(0)" class="product-button"><i class="fa fa-external-link"></i></button>
+
+                <div class="product-price">
+                    RM 99.99
+                </div>
+
                 <div class="product-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                     when an unknown printer took a galley of type and scrambled it to make a type
@@ -106,7 +108,9 @@
                     making it look like readable English. Many desktop publishing packages and
                     web page editors now use Lorem Ipsum as their default model text, and a
                     search for 'lorem ipsum' will uncover many web sites still in their infancy.</div>
-                <button type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Interested</button>
+                <button onclick="interested(0)" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Interested</button>
+
+
             </div>
 
 

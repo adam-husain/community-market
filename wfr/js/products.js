@@ -1,6 +1,8 @@
 const MaxImagesAllowed = 5
+let interestedProd = 0
+let prevScroll = 0
 
-window.onload = function() {
+window.onload = () => {
     setTimeout(function() {
         document.getElementById("fadein").remove()
     },1000)
@@ -13,6 +15,13 @@ window.onload = function() {
     }
 };
 
+window.onscroll = () => {
+    const scrollTop = $(window).scrollTop()
+    $('.nav').toggleClass('nav-hidden', scrollTop > prevScroll);
+
+    prevScroll = scrollTop
+}
+
 /**
  * Check if an element is overflowing
  * @param element
@@ -21,6 +30,10 @@ window.onload = function() {
 function isElementOverflowing(element) {
     return element.scrollHeight > element.clientHeight
         || element.scrollWidth > element.clientWidth
+}
+
+function contactWhatsapp() {
+
 }
 
 function carouselChange(cardIndex, increment) {
@@ -76,6 +89,10 @@ function toggleDesc(cardIndex) {
 
 function openLink(cardIndex) {
 
+}
+
+function interested(cardIndex) {
+    interestedProd = cardIndex
 }
 
 function getCard(cardIndex) {

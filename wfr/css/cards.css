@@ -88,16 +88,20 @@
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
 }
 
+.product-price {
+    margin: 10px 10px 0 0;
+    float: right;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
 
 button, button:focus {
     outline: none;
-    background: transparent;
     border: 1px solid transparent;
 }
 
 button:active {
-    outline: none;
-    background: transparent;
     border: 1px solid grey;
 }
 
