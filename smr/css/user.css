@@ -50,57 +50,6 @@ html, body {
 .profile main {
     display: block;
 }
-.profile main dl {
-    display: block;
-    width: 100%;
-}
-.profile main dl dt,
-.profile main dl dd {
-    float: left;
-    padding: 8px 5px;
-    margin: 0;
-    border-bottom: 1px solid #e1e1e1;
-}
-.profile main dl dt a,
-.profile main dl dd a {
-    padding-right: 5px;
-}
-.profile main dl dt {
-    width: 30%;
-    padding-right: 10px;
-    font-weight: bold;
-}
-.profile main dl dt:after {
-    content: ":";
-}
-.profile main dl dd {
-    width: 70%;
-}
-.profile .toggle {
-    position: absolute;
-    background: #fff;
-    top: 30px;
-    left: 30px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 24px;
-    text-align: center;
-    z-index: 20;
-    vertical-align: middle;
-    box-shadow: 0 0 10px rgba(21, 21, 21, 0.15);
-    cursor: pointer;
-    border-radius: 20px;
-    user-select: none;
-    transition: box-shadow 300ms ease;
-}
-.profile .toggle:hover {
-    box-shadow: 0 0 10px rgba(21, 21, 21, 0.25);
-}
-.profile .toggle main {
-    font-size: 16px;
-}
-
 .view_details {
     position: absolute;
     top: -5000px;
@@ -120,37 +69,4 @@ html, body {
 label {
     display: block;
     cursor: pointer;
-}
-
-@media screen and (max-width: 520px) {
-    .profile {
-        padding: 1em;
-        margin: 1em;
-    }
-
-    .profile img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .profile main dl,
-    .profile main dl dt,
-    .profile main dl dd {
-        display: block;
-        width: 100%;
-        float: none;
-    }
-
-    .profile main dl dt {
-        border-bottom: none;
-    }
-
-    .profile main dl dd {
-        margin-bottom: 10px;
-    }
-
-    .profile .toggle {
-        top: 15px;
-        left: 15px;
-    }
 }

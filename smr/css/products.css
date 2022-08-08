@@ -51,19 +51,6 @@ body {
     animation-delay: 0.3s;
 }
 
-.contact-whatsapp {
-    margin: 20px;
-    float: right;
-    width: 100px;
-    height: 30px;
-    background-color: forestgreen;
-    color: white;
-    font-weight: bold;
-    font-size: 12px;
-    border-radius: 25px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-}
-
 .nav {
     background: darkslateblue;
     color: #fff;
@@ -89,10 +76,7 @@ body {
 }
 
 .nav-space {
-    padding-bottom: 80px;
-    right: 0;
-    top: 0;
-    left: 0;
+    padding-bottom: 110px;
 }
 
 .nav-button {
