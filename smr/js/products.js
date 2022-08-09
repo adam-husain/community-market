@@ -3,9 +3,9 @@ let interestedProd = 0
 let prevScroll = 0
 
 window.onload = () => {
-    setTimeout(function() {
+    setTimeout(function () {
         document.getElementById("fadein").remove()
-    },1000)
+    }, 1000)
 
     const product_titles = document.getElementsByClassName("product-title")
     for (const title of product_titles) {
@@ -46,8 +46,7 @@ function carouselChange(cardIndex, increment) {
             if (!image.classList.contains("hidden")) {
                 currentImage = i
             }
-        }
-        else {
+        } else {
             break
         }
     }
@@ -81,8 +80,7 @@ function toggleDesc(cardIndex) {
     const product = getCard(cardIndex);
     if (product.classList.contains("product-card-expanded")) {
         product.classList.remove("product-card-expanded")
-    }
-    else {
+    } else {
         product.classList.add("product-card-expanded")
     }
 }

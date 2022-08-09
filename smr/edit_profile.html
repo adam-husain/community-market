@@ -27,18 +27,18 @@
         <h1><b>Edit Profile</b><br></h1>
     </div>
 
-    <form class="px-4 py-3" action="edit_profile.php">
+    <form class="px-4 py-3" action="edit_profile.php" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" required>
+            <input name="name" type="text" class="form-control" id="name" required>
         </div>
         <div class="mb-3">
             <label for="pic" class="form-label">Profile Picture (optional)</label>
-            <input type="file" class="form-control" id="pic" accept="image/png, image/jpeg">
+            <input name="pic" type="file" class="form-control" id="pic" accept="image/png, image/jpeg">
         </div>
         <div class="mb-3">
             <label for="pic" class="form-label">How would you like to be referred</label>
-            <select class="form-select" aria-label="Pronouns">
+            <select name="pronouns" class="form-select" aria-label="Pronouns">
                 <option value="1" selected>Prefer not to say</option>
                 <option value="2">He/Him</option>
                 <option value="3">She/Her</option>

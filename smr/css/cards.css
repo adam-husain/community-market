@@ -96,14 +96,7 @@
 }
 
 
-button, button:focus {
-    outline: none;
-    border: 1px solid transparent;
-}
 
-button:active {
-    border: 1px solid grey;
-}
 
 .hidden {
     display: none;
