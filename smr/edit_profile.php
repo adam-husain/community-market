@@ -59,7 +59,7 @@ function uploadFile($tag, $dir)
         // DO NOT USE $_FILES[$tag]['name'] WITHOUT ANY VALIDATION !!
         // On this example, obtain safe unique name from its binary data.
         if (!move_uploaded_file($_FILES[$tag]['tmp_name'],
-            sprintf($dir . '%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext))) {
+            sprintf('img/profile/%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext))) {
             throw new RuntimeException('Failed to move uploaded file.');
         }
 
