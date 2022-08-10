@@ -9,16 +9,15 @@ $unique_id = uniqid(rand());
 $name = $_POST['name'];
 $pronouns = $_POST['pronouns'];
 
-
 $img_dir = './img/profile/';
-
-echo($unique_id . ':' . $img_dir . ':' . $name . ':' . $pronouns);
 
 $file_verification = uploadFile('pic', $img_dir);
 if ($file_verification) {
 
+    echo ('File uploaded');
+
 } else {
-    echo($file_verification);
+    echo ($file_verification);
 }
 
 function uploadFile($tag, $dir)
