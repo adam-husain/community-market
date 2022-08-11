@@ -26,10 +26,13 @@ if (strpos($file_verification, 'img/profile/') !== false) {
     else {
         $sql = "INSERT INTO User (`name`, pronouns, profile_url, whatsapp) VALUES (?, ?, ?, ?)";
         $query = $conn->prepare($sql);
+        if (!$query)
+            echo($conn->error);
         $query->bind_param("siss", $name, $pronouns, $file_verification, $whatsapp);
         $query->execute();
         $query->close();
     }
+    $conn->close();
 }
 else {
     echo ($file_verification);
