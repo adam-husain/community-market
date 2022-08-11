@@ -16,7 +16,7 @@ $name = $_POST['name'];
 $pronouns = (int) $_POST['pronouns'];
 $whatsapp = $_POST['whatsapp'];
 
-$img_dir = './img/profile/';
+$img_dir = 'img/profile/';
 
 $file_verification = uploadFile('pic', $img_dir);
 if ($file_verification === true) {
