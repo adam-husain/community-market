@@ -1,25 +1,40 @@
 <?php
 
+include '../dbconnect.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-echo "current user: ".get_current_user();
-
-echo "script was executed under user: ".exec('whoami');
 
 if (!hasPost('name') || !hasPost('pronouns')) {
     header('Location: edit_profile.html');
     exit();
 }
 
-$unique_id = uniqid(rand());
+$file = 'img/profile/default.jpeg';
 $name = $_POST['name'];
-$pronouns = $_POST['pronouns'];
+$pronouns = (int) $_POST['pronouns'];
+$whatsapp = $_POST['whatsapp'];
 
 $img_dir = './img/profile/';
 
 $file_verification = uploadFile('pic', $img_dir);
+if ($file_verification === true) {
+    $conn = smrConnect();
+    if ($conn === false) {
+        echo ('db error');
+    }
+    else {
+        $sql = "INSERT INTO User (name, pronouns, profile_url, whatsapp) VALUES (?, ?, ?, ?)";
+        $query = $conn->prepare($sql);
+        $query->bind_param("siss", $name, $pronouns, $file, $whatsapp);
+        $query->execute();
+        $query->close();
+    }
+}
+else {
+    echo ($file_verification);
+}
 
 function uploadFile($tag, $dir)
 {
@@ -59,11 +74,12 @@ function uploadFile($tag, $dir)
         // You should name it uniquely.
         // DO NOT USE $_FILES[$tag]['name'] WITHOUT ANY VALIDATION !!
         // On this example, obtain safe unique name from its binary data.
-        if (!move_uploaded_file($_FILES[$tag]['tmp_name'],
-            sprintf($dir.'%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext))) {
+        $filename = sprintf($dir.'%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext);
+        if (!move_uploaded_file($_FILES[$tag]['tmp_name'], $filename)) {
             throw new RuntimeException('Failed to move uploaded file.');
         }
 
+        $GLOBALS['file'] = $filename;
         return true;
 
     } catch (RuntimeException $e) {
