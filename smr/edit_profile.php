@@ -1,5 +1,13 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+echo "current user: ".get_current_user();
+
+echo "script was executed under user: ".exec('whoami');
+
 if (!hasPost('name') || !hasPost('pronouns')) {
     header('Location: edit_profile.html');
     exit();
@@ -12,13 +20,6 @@ $pronouns = $_POST['pronouns'];
 $img_dir = './img/profile/';
 
 $file_verification = uploadFile('pic', $img_dir);
-if ($file_verification) {
-
-    echo ('File uploaded');
-
-} else {
-    echo ($file_verification);
-}
 
 function uploadFile($tag, $dir)
 {
@@ -43,9 +44,9 @@ function uploadFile($tag, $dir)
         }
 
         // You should also check filesize here.
-        if ($_FILES[$tag]['size'] > 100000) {
+        /*if ($_FILES[$tag]['size'] > 100000) {
             throw new RuntimeException('Exceeded filesize limit.');
-        }
+        }*/
 
         // DO NOT TRUST $_FILES[$tag]['mime'] VALUE !!
         // Check MIME Type by yourself.
@@ -59,7 +60,7 @@ function uploadFile($tag, $dir)
         // DO NOT USE $_FILES[$tag]['name'] WITHOUT ANY VALIDATION !!
         // On this example, obtain safe unique name from its binary data.
         if (!move_uploaded_file($_FILES[$tag]['tmp_name'],
-            sprintf('img/profile/%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext))) {
+            sprintf($dir.'%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext))) {
             throw new RuntimeException('Failed to move uploaded file.');
         }
 
