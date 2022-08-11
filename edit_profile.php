@@ -11,7 +11,6 @@ if (!hasPost('name') || !hasPost('pronouns')) {
     exit();
 }
 
-$file = 'img/profile/default.jpeg';
 $name = $_POST['name'];
 $pronouns = (int) $_POST['pronouns'];
 $whatsapp = $_POST['whatsapp'];
@@ -19,15 +18,15 @@ $whatsapp = $_POST['whatsapp'];
 $img_dir = 'img/profile/';
 
 $file_verification = uploadFile('pic', $img_dir);
-if ($file_verification === true) {
+if (strpos($file_verification, 'img/profile/') !== false) {
     $conn = smrConnect();
     if ($conn === false) {
         echo ('db error');
     }
     else {
-        $sql = "INSERT INTO User (name, pronouns, profile_url, whatsapp) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO User (`name`, pronouns, profile_url, whatsapp) VALUES (?, ?, ?, ?)";
         $query = $conn->prepare($sql);
-        $query->bind_param("siss", $name, $pronouns, $file, $whatsapp);
+        $query->bind_param("siss", $name, $pronouns, $file_verification, $whatsapp);
         $query->execute();
         $query->close();
     }
@@ -79,8 +78,7 @@ function uploadFile($tag, $dir)
             throw new RuntimeException('Failed to move uploaded file.');
         }
 
-        $GLOBALS['file'] = $filename;
-        return true;
+        return $filename;
 
     } catch (RuntimeException $e) {
         return $e->getMessage();
