@@ -1,11 +1,3 @@
-body {
-    background-color: #eceff1;
-    color: #37474f;
-    font-family: "Raleway", sans-serif;
-    font-size: 16px;
-}
-
-
 @keyframes fadeinall {
     0% {
         opacity: 1;
@@ -49,52 +41,4 @@ body {
     animation: fadeinall 1s normal both;
     -webkit-animation-delay: 0.3s;
     animation-delay: 0.3s;
-}
-
-.nav {
-    background: darkslateblue;
-    color: #fff;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    position: fixed;
-    right: 0;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-    -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-    -moz-transition: -moz-transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-    transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-    display: ruby;
-}
-
-.nav-hidden {
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
-    transform: translateY(-100%);
-}
-
-.nav-space {
-    padding-bottom: 110px;
-}
-
-.nav-button {
-    width: 100px;
-    height: 30px;
-    background-color: lightblue;
-    color: black;
-    font-weight: bold;
-    font-size: 12px;
-    border-radius: 25px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-    margin: 0 10px 0 10px;
-    float: right;
-}
-
-.nav-title {
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 20px 0 20px;
 }

@@ -9,7 +9,7 @@
     padding: 20px;
     width: 20rem;
     height: 22rem;
-    background-color: aliceblue;
+    background-color: var(--primary-color);
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -21,7 +21,7 @@
 }
 
 .product-card:hover {
-    background-color: floralwhite;
+    background-color: var(--secondary-color);
 }
 
 .product-title {
@@ -46,12 +46,12 @@
     width: 0.6rem;
     height: 0.6rem;
     border-radius: 50%;
-    background-color: wheat;
+    background-color: var(--heading-color);
     margin: 10px 5px 5px 5px;
 }
 
 .selected {
-    background-color: #37474f;
+    background-color: var(--bg-color);
 }
 
 .product-image {
@@ -80,8 +80,8 @@
     margin: 12px 10px 0 0;
     width: 80px;
     height: 30px;
-    background-color: darkslateblue;
-    color: white;
+    background-color: #eceff1;
+    color: black;
     font-weight: bold;
     font-size: 12px;
     border-radius: 25px;

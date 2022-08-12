@@ -1,8 +1,7 @@
 const MaxImagesAllowed = 5
 let interestedProd = 0
-let prevScroll = 0
 
-window.onload = () => {
+window.addEventListener('load', () => {
     setTimeout(function () {
         document.getElementById("fadein").remove()
     }, 1000)
@@ -13,14 +12,7 @@ window.onload = () => {
             title.classList.add("marquee")
         }
     }
-};
-
-window.onscroll = () => {
-    const scrollTop = $(window).scrollTop()
-    $('.nav').toggleClass('nav-hidden', scrollTop > prevScroll);
-
-    prevScroll = scrollTop
-}
+})
 
 /**
  * Check if an element is overflowing
