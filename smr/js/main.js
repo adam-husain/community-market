@@ -2,8 +2,6 @@ window.addEventListener('load', () => {
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     const currentTheme = localStorage.getItem('theme');
 
-    // Todo: remove in deployment
-    document.documentElement.setAttribute('data-theme', 'dark');
     if (currentTheme) {
         document.documentElement.setAttribute('data-theme', currentTheme);
 
