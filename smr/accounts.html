@@ -68,12 +68,12 @@
                     </form>
                     <hr class="my-4">
                     <div class="d-grid mb-2">
-                        <button onclick="showRegister()" class="btn btn-secondary text-uppercase fw-bold">
+                        <button onclick="showRegister()" class="btn btn-secondary text-uppercase fw-bold" type="button">
                             <i class="fa fa-user me-2"></i> Register
                         </button>
                     </div>
                     <div class="d-grid">
-                        <button onclick="back()" class="btn btn-secondary text-uppercase fw-bold">
+                        <button onclick="window.history.back()" class="btn btn-secondary text-uppercase fw-bold" type="button">
                             <i class="fa fa-arrow-left me-2"></i> Back
                         </button>
                     </div>
@@ -106,8 +106,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="pronouns" class="form-label">How would you like to be referred</label>
-                            <select name="pronouns" id="pronouns" class="form-select" aria-label="Pronouns">
+                            <label for="register-pronouns" class="form-label">How would you like to be referred</label>
+                            <select name="register-pronouns" id="register-pronouns" class="form-select" aria-label="Pronouns">
                                 <option value="1" selected>Prefer not to say</option>
                                 <option value="2">He/Him</option>
                                 <option value="3">She/Her</option>
@@ -116,9 +116,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="whatsapp" class="form-label">Whatsapp Number</label>
-                            <input type="tel" class="form-control" id="whatsapp"
-                                   name="whatsapp"
+                            <label for="register-whatsapp" class="form-label">Whatsapp Number</label>
+                            <input type="tel" class="form-control" id="register-whatsapp"
+                                   name="register-whatsapp"
                                    required placeholder="Example: +60143531234" minlength="5">
                             <small>
                                 Only Whatsapp contact are allowed for now (more ways will be added soon)<br>
@@ -132,12 +132,12 @@
                         </div>
                         <hr class="my-4">
                         <div class="d-grid mb-2">
-                            <button onclick="showSignIn()" class="btn btn-secondary text-uppercase fw-bold" type="submit">
+                            <button onclick="showSignIn()" class="btn btn-secondary text-uppercase fw-bold" type="button">
                                 <i class="fa fa-user me-2"></i> Sign Up
                             </button>
                         </div>
                         <div class="d-grid">
-                            <button onclick="back()" class="btn btn-secondary text-uppercase fw-bold" type="submit">
+                            <button onclick="window.history.back()" class="btn btn-secondary text-uppercase fw-bold" type="button">
                                 <i class="fa fa-arrow-left me-2"></i> Back
                             </button>
                         </div>

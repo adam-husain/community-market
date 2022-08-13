@@ -15,7 +15,3 @@ function showRegister() {
     loginForm.style.display = 'none'
     registerForm.style.display = 'block'
 }
-
-function back() {
-    window.location.href = 'products.html'
-}

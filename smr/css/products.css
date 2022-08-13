@@ -33,7 +33,7 @@
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
-    background-color: #fff;
+    background-color: var(--bg-color);
     z-index: 999;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;

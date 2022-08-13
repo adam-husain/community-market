@@ -3,7 +3,7 @@ let interestedProd = 0
 
 window.addEventListener('load', () => {
     setTimeout(function () {
-        document.getElementById("fadein").remove()
+        document.getElementById("fadein")?.remove()
     }, 1000)
 
     const product_titles = document.getElementsByClassName("product-title")
