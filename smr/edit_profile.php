@@ -31,7 +31,7 @@ $img_dir = 'img/profile/';
 $file_verification = uploadFile('pic', $img_dir);
 $code = 0;
 if (is_string($file_verification)) {
-    $conn = smrConnect();
+    $conn = connect();
     if ($conn === false) {
         $code = 4;
     } else {
