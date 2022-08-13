@@ -13,13 +13,14 @@ window.addEventListener('load', () => {
     oReq.open("get",
         "http://myresidence.shop/smr/server/checkSession.php", false)
     oReq.send()
-
-
-
 })
 
 function onLogin(user) {
     const userFrame = document.getElementById('user-frame')
     const id = user['id']
     userFrame.src = 'user.html?id=' + id
+
+    setTimeout(function () {
+        document.getElementById("fadein")?.remove()
+    }, 1000)
 }
