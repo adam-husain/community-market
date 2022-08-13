@@ -2,10 +2,12 @@ window.addEventListener('load', () => {
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     const currentTheme = localStorage.getItem('theme');
 
+    // Todo: remove in deployment
+    document.documentElement.setAttribute('data-theme', 'dark');
     if (currentTheme) {
         document.documentElement.setAttribute('data-theme', currentTheme);
 
-        if (currentTheme === 'dark') {
+        if (currentTheme === 'dark' && toggleSwitch) {
             toggleSwitch.checked = true;
         }
     }
@@ -20,7 +22,7 @@ window.addEventListener('load', () => {
         }
     }
 
-    toggleSwitch.addEventListener('change', switchTheme, false);
+    toggleSwitch?.addEventListener('change', switchTheme, false);
 })
 
 let prevScroll = 0
