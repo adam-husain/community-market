@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
     oReq.onload = function () {
         const response = this.responseText
         if (response === 'false') {
-            window.location.href = '../accounts.html';
+            window.location.href = 'accounts.html';
         } else {
             const user = JSON.parse(response)
             onLogin(user)
