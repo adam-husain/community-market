@@ -31,10 +31,8 @@ h3 {
 
 /*Simple css to style it like a toggle switch*/
 .theme-switch-wrapper {
-    display: flex;
     align-items: center;
     margin: 10px 10px 10px 10px;
-    float: right;
 }
 
 .theme-switch {

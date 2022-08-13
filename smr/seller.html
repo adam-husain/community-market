@@ -3,84 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <title>Seller Portal</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
 
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700' rel='stylesheet' type='text/css'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700' rel='stylesheet'
+          type='text/css'>
+
+    <!-- Bootstrap -->
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Stylesheets -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/seller.css" rel="stylesheet">
+    <link href="css/cards.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
     <script src="js/seller.js"></script>
 
-    <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
+    <!-- Favicon -->
+    <link href="../favicon/favicon.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <b>SELLER PORTAL</b>
+        </a>
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input id="checkbox" type="checkbox"/>
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <button class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="new_product.html">New Product</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
 
 
 <div class="container">
 
-    <div class="nav">
-        <div class="nav-title"></div>
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round"></div>
-            </label>
-        </div>
-        <button onclick="window.location.href='edit_profile.html'" class="nav-button">EDIT PROFILE</button>
-        <button onclick="window.location.href='products.html'" class="nav-button">BACK</button>
-    </div>
-
-    <div class="nav-space"></div>
-
-    <iframe class="frame" src="user.html" height="350">
+    <iframe class="frame" height="350" id="user-frame" src="user.html" style="border-radius: 10px">
         Your browser does not support IFrames
     </iframe>
 
-    <h1><b>Product</b></h1>
-    <br>
-    <form class="form-display mb-5" action="seller.php" method="post" enctype="multipart/form-data">
-        <label for="pname" class="form-label">Name</label>
-        <input maxlength="20" required type="text" id="pname" name="pname" class="form-control">
+    <div class="mb-5"></div>
 
-        <div class="spacing"></div>
+    <h1 style="font-weight: bold">Your Products</h1>
 
-        <label for="pdesc" class="form-label">Description</label>
-        <textarea maxlength="200" required id="pdesc" name="pdesc" class="form-control"></textarea>
+    <div class="products">
 
-        <div class="spacing"></div>
 
-        <label for="price" class="form-label">Price</label>
-        <div style="display: flex">
-            <div style="margin: auto 10px;">RM</div>
-            <input required type="number" id="price" name="price" min="0" max="999" step="0.01" class="form-control">
+        <div class="product-card">
+            <div class="product-title">
+                Headphones
+            </div>
+
+            <div class="product-carousel">
+                <button onclick="carouselChange(0, -1)" class="btn"><i class="fa fa-arrow-left"></i></button>
+                <img id="image0.0" src="img/products/example1.jpeg" class="product-image" alt="Product">
+                <img id="image0.1" src="img/products/example2.jpeg" class="product-image hidden" alt="Product">
+                <img id="image0.2" src="img/products/example3.jpeg" class="product-image hidden" alt="Product">
+                <button onclick="carouselChange(0, 1)" class="btn"><i class="fa fa-arrow-right"></i></button>
+            </div>
+            <div class="carousel-indicator">
+                <div id="indicator0.0" class="indicator selected"></div>
+                <div id="indicator0.1" class="indicator"></div>
+                <div id="indicator0.2" class="indicator"></div>
+            </div>
+
+
+            <button id="like0" onclick="like(0)" class="product-button"><i class="fa fa-heart-o"></i></button>
+            <button id="unlike0" onclick="unlike(0)" class="product-button hidden"><i class="fa fa-heart"></i></button>
+            <button id="desc0" onclick="toggleDesc(0)" class="product-button"><i class="fa fa-navicon"></i></button>
+            <button id="link0" onclick="openLink(0)" class="product-button"><i class="fa fa-external-link"></i></button>
+
+            <div class="product-price">
+                RM 99.99
+            </div>
+
+            <div class="product-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                when an unknown printer took a galley of type and scrambled it to make a type
+                specimen book. It has survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in
+                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                and more recently with desktop publishing software like Aldus PageMaker
+                including versions of Lorem Ipsum. It is a long established fact that a
+                reader will be distracted by the readable content of a page when looking
+                at its layout. The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text, and a
+                search for 'lorem ipsum' will uncover many web sites still in their infancy.</div>
+            <button onclick="interested(0)" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Interested</button>
+
+
         </div>
 
-        <div class="spacing"></div>
 
-        <label for="images" class="form-label">Images</label>
-        <input class="form-control" type="file" id="images" multiple accept="image/png, image/jpeg, image/jpg">
-        <small>Select upto 5 images to display (optional)</small>
-        <div class="spacing"></div>
+    </div>
 
-        <label for="mcode" class="form-label">Modification Code</label>
-        <input minlength="5" maxlength="200" required type="text" id="mcode" name="mcode" class="form-control">
-        <small>Enter a secret code to allow you to modify the product details in the future.
-        Be careful, <b>losing this code means you will not be able to modify the product details.</b><br>
-        The product listing will be automatically deleted in <b>10 days</b>.</small>
-
-        <div class="spacing"></div>
-
-        <input class="btn btn-secondary" type="submit" value="Submit">
-    </form>
 </div>
 
 </body>

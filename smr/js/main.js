@@ -24,11 +24,3 @@ window.addEventListener('load', () => {
 
     toggleSwitch?.addEventListener('change', switchTheme, false);
 })
-
-let prevScroll = 0
-window.onscroll = () => {
-    const scrollTop = $(window).scrollTop()
-    $('.nav').toggleClass('nav-hidden', scrollTop > prevScroll);
-
-    prevScroll = scrollTop
-}
