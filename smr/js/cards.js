@@ -1,33 +1,6 @@
 const MaxImagesAllowed = 5
 let interestedProd = 0
 
-window.addEventListener('load', () => {
-    setTimeout(function () {
-        document.getElementById("fadein")?.remove()
-    }, 1000)
-
-    const product_titles = document.getElementsByClassName("product-title")
-    for (const title of product_titles) {
-        if (isElementOverflowing(title)) {
-            title.classList.add("marquee")
-        }
-    }
-})
-
-/**
- * Check if an element is overflowing
- * @param element
- * @returns {boolean}
- */
-function isElementOverflowing(element) {
-    return element.scrollHeight > element.clientHeight
-        || element.scrollWidth > element.clientWidth
-}
-
-function contactWhatsapp() {
-
-}
-
 function carouselChange(cardIndex, increment) {
     let currentImage = 0
     let maxImages = 0

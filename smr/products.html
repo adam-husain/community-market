@@ -18,7 +18,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/products.css" rel="stylesheet">
+    <link href="css/fadein.css" rel="stylesheet">
     <link href="css/cards.css" rel="stylesheet">
 
 
@@ -39,7 +39,14 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="js/products.js"></script>
+    <script src="js/cards.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(function () {
+                document.getElementById("fadein")?.remove()
+            }, 1000)
+        })
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">

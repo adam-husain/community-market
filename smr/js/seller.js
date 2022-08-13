@@ -16,11 +16,11 @@ window.addEventListener('load', () => {
 })
 
 function onLogin(user) {
-    const userFrame = document.getElementById('user-frame')
-    const id = user['id']
-    userFrame.src = 'user.html?id=' + id
-
     setTimeout(function () {
         document.getElementById("fadein")?.remove()
     }, 1000)
+
+    const userFrame = document.getElementById('user-frame')
+    const id = user['id']
+    userFrame.src = 'user.html?id=' + id
 }
