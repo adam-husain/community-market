@@ -43,13 +43,13 @@
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
                     <form action="server/accounts.php?action=login" method="post">
                         <div class="form-floating mb-3">
-                            <input required class="form-control" id="login-username" name="login-username" placeholder="Username"
-                                   type="text">
+                            <input class="form-control" id="login-username" name="login-username" placeholder="Username"
+                                   required type="text">
                             <label for="login-username">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input required class="form-control" id="login-password" name="login-password" placeholder="Password"
-                                   type="password">
+                            <input class="form-control" id="login-password" name="login-password" placeholder="Password"
+                                   required type="password">
                             <label for="login-password">Password</label>
                         </div>
 
@@ -68,12 +68,13 @@
                     </form>
                     <hr class="my-4">
                     <div class="d-grid mb-2">
-                        <button onclick="showRegister()" class="btn btn-secondary text-uppercase fw-bold" type="button">
+                        <button class="btn btn-secondary text-uppercase fw-bold" onclick="showRegister()" type="button">
                             <i class="fa fa-user me-2"></i> Register
                         </button>
                     </div>
                     <div class="d-grid">
-                        <button onclick="window.history.back()" class="btn btn-secondary text-uppercase fw-bold" type="button">
+                        <button class="btn btn-secondary text-uppercase fw-bold" onclick="window.history.back()"
+                                type="button">
                             <i class="fa fa-arrow-left me-2"></i> Back
                         </button>
                     </div>
@@ -86,29 +87,35 @@
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
-                    <form action="server/accounts.php?action=register" method="post" enctype="multipart/form-data">
+                    <form action="server/accounts.php?action=register" enctype="multipart/form-data" method="post">
                         <div class="form-floating mb-3">
-                            <input required maxlength="20" class="form-control" id="register-username" name="register-username" placeholder="Username" type="text">
+                            <input class="form-control" id="register-username" maxlength="20" name="register-username"
+                                   placeholder="Username" required type="text">
                             <label for="register-username">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input required class="form-control" id="register-password" name="register-password" placeholder="Password" type="password">
+                            <input class="form-control" id="register-password" name="register-password"
+                                   placeholder="Password"
+                                   required type="password">
                             <label for="register-password">Password</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input required maxlength="30" class="form-control" id="register-name" name="register-name" placeholder="Name" type="text">
+                            <input class="form-control" id="register-name" maxlength="30" name="register-name"
+                                   placeholder="Name"
+                                   required type="text">
                             <label for="register-name">Name</label>
                         </div>
                         <div class="mb-3">
                             <label for="register-pic">Profile Picture (Optional)</label>
-                            <input accept="image/png, image/jpeg" class="form-control" id="register-pic" name="register-pic"
-                                   placeholder="Profile Picture" type="file">
+                            <input accept="image/png, image/jpeg" class="form-control" id="register-pic"
+                                   name="register-pic" placeholder="Profile Picture" type="file">
                         </div>
 
                         <div class="mb-3">
-                            <label for="register-pronouns" class="form-label">How would you like to be referred</label>
-                            <select name="register-pronouns" id="register-pronouns" class="form-select" aria-label="Pronouns">
-                                <option value="1" selected>Prefer not to say</option>
+                            <label class="form-label" for="register-pronouns">How would you like to be referred</label>
+                            <select aria-label="Pronouns" class="form-select" id="register-pronouns"
+                                    name="register-pronouns">
+                                <option selected value="1">Prefer not to say</option>
                                 <option value="2">He/Him</option>
                                 <option value="3">She/Her</option>
                                 <option value="4">They/Them</option>
@@ -116,10 +123,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="register-whatsapp" class="form-label">Whatsapp Number</label>
-                            <input type="tel" class="form-control" id="register-whatsapp"
-                                   name="register-whatsapp"
-                                   required placeholder="Example: +60143531234" minlength="5">
+                            <label class="form-label" for="register-whatsapp">Whatsapp Number</label>
+                            <input class="form-control" id="register-whatsapp" minlength="5"
+                                   name="register-whatsapp" placeholder="Example: +60143531234" required type="tel">
                             <small>
                                 Only Whatsapp contact are allowed for now (more ways will be added soon)<br>
                             </small>
@@ -132,12 +138,14 @@
                         </div>
                         <hr class="my-4">
                         <div class="d-grid mb-2">
-                            <button onclick="showSignIn()" class="btn btn-secondary text-uppercase fw-bold" type="button">
+                            <button class="btn btn-secondary text-uppercase fw-bold" onclick="showSignIn()"
+                                    type="button">
                                 <i class="fa fa-user me-2"></i> Sign Up
                             </button>
                         </div>
                         <div class="d-grid">
-                            <button onclick="window.history.back()" class="btn btn-secondary text-uppercase fw-bold" type="button">
+                            <button class="btn btn-secondary text-uppercase fw-bold" onclick="window.history.back()"
+                                    type="button">
                                 <i class="fa fa-arrow-left me-2"></i> Back
                             </button>
                         </div>

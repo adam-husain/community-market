@@ -1,5 +1,25 @@
 window.addEventListener('load', () => {
-    const userFrame = document.getElementById('user-frame')
-    const id = 123
-    userFrame.src = 'user.html?id=' + id
+
+    const oReq = new XMLHttpRequest()
+    oReq.onload = function () {
+        const response = this.responseText
+        if (response === 'false') {
+            window.location.href = '../accounts.html';
+        } else {
+            const user = JSON.parse(response)
+            onLogin(user)
+        }
+    };
+    oReq.open("get",
+        "http://myresidence.shop/smr/server/checkSession.php", false)
+    oReq.send()
+
+
+
 })
+
+function onLogin(user) {
+    const userFrame = document.getElementById('user-frame')
+    const id = user['id']
+    userFrame.src = 'user.html?id=' + id
+}
