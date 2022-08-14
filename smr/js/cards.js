@@ -42,15 +42,15 @@ function unlike(cardIndex) {
 }
 
 function toggleDesc(cardIndex) {
-    const product = getCard(cardIndex);
-    if (product.classList.contains("product-card-expanded")) {
-        product.classList.remove("product-card-expanded")
+    const card = document.getElementsByClassName("product-card")[cardIndex]
+    if (card.classList.contains("product-card-expanded")) {
+        card.classList.remove("product-card-expanded")
     } else {
-        product.classList.add("product-card-expanded")
+        card.classList.add("product-card-expanded")
     }
 }
 
-function openLink(cardIndex) {
+function deleteProduct(cardIndex) {
 
 }
 
@@ -58,13 +58,10 @@ function interested(cardIndex) {
     interestedProd = cardIndex
 }
 
-function getCard(cardIndex) {
-    return document.getElementsByClassName("product-card")[cardIndex]
-}
 
-function getCardLayout(id, title, desc, imageUrl, price) {
+function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
     const imageId = 'image0.' + id;
-    return '<div class="product-card">' +
+    let cardHtml = '<div class="product-card">' +
         `<div class="product-title">${title}</div><` +
         'div class="product-carousel">' +
         //'<button onclick="carouselChange(0, -1)" class="btn"><i class="fa fa-arrow-left"></i></button>' +
@@ -76,12 +73,23 @@ function getCardLayout(id, title, desc, imageUrl, price) {
         //'<div id="indicator0.1" class="indicator"></div>' +
         //'<div id="indicator0.2" class="indicator"></div>' +
         '</div>' +
-        `<button id="like0" onclick="like(${id})" class="product-button"><i class="fa fa-heart-o"></i></button>` +
-        `<button id="unlike0" onclick="unlike(${id})" class="product-button hidden"><i class="fa fa-heart"></i></button>` +
-        `<button id="desc0" onclick="toggleDesc(${id})" class="product-button"><i class="fa fa-navicon"></i></button>` +
-        `<button id="link0" onclick="openLink(${id})" class="product-button"><i class="fa fa-external-link"></i></button>` +
-        `<div class="product-price">RM ${price}</div>` +
-        `<div class="product-description">${desc}</div>` +
-        `<button onclick="interested(${id})" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>` +
-        '</div>'
+        //`<button onclick="like(${id})" class="product-button"><i class="fa fa-heart-o"></i></button>` +
+        //`<button onclick="unlike(${id})" class="product-button hidden"><i class="fa fa-heart"></i></button>` +
+        `<button onclick="toggleDesc(${id})" class="product-button"><i class="fa fa-navicon"></i></button>` +
+        //`<button id="link0" onclick="openLink(${id})" class="product-button"><i class="fa fa-external-link"></i></button>` +
+        '';
+
+    if (deletable) {
+        cardHtml += `<button onclick="deleteProduct(${id})" class="product-button"><i class="fa fa-external-link"></i></button>`;
+    }
+
+    cardHtml += `<div class="product-price">RM ${price}</div>` +
+        `<div class="product-description">${desc}</div>`;
+
+    if (!deletable) {
+        cardHtml += `<button onclick="interested(${id})" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>`;
+    }
+    cardHtml += '</div>'
+
+    return cardHtml
 }
