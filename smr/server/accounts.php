@@ -103,7 +103,7 @@ function register(string $username, string $password, string $name, int $pronoun
 {
     $code = 0;
     $id = -1;
-    if (!preg_match('^(?=.{5,25}$)[a-z0-9]+(?:[._][a-z0-9]+)*[._]?$', $username)) {
+    if (!preg_match('^(?=.{5,20}$)[a-z0-9]+(?:[._][a-z0-9]+)*[._]?$', $username)) {
         $code = 1;
     }
 
@@ -116,7 +116,7 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     if ($code != 0) {
-        redirect("../seller.html?action=register&code=$code");
+        redirect("../accounts.html?action=register&code=$code");
         return;
     }
 
@@ -140,8 +140,8 @@ function register(string $username, string $password, string $name, int $pronoun
             if (!$result) {
                 $code = 5;
             } else {
-                $user = mysqli_fetch_assoc($result);
-                $id = $user['id'];
+                login($username, $password, true);
+                return;
             }
         }
     } else {
@@ -149,5 +149,5 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     $conn->close();
-    redirect("../seller.html?action=register&code=$code&id=$id");
+    redirect("../accounts.html?action=register&code=$code");
 }
