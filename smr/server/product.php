@@ -55,7 +55,7 @@ function newProduct(int $userId, string $name, string $desc, float $price, strin
     if (!$conn) $code = 2;
 
     if ($code == 0) {
-        $price = $price * 100; // Convert it to sen
+        $price = (int) ($price * 100); // Convert it to sen
         $sql = 'INSERT INTO Product (`name`, `description`, price, seller_id, image_url) VALUES (?, ?, ?, ?, ?)';
         $query = $conn->prepare($sql);
         $query->bind_param('ssiss', $name, $desc, $price, $userId, $file);

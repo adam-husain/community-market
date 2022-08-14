@@ -71,11 +71,11 @@ function getCardLayout(id, title, desc, imageUrl, price) {
         `<img id="${imageId}" src="${imageUrl}" class="product-image" alt="Product">` +
         //'<button onclick="carouselChange(0, 1)" class="btn"><i class="fa fa-arrow-right"></i></button>' +
         '</div>' +
-        //'<div class="carousel-indicator">' +
+        '<div class="carousel-indicator">' +
         //'<div id="indicator0.0" class="indicator selected"></div>' +
         //'<div id="indicator0.1" class="indicator"></div>' +
         //'<div id="indicator0.2" class="indicator"></div>' +
-        //'</div>' +
+        '</div>' +
         `<button id="like0" onclick="like(${id})" class="product-button"><i class="fa fa-heart-o"></i></button>` +
         `<button id="unlike0" onclick="unlike(${id})" class="product-button hidden"><i class="fa fa-heart"></i></button>` +
         `<button id="desc0" onclick="toggleDesc(${id})" class="product-button"><i class="fa fa-navicon"></i></button>` +
