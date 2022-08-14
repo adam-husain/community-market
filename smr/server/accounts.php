@@ -147,9 +147,9 @@ function register(string $username, string $password, string $name, int $pronoun
             $hash = hash('sha256', $password);
             $sql = "INSERT INTO User (username, `password`, `name`, pronouns, profile_url, whatsapp) 
             VALUES (?, ?, ?, ?, ?, ?)";
-            $query = $conn->prepare($sql);
+            $query = $conn->prepare($sql) or die($conn->error);
             $query->bind_param('sssiss', $username, $hash, $name, $pronouns, $pic, $whatsapp);
-            $query->execute();
+            $query->execute() or die($query->error);
             $result = $query->get_result();
 
             if (!$result) {
