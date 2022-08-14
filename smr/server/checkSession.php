@@ -8,11 +8,11 @@ error_reporting(E_ALL);
 include 'dbconnect.php';
 
 if (!isset($_COOKIE['session']))
-    exit('false');
+    exit('false, no cookie');
 $sessId = $_COOKIE['session'];
 
 $conn = connect();
-if (!$conn) exit('false');
+if (!$conn) exit('false, database error');
 $sql = "SELECT * FROM Session WHERE id = ?";
 $query = $conn->prepare($sql);
 $query->bind_param('s', $sessId);
@@ -21,7 +21,7 @@ $result = $query->get_result();
 $query->close();
 
 if (mysqli_num_rows($result) == 0) {
-    exit('false');
+    exit('false, session '.$sessId.' not found');
 }
 
 $id = (int) mysqli_fetch_assoc($result)['id'];
@@ -31,7 +31,7 @@ $query->bind_param('i', $id);
 $query->execute();
 $result = $query->get_result();
 
-if (!$result || mysqli_num_rows($result) == 0) exit('false');
+if (mysqli_num_rows($result) == 0) exit('false, session has no user');
 $user = mysqli_fetch_assoc($result);
 $json = json_encode($user);
 exit($json);

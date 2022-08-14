@@ -1,7 +1,7 @@
 const oReq = new XMLHttpRequest()
 oReq.onload = function () {
     const response = this.responseText
-    if (response === 'false') {
+    if (response.toLowerCase().startsWith('false')) {
         window.location.href = 'accounts.html';
     } else {
         const user = JSON.parse(response)
