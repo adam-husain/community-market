@@ -103,9 +103,13 @@
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
                     <form action="server/accounts.php?action=register" enctype="multipart/form-data" method="post">
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="register-username" maxlength="20" name="register-username"
+                            <input pattern="^(?=.{5,20}$)[a-zA-Z0-9]+(?:[._][a-zA-Z0-9]+)*[._]?$"
+                                    class="form-control" id="register-username" minlength="5" maxlength="20" name="register-username"
                                    placeholder="Username" required type="text">
                             <label for="register-username">Username</label>
+                            <small>
+                                Username must be between 5 and 20 characters and only include letters, dots (.) and underscore (_)
+                            </small>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="register-password" name="register-password"
@@ -138,7 +142,8 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="register-whatsapp">Whatsapp Number</label>
-                            <input class="form-control" id="register-whatsapp" minlength="5"
+                            <input pattern="^\+(?:[0-9]●?){6,14}[0-9]$"
+                                    class="form-control" id="register-whatsapp" minlength="5"
                                    name="register-whatsapp" placeholder="Example: +60143531234" required type="tel">
                             <small>
                                 Only Whatsapp contact are allowed for now (more ways will be added soon)<br>

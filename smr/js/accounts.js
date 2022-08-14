@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
                 // Cannot reach here since server will log in when success register
                 break
             case 1:
-                showAlert('Invalid Username', 'Username must be between 5 to 20 characters and only include letters, dots (.) and underscore (_)')
+                showAlert('Invalid Username', 'Username must be between 5 and 20 characters and only include letters, dots (.) and underscore (_)')
                 break
             case 2:
                 showAlert('Invalid Password', 'Password must be longer than 6 characters')
