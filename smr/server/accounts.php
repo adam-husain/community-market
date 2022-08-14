@@ -93,7 +93,7 @@ function login(string $username, string $password, bool $remember)
     }
 
     $conn->close();
-    redirect("../seller.html?action=login&code=$code");
+    redirect("accounts.html?action=login&code=$code");
 }
 
 
@@ -115,7 +115,6 @@ function login(string $username, string $password, bool $remember)
 function register(string $username, string $password, string $name, int $pronouns, string $whatsapp, string $pic)
 {
     $code = 0;
-    $id = -1;
     if (!preg_match('^(?=.{5,20}$)[a-z0-9]+(?:[._][a-z0-9]+)*[._]?$', $username)) {
         $code = 1;
     }
@@ -138,7 +137,8 @@ function register(string $username, string $password, string $name, int $pronoun
         $code = 5;
     }
 
-    if ($result = $conn->query("SELECT * FROM User WHERE username = $username")) {
+    if ($code == 0 &&
+        $result = $conn->query("SELECT * FROM User WHERE username = $username")) {
         if ($result->num_rows != 0) {
             $code = 4;
         } else {
