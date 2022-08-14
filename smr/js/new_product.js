@@ -5,7 +5,7 @@ function onLogin(user) {
     let code = urlParams.get('code')
     if (code == null) return
 
-    switch (code) {
+    switch (parseInt(code)) {
         case 0:
             showAlert('Login Successful', 'You will be redirected to Seller Portal')
             setTimeout(()=>window.location.href='seller.html', 1000)
