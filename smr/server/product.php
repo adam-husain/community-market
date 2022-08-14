@@ -9,6 +9,7 @@ include 'dbconnect.php';
 
 $action = $_GET['action'];
 
+
 switch ($action) {
     case 'new':
         $userId = (int)getPost('userId');
@@ -18,6 +19,13 @@ switch ($action) {
         $file = uploadFile('image', '../img/products');
         if (!is_string($file)) $file = 'default.jpeg';
         newProduct($userId, $name, $desc, $price, $file);
+        break;
+    case 'all':
+        allProducts();
+        break;
+    case 'user':
+        $userId = (int) $_GET['id'];
+        userProducts($userId);
         break;
     default:
         break;
@@ -55,4 +63,54 @@ function newProduct(int $userId, string $name, string $desc, float $price, strin
     }
 
     redirect("new_product.html?code=$code");
+}
+
+/**
+ * @return void
+ */
+function allProducts()
+{
+    $conn = connect();
+
+    if (!$conn) exit('false, cannot connect to database');
+
+    $sql = 'SELECT * FROM Product';
+    if ($result = $conn->query($sql))
+    {
+        $data = array();
+        while($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+        $conn->close();
+        exit(json_encode($data));
+    }
+    else {
+        $conn->close();
+        exit('false, could not access database');
+    }
+
+}
+
+/**
+ * @param int $userId
+ * @return void
+ */
+function userProducts(int $userId)
+{
+    $conn = connect();
+
+    if (!$conn) exit('false, cannot connect to database');
+
+    $sql = 'SELECT * FROM Product WHERE seller_id = ?';
+    $query = $conn->prepare($sql);
+    $query->bind_param('i', $userId);
+    $query->execute();
+    $result = $query->get_result();
+
+    $data = array();
+    while($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    $conn->close();
+    exit(json_encode($data));
 }

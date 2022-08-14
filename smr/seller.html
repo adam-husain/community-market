@@ -83,7 +83,7 @@
 
     <h1 style="font-weight: bold">Your Products</h1>
 
-    <div class="products">
+    <div id="product-list" class="products">
 
 
         <div class="product-card">
@@ -92,16 +92,7 @@
             </div>
 
             <div class="product-carousel">
-                <button onclick="carouselChange(0, -1)" class="btn"><i class="fa fa-arrow-left"></i></button>
-                <img id="image0.0" src="img/products/example1.jpeg" class="product-image" alt="Product">
                 <img id="image0.1" src="img/products/example2.jpeg" class="product-image hidden" alt="Product">
-                <img id="image0.2" src="img/products/example3.jpeg" class="product-image hidden" alt="Product">
-                <button onclick="carouselChange(0, 1)" class="btn"><i class="fa fa-arrow-right"></i></button>
-            </div>
-            <div class="carousel-indicator">
-                <div id="indicator0.0" class="indicator selected"></div>
-                <div id="indicator0.1" class="indicator"></div>
-                <div id="indicator0.2" class="indicator"></div>
             </div>
 
 
@@ -114,22 +105,8 @@
                 RM 99.99
             </div>
 
-            <div class="product-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                when an unknown printer took a galley of type and scrambled it to make a type
-                specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was popularised in
-                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                and more recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum. It is a long established fact that a
-                reader will be distracted by the readable content of a page when looking
-                at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed to using 'Content here, content here',
-                making it look like readable English. Many desktop publishing packages and
-                web page editors now use Lorem Ipsum as their default model text, and a
-                search for 'lorem ipsum' will uncover many web sites still in their infancy.</div>
+            <div class="product-description">Lorem Ipsum</div>
             <button onclick="interested(0)" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Interested</button>
-
 
         </div>
 

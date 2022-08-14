@@ -61,3 +61,27 @@ function interested(cardIndex) {
 function getCard(cardIndex) {
     return document.getElementsByClassName("product-card")[cardIndex]
 }
+
+function getCardLayout(id, title, desc, imageUrl, price) {
+    const imageId = 'image0.' + id;
+    return '<div class="product-card">' +
+        `<div class="product-title">${title}</div><` +
+        'div class="product-carousel">' +
+        //'<button onclick="carouselChange(0, -1)" class="btn"><i class="fa fa-arrow-left"></i></button>' +
+        `<img id="${imageId}" src="${imageUrl}" class="product-image" alt="Product">` +
+        //'<button onclick="carouselChange(0, 1)" class="btn"><i class="fa fa-arrow-right"></i></button>' +
+        '</div>' +
+        //'<div class="carousel-indicator">' +
+        //'<div id="indicator0.0" class="indicator selected"></div>' +
+        //'<div id="indicator0.1" class="indicator"></div>' +
+        //'<div id="indicator0.2" class="indicator"></div>' +
+        //'</div>' +
+        `<button id="like0" onclick="like(${id})" class="product-button"><i class="fa fa-heart-o"></i></button>` +
+        `<button id="unlike0" onclick="unlike(${id})" class="product-button hidden"><i class="fa fa-heart"></i></button>` +
+        `<button id="desc0" onclick="toggleDesc(${id})" class="product-button"><i class="fa fa-navicon"></i></button>` +
+        `<button id="link0" onclick="openLink(${id})" class="product-button"><i class="fa fa-external-link"></i></button>` +
+        `<div class="product-price">RM ${price}</div>` +
+        `<div class="product-description">${desc}</div>` +
+        `<button onclick="interested(${id})" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>` +
+        '</div>'
+}
