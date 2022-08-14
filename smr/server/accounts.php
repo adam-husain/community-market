@@ -130,7 +130,6 @@ function register(string $username, string $password, string $name, int $pronoun
 
     $conn = connect();
     if (!$conn) {
-        echo mysqli_error($conn);
         $code = 5;
     }
 
@@ -138,18 +137,17 @@ function register(string $username, string $password, string $name, int $pronoun
         $sql = "SELECT * FROM User WHERE username = ?";
         $query = $conn->prepare($sql);
         $query->bind_param('s', $username);
-        $query->execute() or die($query->error);
+        $query->execute();
         $result = $query->get_result();
         if (mysqli_num_rows($result) != 0) {
             $code = 4;
-            echo $conn->error;
         } else {
             $hash = hash('sha256', $password);
             $sql = "INSERT INTO User (username, `password`, `name`, pronouns, profile_url, whatsapp) 
             VALUES (?, ?, ?, ?, ?, ?)";
-            $query = $conn->prepare($sql) or die($conn->error);
+            $query = $conn->prepare($sql);
             $query->bind_param('sssiss', $username, $hash, $name, $pronouns, $pic, $whatsapp);
-            $query->execute() or die($query->error);
+            $query->execute();
             $result = $query->get_result();
 
             if (!$result) {
@@ -162,7 +160,5 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     $conn->close();
-    // Todo: uncomment for production and remove echo statements
-    //redirect("accounts.html?action=register&code=$code");
-    echo $code;
+    redirect("accounts.html?action=register&code=$code");
 }
