@@ -21,11 +21,15 @@ window.addEventListener('load', () => {
     }
 
     toggleSwitch?.addEventListener('change', switchTheme, false);
+
+    if (getCookie('signout') !== '') {
+        setCookie('session', '', 0)
+    }
 })
 
 
-function getCookie(cname) {
-    let name = cname + "=";
+function getCookie(key) {
+    let name = key + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -38,6 +42,13 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function setCookie(key, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = key + "=" + value + ";" + expires + ";path=/";
 }
 
 function waitFor(conditionFunction) {
@@ -54,7 +65,7 @@ function displayUser(user) {
     const name = user['name']
     const pronouns = ['', '', 'He/Him', 'She/Her', 'They/Them'][user['pronouns']]
     const number = user['whatsapp'].replace('+', '')
-    const message = 'Hello ' + name + '👋. I am interested in purchasing the product you have listed on the SMR Marketplace site.'
+    const message = 'Hello ' + name + ', I am interested in purchasing the product you have listed on the SMR Marketplace site.'
     const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
     console.log(wa_url)
     const image_url = 'http://myresidence.shop/smr/img/profile/' + user['profile_url']
