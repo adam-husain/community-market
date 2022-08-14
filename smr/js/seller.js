@@ -2,14 +2,13 @@ const oReq = new XMLHttpRequest()
 oReq.onload = function () {
     const response = this.responseText
     if (response.toLowerCase().startsWith('false')) {
-        //window.location.href = 'accounts.html';
+        window.location.href = 'accounts.html';
     } else {
         const user = JSON.parse(response)
         onLogin(user)
     }
 };
 session = getCookie('session')
-console.log("Session: " + session)
 oReq.open("get",
     "http://myresidence.shop/smr/server/checkSession.php?session=" + session, false)
 oReq.send()
