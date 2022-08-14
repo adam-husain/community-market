@@ -14,6 +14,8 @@ $pronouns = (int) getPost('pronouns');
 $whatsapp = getPost('whatsapp');
 $image = uploadFile('pic', '../img/profile/');
 
+saveProfile($session, $name, $pronouns, $whatsapp, $image);
+
 /**
  * 0: success
  * 1: Invalid name
