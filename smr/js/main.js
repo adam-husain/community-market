@@ -22,8 +22,9 @@ window.addEventListener('load', () => {
 
     toggleSwitch?.addEventListener('change', switchTheme, false);
 
-    if (getCookie('signout') !== '') {
-        setCookie('session', '', 0)
+    const queryString = window.location.search;
+    if (queryString.includes('signout')) {
+        setCookie('session', '', 1)
     }
 })
 
