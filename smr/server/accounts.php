@@ -123,12 +123,12 @@ function register(string $username, string $password, string $name, int $pronoun
         $code = 2;
     }
 
-    if (!preg_match('^\+(?:[0-9]●?){6,14}[0-9]$', $whatsapp)) {
+    if (!preg_match('^\+(?:[0-9]?){6,14}[0-9]$', $whatsapp)) {
         $code = 3;
     }
 
     if ($code != 0) {
-        redirect("accounts.html?action=register&code=$code&wa=$whatsapp");
+        redirect("accounts.html?action=register&code=$code");
         return;
     }
 
