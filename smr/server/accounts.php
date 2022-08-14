@@ -134,6 +134,7 @@ function register(string $username, string $password, string $name, int $pronoun
 
     $conn = connect();
     if (!$conn) {
+        echo mysqli_error($conn);
         $code = 5;
     }
 
@@ -141,6 +142,7 @@ function register(string $username, string $password, string $name, int $pronoun
         $result = $conn->query("SELECT * FROM User WHERE username = $username")) {
         if ($result->num_rows != 0) {
             $code = 4;
+            echo mysqli_error($conn);
         } else {
             $hash = hash('sha256', $password);
             $sql = "INSERT INTO User (username, `password`, `name`, pronouns, profile_url, whatsapp) 
@@ -159,6 +161,7 @@ function register(string $username, string $password, string $name, int $pronoun
         }
     } else {
         $code = 5;
+        echo mysqli_error($conn);
     }
 
     $conn->close();
