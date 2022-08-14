@@ -24,7 +24,7 @@ $register_pic = uploadFile('register-pic', '../img/profile/');
 
 if ($action == 'login') {
     if (!$login_username || !$login_password) {
-        redirect('../accounts.html');
+        redirect('accounts.html');
     } else {
         if ($login_remember !== false) $login_remember = true;
         login($login_username, $login_password, $login_remember);
@@ -35,14 +35,14 @@ if ($action == 'login') {
         || !$register_name
         || !$register_pronouns
         || !$register_whatsapp) {
-        redirect('../accounts.html');
+        redirect('accounts.html');
     }
     if (!is_string($register_pic)) {
         $register_pic = 'default.jpeg';
     }
     register($register_username, $register_password, $register_name, (int)$register_pronouns, $register_whatsapp, $register_pic);
 } else {
-    redirect('../accounts.html');
+    redirect('accounts.html');
 }
 
 /**
@@ -129,7 +129,7 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     if ($code != 0) {
-        redirect("../accounts.html?action=register&code=$code");
+        redirect("accounts.html?action=register&code=$code");
         return;
     }
 
@@ -162,5 +162,5 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     $conn->close();
-    redirect("../accounts.html?action=register&code=$code");
+    redirect("accounts.html?action=register&code=$code");
 }

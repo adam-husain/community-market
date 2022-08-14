@@ -16,7 +16,7 @@ function connect() {
 }
 
 function redirect($url) {
-    header("Location: ".$url);
+    header("Location: http://myresidence.shop/smr/".$url);
     exit();
 }
 
