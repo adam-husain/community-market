@@ -61,6 +61,12 @@ function waitFor(conditionFunction) {
     return new Promise(poll);
 }
 
+function showAlert(title, body) {
+    document.getElementById('alert-title').innerText = title
+    document.getElementById('alert-body').innerText = body
+    $('#alert-modal').modal('show')
+}
+
 function displayUser(user) {
     const frame = window.frames['user-frame'].contentDocument
     const name = user['name']
@@ -68,7 +74,6 @@ function displayUser(user) {
     const number = user['whatsapp'].replace('+', '')
     const message = 'Hello ' + name + ', I am interested in purchasing the product you have listed on the SMR Marketplace site.'
     const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
-    console.log(wa_url)
     const image_url = 'http://myresidence.shop/smr/img/profile/' + user['profile_url']
     frame.getElementById('title').innerHTML = name + '<small>' + pronouns + '</small>'
     frame.getElementById('contact').innerHTML = 'Contact: <a href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
