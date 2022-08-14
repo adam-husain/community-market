@@ -81,6 +81,7 @@ function login(string $username, string $password, bool $remember)
         $sessId = hash('sha256', $token);
         $sql = "INSERT INTO Session (id, user_id) VALUES ($sessId, $id)";
         $query = $conn->prepare($sql);
+        if (!$query) echo $query->error;
         $query->execute();
         if (!$query->get_result()) {
             $code = 2;
