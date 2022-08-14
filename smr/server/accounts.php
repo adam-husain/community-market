@@ -77,7 +77,8 @@ function login(string $username, string $password, bool $remember)
     }
 
     if ($code == 0) {
-        $sessId = $hash('sha256', $id . date('d-m-y'));
+        $token = $id . ((string) time());
+        $sessId = $hash('sha256', $token);
         $sql = "INSERT INTO Session (id, user_id) VALUES ($sessId, $id)";
         $query = $conn->prepare($sql);
         $query->execute();
