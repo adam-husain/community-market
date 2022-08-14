@@ -115,7 +115,7 @@ function login(string $username, string $password, bool $remember)
 function register(string $username, string $password, string $name, int $pronouns, string $whatsapp, string $pic)
 {
     $code = 0;
-    if (!preg_match('^(?=.{5,20}$)[a-zA-Z0-9]+(?:[._][a-zA-Z0-9]+)*[._]?$', $username)) {
+    if (preg_match('^(?=.{5,20}$)[a-zA-Z0-9]+(?:[._][a-zA-Z0-9]+)*[._]?$', $username) == 0) {
         $code = 1;
     }
 
@@ -123,7 +123,7 @@ function register(string $username, string $password, string $name, int $pronoun
         $code = 2;
     }
 
-    if (!preg_match('^\+[0-9]{5,15}$', $whatsapp)) {
+    if (preg_match('^\+[0-9]{5,15}$', $whatsapp) == 0) {
         $code = 3;
     }
 
