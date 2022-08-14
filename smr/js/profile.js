@@ -1,7 +1,7 @@
 function onLogin(user) {
     displayUser(user)
 
-    $('#name').value = user['name']
-    $('#pronouns').value = parseInt(user['pronouns'])
-    $('#whatsapp').value = user['whatsapp']
+    document.getElementById('name').value = user['name']
+    document.getElementById('pronouns').value = parseInt(user['pronouns'])
+    document.getElementById('whatsapp').value = user['whatsapp']
 }

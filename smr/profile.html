@@ -45,7 +45,7 @@
 
         <div class="mb-3">
             <label for="pic">Change Profile Picture</label>
-            <input accept="image/png, image/jpeg" class="form-control" id="pic" name="register-pic"
+            <input accept="image/png, image/jpeg" class="form-control" id="pic" name="pic"
                    placeholder="Profile Picture" type="file">
         </div>
 
@@ -62,10 +62,11 @@
         <div class="mb-3">
             <label for="whatsapp" class="form-label">Whatsapp Number</label>
             <input type="tel" class="form-control" id="whatsapp"
-                   name="whatsapp"
+                   name="whatsapp" pattern="^\+[0-9]{5,15}$"
                    required placeholder="Example: +60143531234" minlength="5">
             <small>
-                Only Whatsapp contact are allowed for now (more ways will be added soon)<br>
+                Make sure the number starts with a plus (+) and there are no spaces<br>
+                Only Whatsapp contact are allowed for now (more ways will be added soon)
             </small>
         </div>
 
