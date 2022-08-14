@@ -1,21 +1,20 @@
+let user = false
 const oReq = new XMLHttpRequest()
 oReq.onload = function () {
     const response = this.responseText
     if (response.toLowerCase().startsWith('false')) {
         window.location.href = 'accounts.html';
     } else {
-        const user = JSON.parse(response)
-        onLogin(user)
+        user = JSON.parse(response)
     }
 };
 session = getCookie('session')
-oReq.open("get",
-    "http://myresidence.shop/smr/server/checkSession.php?session=" + session, false)
+oReq.open("get", "http://myresidence.shop/smr/server/checkSession.php?session=" + session, false)
 oReq.send()
 
-window.addEventListener('load', () => {
-
-
+window.addEventListener('load', async () => {
+    await waitFor(_ => user !== false)
+    onLogin(user)
 })
 
 function onLogin(user) {
@@ -32,7 +31,7 @@ function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
+    for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') {
             c = c.substring(1);
@@ -42,4 +41,14 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function waitFor(conditionFunction) {
+
+    const poll = resolve => {
+        if(conditionFunction()) resolve();
+        else setTimeout(_ => poll(resolve), 400);
+    }
+
+    return new Promise(poll);
 }
