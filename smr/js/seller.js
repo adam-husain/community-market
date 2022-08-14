@@ -18,37 +18,10 @@ window.addEventListener('load', async () => {
 })
 
 function onLogin(user) {
+    console.log(user) // todo: remove in production
     setTimeout(function () {
         document.getElementById("fadein")?.remove()
     }, 1000)
 
-    const userFrame = document.getElementById('user-frame')
-    const id = user['id']
-    userFrame.src = 'user.html?id=' + id
-}
-
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) === 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function waitFor(conditionFunction) {
-
-    const poll = resolve => {
-        if(conditionFunction()) resolve();
-        else setTimeout(_ => poll(resolve), 400);
-    }
-
-    return new Promise(poll);
+    displayUser(user)
 }
