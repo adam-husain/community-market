@@ -18,9 +18,3 @@ function onLogin(user) {
             break
     }
 }
-
-function showAlert(title, body) {
-    document.getElementById('alert-title').innerText = title
-    document.getElementById('alert-body').innerText = body
-    $('#alert-modal').modal('show')
-}
