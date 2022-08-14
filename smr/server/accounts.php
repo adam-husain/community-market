@@ -128,7 +128,7 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     if ($code != 0) {
-        redirect("accounts.html?action=register&code=$code");
+        redirect("accounts.html?action=register&code=$code&wa=$whatsapp");
         return;
     }
 
