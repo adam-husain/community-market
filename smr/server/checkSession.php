@@ -24,7 +24,7 @@ if (mysqli_num_rows($result) == 0) {
     exit('false, session '.$sessId.' not found');
 }
 
-$id = (int) mysqli_fetch_assoc($result)['id'];
+$id = (int) mysqli_fetch_assoc($result)['user_id'];
 $sql = "SELECT * FROM User WHERE id = ?";
 $query = $conn->prepare($sql);
 $query->bind_param('i', $id);
