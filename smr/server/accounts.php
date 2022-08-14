@@ -30,11 +30,7 @@ if ($action == 'login') {
         login($login_username, $login_password, $login_remember);
     }
 } else if ($action == 'register') {
-    if (!$register_username
-        || !$register_password
-        || !$register_name
-        || !$register_pronouns
-        || !$register_whatsapp) {
+    if (!$register_username || !$register_password || !$register_name || !$register_pronouns || !$register_whatsapp) {
         redirect('accounts.html');
     }
     if (!is_string($register_pic)) {
@@ -138,9 +134,13 @@ function register(string $username, string $password, string $name, int $pronoun
         $code = 5;
     }
 
-    if ($code == 0 &&
-        $result = $conn->query("SELECT * FROM User WHERE username = $username")) {
-        if ($result->num_rows != 0) {
+    if ($code == 0) {
+        $sql = "SELECT * FROM User WHERE username = ?";
+        $query = $conn->prepare($sql);
+        $query->bind_param('s', $username);
+        $query->execute();
+        $result = $query->get_result();
+        if (mysqli_num_rows($result) != 0) {
             $code = 4;
             echo mysqli_error($conn);
         } else {
