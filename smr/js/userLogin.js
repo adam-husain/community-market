@@ -9,7 +9,7 @@ oReq.onload = function () {
     }
 };
 session = getCookie('session')
-oReq.open("get", "http://myresidence.shop/smr/server/checkSession.php?session=" + session, false)
+oReq.open("get", "http://myresidence.shop/smr/server/checkSession.php?session=" + session, true)
 oReq.send()
 
 window.addEventListener('load', async () => {

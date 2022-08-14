@@ -61,12 +61,6 @@ function waitFor(conditionFunction) {
     return new Promise(poll);
 }
 
-function showAlert(title, body) {
-    document.getElementById('alert-title').innerText = title
-    document.getElementById('alert-body').innerText = body
-    $('#alert-modal').modal('show')
-}
-
 function displayUser(user) {
     const frame = window.frames['user-frame'].contentDocument
     const name = user['name']

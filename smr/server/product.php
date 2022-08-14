@@ -11,13 +11,12 @@ $action = $_GET['action'];
 
 switch ($action) {
     case 'new':
-        $userId = (int) getPost('userId');
+        $userId = (int)getPost('userId');
         $name = getPost('name');
         $desc = getPost('desc');
         $price = floatval(getPost('price'));
         $file = uploadFile('image', '../img/products');
-        if (!is_string($file))
-            $file = 'default.jpeg';
+        if (!is_string($file)) $file = 'default.jpeg';
         newProduct($userId, $name, $desc, $price, $file);
         break;
     default:
@@ -48,6 +47,7 @@ function newProduct(int $userId, string $name, string $desc, float $price, strin
     if (!$conn) $code = 2;
 
     if ($code == 0) {
+        $price = $price * 100; // Convert it to sen
         $sql = 'INSERT INTO Product (`name`, `description`, price, seller_id, image_url) VALUES (?, ?, ?, ?, ?)';
         $query = $conn->prepare($sql);
         $query->bind_param('ssiss', $name, $desc, $price, $userId, $file);
