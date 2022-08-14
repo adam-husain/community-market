@@ -123,7 +123,7 @@ function register(string $username, string $password, string $name, int $pronoun
         $code = 2;
     }
 
-    if (!preg_match('^\+(?:[0-9]?){6,14}[0-9]$', $whatsapp)) {
+    if (!preg_match('^\+[0-9]{5,15}$', $whatsapp)) {
         $code = 3;
     }
 
