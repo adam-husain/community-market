@@ -162,5 +162,6 @@ function register(string $username, string $password, string $name, int $pronoun
     }
 
     $conn->close();
-    redirect("accounts.html?action=register&code=$code");
+    // Todo: uncomment for production
+    //redirect("accounts.html?action=register&code=$code");
 }
