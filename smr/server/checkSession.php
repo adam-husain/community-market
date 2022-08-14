@@ -31,7 +31,7 @@ $query->bind_param('i', $id);
 $query->execute();
 $result = $query->get_result();
 
-if (mysqli_num_rows($result) == 0) exit('false, session has no user');
+if (mysqli_num_rows($result) == 0) exit('false, session has no user '.$id);
 $user = mysqli_fetch_assoc($result);
 $json = json_encode($user);
 exit($json);
