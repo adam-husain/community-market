@@ -7,9 +7,9 @@ error_reporting(E_ALL);
 
 include 'dbconnect.php';
 
-if (!isset($_COOKIE['session']))
+if (!isset($_GET['session']))
     exit('false, no cookie');
-$sessId = $_COOKIE['session'];
+$sessId = $_GET['session'];
 
 $conn = connect();
 if (!$conn) exit('false, database error');
