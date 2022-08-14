@@ -73,7 +73,7 @@ function login(string $username, string $password, bool $remember)
         $code = 1;
     } else {
         $user = mysqli_fetch_assoc($result);
-        $id = (int)$user['id'];
+        $id = (int)$user['ID'];
     }
 
     if ($code == 0) {
