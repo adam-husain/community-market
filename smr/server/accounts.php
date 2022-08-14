@@ -1,5 +1,11 @@
 <?php
 
+// Todo: remove in production
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include 'dbconnect.php';
 
 $action = $_GET['action'];
 
@@ -24,6 +30,13 @@ if ($action == 'login') {
         login($login_username, $login_password, $login_remember);
     }
 } else if ($action == 'register') {
+    if (!$register_username
+        || !$register_password
+        || !$register_name
+        || !$register_pronouns
+        || !$register_whatsapp) {
+        redirect('../accounts.html');
+    }
     if (!is_string($register_pic)) {
         $register_pic = 'default.jpeg';
     }
