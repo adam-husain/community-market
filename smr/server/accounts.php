@@ -142,7 +142,7 @@ function register(string $username, string $password, string $name, int $pronoun
         $result = $query->get_result();
         if (mysqli_num_rows($result) != 0) {
             $code = 4;
-            echo mysqli_error($conn);
+            echo $conn->error;
         } else {
             $hash = hash('sha256', $password);
             $sql = "INSERT INTO User (username, `password`, `name`, pronouns, profile_url, whatsapp) 
@@ -153,7 +153,7 @@ function register(string $username, string $password, string $name, int $pronoun
             $result = $query->get_result();
 
             if (!$result) {
-                $code = 5;
+                $code = 6;
             } else {
                 login($username, $password, true);
                 return;
@@ -165,5 +165,4 @@ function register(string $username, string $password, string $name, int $pronoun
     // Todo: uncomment for production and remove echo statements
     //redirect("accounts.html?action=register&code=$code");
     echo $code;
-    echo mysqli_error($conn);
 }
