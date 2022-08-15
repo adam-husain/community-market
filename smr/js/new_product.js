@@ -7,7 +7,7 @@ function onLogin(user) {
 
     switch (parseInt(code)) {
         case 0:
-            showAlert('Login Successful', 'You will be redirected to Seller Portal')
+            showAlert('Product Added', 'Your product will be listed for everyone to view')
             setTimeout(()=>window.location.href='seller.html', 1000)
             break
         case 1:
