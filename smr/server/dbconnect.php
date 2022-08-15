@@ -64,15 +64,16 @@ function uploadFile($tag, $dir)
 
     // DO NOT TRUST $_FILES[$tag]['mime'] VALUE !!
     // Check MIME Type by yourself.
-    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    /*$finfo = new finfo(FILEINFO_MIME_TYPE);
     if (false === $ext = array_search($finfo->file($_FILES[$tag]['tmp_name']), array('jpg' => 'image/jpeg', 'png' => 'image/png'), true)) {
         return 3;
-    }
+    }*/
 
     // You should name it uniquely.
     // DO NOT USE $_FILES[$tag]['name'] WITHOUT ANY VALIDATION !!
     // On this example, obtain safe unique name from its binary data.
-    $filename = sprintf('%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext);
+    //$filename = sprintf('%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext);
+    $filename = basename($_FILES[$tag]['name']);
     $filedir = $dir . $filename;
     if (!move_uploaded_file($_FILES[$tag]['tmp_name'], $filedir)) {
         return 2;
