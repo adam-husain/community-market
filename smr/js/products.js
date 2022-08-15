@@ -1,14 +1,9 @@
 let products = []
-function onLogin(user) {
+window.addEventListener('load', () => {
     setTimeout(function () {
         document.getElementById("fadein")?.remove()
     }, 1000)
 
-    displayUser(user)
-    getProducts(user['id'])
-}
-
-function getProducts(userId) {
     const oReq = new XMLHttpRequest()
     oReq.onload = function () {
         const response = this.responseText
@@ -19,9 +14,9 @@ function getProducts(userId) {
             displayProducts()
         }
     };
-    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=user&id=" + userId, true)
+    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=all", true)
     oReq.send()
-}
+})
 
 function displayProducts() {
     const body = document.getElementById('product-list')
@@ -33,7 +28,7 @@ function displayProducts() {
         products.map((p, i) => {
             const imageUrl = 'http://myresidence.shop/smr/img/products/' + p['image_url'];
             const price = '' + (parseFloat(p['price']) / 100)
-            body.innerHTML += getCardLayout(i, p['name'], p['description'], imageUrl, price, true)
+            body.innerHTML += getCardLayout(i, p['name'], p['description'], imageUrl, price, false)
         })
     }
 }
