@@ -79,7 +79,7 @@ function allProducts()
 
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT * FROM Product';
+    $sql = 'SELECT * FROM Product WHERE available = true';
     if ($result = $conn->query($sql))
     {
         $data = array();
@@ -106,7 +106,7 @@ function userProducts(int $userId)
 
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT * FROM Product WHERE seller_id = ?';
+    $sql = 'SELECT * FROM Product WHERE seller_id = ? AND available = true';
     $query = $conn->prepare($sql);
     $query->bind_param('i', $userId);
     $query->execute();

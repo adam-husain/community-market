@@ -57,12 +57,9 @@ function promptDelete(cardIndex) {
 }
 
 function confirmDelete(prodId) {
-    console.log('Confirm delete');
     const oReq = new XMLHttpRequest()
     oReq.onload = function () {
-        // Todo: remove development code
-        console.log(oReq.responseText)
-        //window.location.reload()
+        window.location.reload()
     };
     oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=delete&session=" + session + "&product=" + prodId, true)
     oReq.send()
