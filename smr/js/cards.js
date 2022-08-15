@@ -52,11 +52,12 @@ function toggleDesc(cardIndex) {
 
 function promptDelete(cardIndex) {
     const product = products[cardIndex];
-    document.getElementById('deleteModalLabel').innerText = 'Delete <b>' + product['name'] + '</b>';
+    document.getElementById('deleteModalLabel').innerHTML = 'Delete <b>' + product['name'] + '</b>';
     document.getElementById('deleteButton').onclick = confirmDelete(product['id']);
 }
 
 function confirmDelete(prodId) {
+    console.log('Confirm delete');
     const oReq = new XMLHttpRequest()
     oReq.onload = function () {
         // Todo: remove development code

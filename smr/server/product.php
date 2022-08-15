@@ -136,7 +136,7 @@ function delete(string $session, int $prodId)
     $query->execute();
     $result = $query->get_result();
     if (mysqli_num_rows($result) == 0) exit('false, invalid session');
-    $userId = (int) $result->fetch_assoc()['id'];
+    $userId = (int) $result->fetch_assoc()['user_id'];
     $query->close();
 
     $sql = 'UPDATE Product SET available = false WHERE id = ? and seller_id = ?';
