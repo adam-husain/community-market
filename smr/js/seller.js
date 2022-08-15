@@ -33,7 +33,7 @@ function displayProducts() {
         products.map((p, i) => {
             const imageUrl = 'http://myresidence.shop/smr/img/products/' + p['image_url'];
             const price = '' + (parseFloat(p['price']) / 100)
-            body.innerHTML += getCardLayout(i, p['name'], p['description'], imageUrl, price, true)
+            body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, price, true)
         })
     }
 }
