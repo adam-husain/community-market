@@ -61,7 +61,8 @@ h3 {
 .slider:before {
     background-color: #fff;
     bottom: 4px;
-    content: "";
+    content: "☀️";
+    text-align: center;
     height: 26px;
     left: 4px;
     position: absolute;
@@ -75,6 +76,7 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(26px);
+    content: "🌙";
 }
 
 .slider.round {
