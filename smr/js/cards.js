@@ -50,8 +50,21 @@ function toggleDesc(cardIndex) {
     }
 }
 
-function deleteProduct(cardIndex) {
+function promptDelete(cardIndex) {
+    const product = products[cardIndex];
+    document.getElementById('deleteModalLabel').innerText = 'Delete <b>' + product['name'] + '</b>';
+    document.getElementById('deleteButton').onclick = confirmDelete(product['id']);
+}
 
+function confirmDelete(prodId) {
+    const oReq = new XMLHttpRequest()
+    oReq.onload = function () {
+        // Todo: remove development code
+        console.log(oReq.responseText)
+        //window.location.reload()
+    };
+    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=delete&session=" + session + "&product=" + prodId, true)
+    oReq.send()
 }
 
 function interested(cardIndex) {
@@ -80,7 +93,7 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
         '';
 
     if (deletable) {
-        cardHtml += `<button onclick="deleteProduct(${id})" class="product-button"><i class="fa fa-external-link"></i></button>`;
+        cardHtml += `<button onclick="promptDelete(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>`;
     }
 
     cardHtml += `<div class="product-price">RM ${price}</div>` +

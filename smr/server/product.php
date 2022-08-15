@@ -27,6 +27,11 @@ switch ($action) {
         $userId = (int) $_GET['id'];
         userProducts($userId);
         break;
+    case 'delete':
+        $session = $_GET['session'];
+        $prodId = (int) $_GET['product'];
+        delete($session, $prodId);
+        break;
     default:
         break;
 }
@@ -113,4 +118,31 @@ function userProducts(int $userId)
     }
     $conn->close();
     exit(json_encode($data));
+}
+
+/**
+ * @param string $session
+ * @param int $prodId
+ * @return void
+ */
+function delete(string $session, int $prodId)
+{
+    $conn = connect();
+    if (!$conn) exit('false, cannot connect to database');
+
+    $sql = 'SELECT user_id FROM Session WHERE id = ?';
+    $query = $conn->prepare($sql);
+    $query->bind_param('s', $session);
+    $query->execute();
+    $result = $query->get_result();
+    if (mysqli_num_rows($result) == 0) exit('false, invalid session');
+    $userId = (int) $result->fetch_assoc()['id'];
+    $query->close();
+
+    $sql = 'UPDATE Product SET available = false WHERE id = ? and seller_id = ?';
+    $query = $conn->prepare($sql);
+    $query->bind_param('ii', $prodId, $userId);
+    $query->execute();
+
+    exit('true');
 }
