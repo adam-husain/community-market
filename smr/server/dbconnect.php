@@ -73,7 +73,7 @@ function uploadFile($tag, $dir)
     // DO NOT USE $_FILES[$tag]['name'] WITHOUT ANY VALIDATION !!
     // On this example, obtain safe unique name from its binary data.
     //$filename = sprintf('%s.%s', sha1_file($_FILES[$tag]['tmp_name']), $ext);
-    $filename = basename($_FILES[$tag]['name']);
+    $filename = hash('md5', (string) time()) . basename($_FILES[$tag]['name']);
     $filedir = $dir . $filename;
     if (!move_uploaded_file($_FILES[$tag]['tmp_name'], $filedir)) {
         return 2;
