@@ -13,12 +13,12 @@ $action = $_GET['action'];
 switch ($action) {
     case 'new':
         $userId = (int)getPost('userId');
-        $name = getPost('name');
+        $title = getPost('title');
         $desc = getPost('desc');
         $price = floatval(getPost('price'));
         $file = uploadFile('image', '../img/products');
         if (!is_string($file)) $file = 'default.jpeg';
-        newProduct($userId, $name, $desc, $price, $file);
+        newProduct($userId, $title, $desc, $price, $file);
         break;
     case 'all':
         allProducts();
@@ -41,16 +41,16 @@ switch ($action) {
  * 1: Invalid product details
  * 2: Database connection error
  * @param int $userId
- * @param string $name
+ * @param string $title
  * @param string $desc
  * @param float $price
  * @param string $file
  * @return void
  */
-function newProduct(int $userId, string $name, string $desc, float $price, string $file): int
+function newProduct(int $userId, string $title, string $desc, float $price, string $file): int
 {
     $code = 0;
-    if (!$userId || !$name || !$desc || !$price || !$file) {
+    if (!$userId || !$title || !$desc || !$price || !$file) {
         $code = 1;
     }
 
@@ -61,9 +61,9 @@ function newProduct(int $userId, string $name, string $desc, float $price, strin
 
     if ($code == 0) {
         $price = (int) ($price * 100); // Convert it to sen
-        $sql = 'INSERT INTO Product (`name`, `description`, price, seller_id, image_url) VALUES (?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO Product (`title`, `description`, price, seller_id, image_url) VALUES (?, ?, ?, ?, ?)';
         $query = $conn->prepare($sql);
-        $query->bind_param('ssiss', $name, $desc, $price, $userId, $file);
+        $query->bind_param('ssiss', $title, $desc, $price, $userId, $file);
         $query->execute();
     }
 
