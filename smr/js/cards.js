@@ -65,8 +65,8 @@ function confirmDelete(prodId) {
     oReq.send()
 }
 
-function interested(cardIndex) {
-    interestedProd = cardIndex
+function contact(cardIndex) {
+    displayUser(products[cardIndex])
 }
 
 
@@ -98,7 +98,7 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
         `<div class="product-description">${desc}</div>`;
 
     if (!deletable) {
-        cardHtml += `<button onclick="interested(${id})" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>`;
+        cardHtml += `<button onclick="contact(${id})" type="button" class="product-button-long" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>`;
     }
     cardHtml += '</div>'
 

@@ -79,7 +79,7 @@ function allProducts()
 
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT * FROM Product WHERE available = true';
+    $sql = 'SELECT * FROM Product INNER JOIN User ON Product.seller_id = User.id WHERE available = true';
     if ($result = $conn->query($sql))
     {
         $data = array();
