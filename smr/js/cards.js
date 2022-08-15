@@ -53,7 +53,7 @@ function toggleDesc(cardIndex) {
 function promptDelete(cardIndex) {
     const product = products[cardIndex];
     document.getElementById('deleteModalLabel').innerHTML = 'Delete <b>' + product['name'] + '</b>';
-    document.getElementById('deleteButton').onclick = confirmDelete(product['id']);
+    document.getElementById('deleteButton').onclick = () => confirmDelete(product['id']);
 }
 
 function confirmDelete(prodId) {
