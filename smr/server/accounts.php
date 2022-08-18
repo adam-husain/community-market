@@ -54,13 +54,13 @@ function login(string $username, string $password, bool $remember)
 {
     $conn = connect();
     $code = 0;
-    $id = -1;
+    $user_id = -1;
     if (!$conn) {
         $code = 2;
     }
 
     $hash = hash('sha256', $password);
-    $sql = "SELECT ID FROM User WHERE username = ? AND `password` = ?";
+    $sql = "SELECT user_id FROM User WHERE username = ? AND `password` = ?";
     $query = $conn->prepare($sql);
     $query->bind_param('ss', $username, $hash);
     $query->execute();
@@ -73,14 +73,15 @@ function login(string $username, string $password, bool $remember)
         $code = 1;
     } else {
         $user = mysqli_fetch_assoc($result);
-        $id = (int)$user['ID'];
+        $user_id = (int)$user['user_id'];
     }
 
     if ($code == 0) {
-        $token = $id . ((string) time());
+        $token = $user_id . ((string) time());
         $sessId = hash('sha256', $token);
-        $sql = "INSERT INTO Session (id, user_id) VALUES ('$sessId', '$id')";
+        $sql = "INSERT INTO Session (session_id, user_id) VALUES (?, ?)";
         $query = $conn->prepare($sql);
+        $query->bind_param('si', $sessId, $user_id);
         $query->execute();
         setcookie('session', $sessId, time() + (86400 * 1000), "/");
     }

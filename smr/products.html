@@ -79,6 +79,27 @@
 
     <div class="mb-3"></div>
 
+    <!-- Report product popup -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="color: black">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Found something sussy? 🤨</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="reportModalBody" class="modal-body">
+                    You have reported {product}. Please don't spam reports.
+                    Reporting does not guarantee being taken down.
+                    That decision will be to my discretion.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="reportButton" type="button" class="btn btn-primary" data-bs-dismiss="modal">Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Contact details popup -->
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -102,6 +123,16 @@
         </div>
     </div>
 
+
+    <!-- Report Successful Toast -->
+    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="reportToast" class="d-flex">
+            <div class="toast-body">
+                Your report has been received 👮
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
 
     <section class="container">
         <div class="page-header">

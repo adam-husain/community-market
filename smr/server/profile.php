@@ -43,24 +43,20 @@ function saveProfile(string $session, string $name, int $pronouns, string $whats
 
     if ($code == 0) {
         $conn = connect();
-        if (!$conn) $code = 3;
+        if (!$conn) {
+            $code = 3;
+        }
         else {
-            $sql = "SELECT user_id FROM Session WHERE id = ?";
+            $sql = "UPDATE User SET `name` = ?, pronouns = ?, whatsapp = ?, profile_url = ? WHERE user_id = 
+                                                                              (SELECT user_id FROM Session WHERE session_id = ?)";
             $query = $conn->prepare($sql);
-            $query->bind_param('s', $session);
+            $query->bind_param('sissss', $name, $pronouns, $whatsapp, $file, $id, $session);
             $query->execute();
             $result = $query->get_result();
             $query->close();
 
             if (mysqli_num_rows($result) == 0) {
                 $code = 3;
-            }
-            else {
-                $id = (int) $result->fetch_assoc()['user_id'];
-                $sql = "UPDATE User SET `name` = ?, pronouns = ?, whatsapp = ?, profile_url = ? WHERE id = ?";
-                $query = $conn->prepare($sql);
-                $query->bind_param('sisss', $name, $pronouns, $whatsapp, $file, $id);
-                $query->execute();
             }
         }
     }

@@ -32,6 +32,10 @@ switch ($action) {
         $prodId = (int) $_GET['product'];
         delete($session, $prodId);
         break;
+    case 'report':
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $prodId = (int) $_GET['product'];
+        report($ip, $prodId);
     default:
         break;
 }
@@ -79,7 +83,7 @@ function allProducts()
 
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT * FROM Product INNER JOIN User ON Product.seller_id = User.id WHERE available = true';
+    $sql = 'SELECT * FROM Product INNER JOIN User ON Product.seller_id = User.user_id WHERE available = true';
     if ($result = $conn->query($sql))
     {
         $data = array();
@@ -130,19 +134,33 @@ function delete(string $session, int $prodId)
     $conn = connect();
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT user_id FROM Session WHERE id = ?';
+    $sql = 'UPDATE Product SET available = false WHERE product_id = ? and seller_id = 
+                                                              (SELECT user_id FROM Session WHERE session_id = ?)';
     $query = $conn->prepare($sql);
-    $query->bind_param('s', $session);
+    $query->bind_param('is', $prodId, $session);
     $query->execute();
     $result = $query->get_result();
-    if (mysqli_num_rows($result) == 0) exit('false, invalid session');
-    $userId = (int) $result->fetch_assoc()['user_id'];
+    if (mysqli_num_rows($result) == 0) exit('false, cannot find product');
     $query->close();
 
-    $sql = 'UPDATE Product SET available = false WHERE id = ? and seller_id = ?';
+    exit('true');
+}
+
+/**
+ * @param string $ip
+ * @param int $prodId
+ * @return void
+ */
+function report(string $ip, int $prodId)
+{
+    $conn = connect();
+    if (!$conn) exit('false, cannot connect to database');
+
+    $sql = 'INSERT INTO Product_Report (user_ip, product_id, report) VALUES (?, ?, 0)';
     $query = $conn->prepare($sql);
-    $query->bind_param('ii', $prodId, $userId);
+    $query->bind_param('si', $ip, $prodId);
     $query->execute();
+    $query->close();
 
     exit('true');
 }

@@ -53,7 +53,15 @@ function toggleDesc(cardIndex) {
 function promptDelete(cardIndex) {
     const product = products[cardIndex];
     document.getElementById('deleteModalLabel').innerHTML = 'Delete <b>' + product['title'] + '</b>';
-    document.getElementById('deleteButton').onclick = () => confirmDelete(product['id']);
+    document.getElementById('deleteButton').onclick = () => confirmDelete(product['product_id']);
+}
+
+function promptReport(cardIndex) {
+    const id = products[cardIndex]['product_id'];
+    const title = products[cardIndex]['title'];
+    document.getElementById('reportModalBody').innerHTML = `You have reported <b>${title}</b>. Please don't spam reports. ` +
+        "Reporting does not guarantee being taken down. That decision will be left to my discretion."
+    document.getElementById('reportButton').onclick = () => confirmReport(id)
 }
 
 function confirmDelete(prodId) {
@@ -62,6 +70,19 @@ function confirmDelete(prodId) {
         window.location.reload()
     };
     oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=delete&session=" + session + "&product=" + prodId, true)
+    oReq.send()
+}
+
+function confirmReport(prodId) {
+    const oReq = new XMLHttpRequest()
+    oReq.onload = function () {
+        const reportToast = document.getElementById('reportToast')
+        const toast = new bootstrap.Toast(reportToast)
+        toast.show()
+        console.log(reportToast)
+        console.log(toast)
+    };
+    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=report&product=" + prodId, true)
     oReq.send()
 }
 
@@ -92,6 +113,9 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
 
     if (deletable) {
         cardHtml += `<button onclick="promptDelete(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>`;
+    }
+    else {
+        cardHtml += `<button onclick="promptReport(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fa fa-exclamation-circle"></i></button>`;
     }
 
     cardHtml += `<div class="product-price">RM ${price}</div>` +
