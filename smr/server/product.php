@@ -17,7 +17,6 @@ switch ($action) {
         $desc = getPost('desc');
         $price = floatval(getPost('price'));
         $file = uploadFile('image', '../img/products');
-        exit('file:'.$file);
         if (!is_string($file)) $file = 'default.jpeg';
         newProduct($userId, $title, $desc, $price, $file);
         break;
