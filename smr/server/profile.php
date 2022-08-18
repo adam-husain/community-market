@@ -13,6 +13,7 @@ $name = getPost('name');
 $pronouns = (int) getPost('pronouns');
 $whatsapp = getPost('whatsapp');
 $image = uploadFile('pic', '../img/profile/');
+if (!is_string($image)) $image = 'default.jpeg';
 
 saveProfile($session, $name, $pronouns, $whatsapp, $image);
 
