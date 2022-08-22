@@ -15,7 +15,7 @@ $conn = connect();
 if (!$conn) exit('false, database error');
 $sql = "SELECT * FROM Session INNER JOIN User ON Session.user_id = User.user_id WHERE session_id = ?";
 $query = $conn->prepare($sql);
-$query->bind_param('si', $sessId);
+$query->bind_param('s', $sessId);
 $query->execute();
 $result = $query->get_result();
 $query->close();

@@ -5,7 +5,7 @@ function onLogin(user) {
     }, 1000)
 
     displayUser(user)
-    getProducts(user['id'])
+    getProducts(user['user_id'])
 }
 
 function getProducts(userId) {
@@ -19,7 +19,7 @@ function getProducts(userId) {
             displayProducts()
         }
     };
-    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=user&id=" + userId, true)
+    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=user&userId=" + userId, true)
     oReq.send()
 }
 

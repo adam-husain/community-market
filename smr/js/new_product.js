@@ -1,5 +1,5 @@
 function onLogin(user) {
-    document.getElementById('userId').value = user['id'];
+    document.getElementById('userId').value = user['user_id'];
 
     const urlParams = new URLSearchParams(window.location.search)
     let code = urlParams.get('code')

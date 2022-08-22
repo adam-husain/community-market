@@ -50,14 +50,9 @@ function saveProfile(string $session, string $name, int $pronouns, string $whats
             $sql = "UPDATE User SET `name` = ?, pronouns = ?, whatsapp = ?, profile_url = ? WHERE user_id = 
                                                                               (SELECT user_id FROM Session WHERE session_id = ?)";
             $query = $conn->prepare($sql);
-            $query->bind_param('sissss', $name, $pronouns, $whatsapp, $file, $id, $session);
+            $query->bind_param('sisss', $name, $pronouns, $whatsapp, $file, $session);
             $query->execute();
-            $result = $query->get_result();
             $query->close();
-
-            if (mysqli_num_rows($result) == 0) {
-                $code = 3;
-            }
         }
     }
 

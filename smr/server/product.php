@@ -24,7 +24,7 @@ switch ($action) {
         allProducts();
         break;
     case 'user':
-        $userId = (int) $_GET['id'];
+        $userId = (int) $_GET['userId'];
         userProducts($userId);
         break;
     case 'delete':
