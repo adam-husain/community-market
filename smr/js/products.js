@@ -11,11 +11,10 @@ window.addEventListener('load', () => {
             window.location.href = 'accounts.html?action=login&code=5';
         } else {
             products = JSON.parse(response)
+            const urlParams = new URLSearchParams(window.location.search)
 
             // Sort products
-            const urlParams = new URLSearchParams(window.location.search)
             const sortBy = urlParams.get('sort')
-            console.log(sortBy)
             switch (sortBy) {
                 case 'lprice':
                     sortByLPrice()
@@ -33,6 +32,17 @@ window.addEventListener('load', () => {
                     sortByNew()
             }
 
+            // Show pagination if necessary
+            const length = products.length
+            const paginationLimit = 12
+            if (length > paginationLimit) {
+                let page = parseInt(urlParams.get('page'))
+                if (isNaN(page)
+                    || page > parseInt(length / paginationLimit) + 1
+                    || page <= 0)
+                    page = 1
+                showPagination((page - 1) * paginationLimit, page * paginationLimit, length / paginationLimit)
+            }
             displayProducts()
         }
     };
@@ -94,3 +104,21 @@ function sortByOld() {
     )
 }
 
+function showPagination(start, end, total) {
+    products = products.slice(start, end)
+    document.getElementById('page-nav').style.display = 'block'
+    const pagination = document.getElementById('page-nav-buttons')
+    pagination.innerHTML += `<li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>`
+    for (let i = 1; i <= total + 1; i++) {
+        pagination.innerHTML += `<li class="page-item"><a class="page-link" href="javascript:addUrlParam('page', ${i})">${i}</a></li>`
+    }
+    pagination.innerHTML += `<li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>`
+}

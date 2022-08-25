@@ -79,3 +79,21 @@ function displayUser(user) {
     frame.getElementById('contact').innerHTML = 'Contact: <a href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
     frame.getElementById('profile-pic').src = image_url;
 }
+
+function addUrlParam(name, value)
+{
+    const href = window.location.href;
+    let regex = new RegExp("[&\\?]" + name + "=");
+    if(regex.test(href))
+    {
+        regex = new RegExp("([&\\?])" + name + "=\\d+");
+        window.location.href = href.replace(regex, "$1" + name + "=" + value);
+    }
+    else
+    {
+        if(href.indexOf("?") > -1)
+            window.location.href = href + "&" + name + "=" + value;
+        else
+            window.location.href = href + "?" + name + "=" + value;
+    }
+}

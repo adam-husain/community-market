@@ -148,16 +148,32 @@
                     Sort by
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="?sort=lprice">Lowest Price 📈</a></li>
-                    <li><a class="dropdown-item" href="?sort=hprice">Highest Price 📉</a></li>
-                    <li><a class="dropdown-item" href="?sort=new">Newest ⏳</a></li>
-                    <li><a class="dropdown-item" href="?sort=old">Oldest ⌛</a></li>
+                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'lprice')">Lowest Price 📈</a></li>
+                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'hprice')">Highest Price 📉</a></li>
+                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'new')">Newest ⏳</a></li>
+                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'old')">Oldest ⌛</a></li>
                 </ul>
             </div>
 
             <div id="sort-text" style="margin: auto; font-weight: 500" class="mx-3">
 
             </div>
+
+            <nav id="page-nav" style="display: none" aria-label="Page navigation">
+                <ul id="page-nav-buttons" class="m-2 pagination">
+                    <!--<li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>-->
+                </ul>
+            </nav>
         </div>
 
         <div id="product-list" class="products">
