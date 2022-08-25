@@ -139,6 +139,27 @@
             <h2><b>Residence Marketplace</b><br>
                 <small>Buy and Sell within your residence 💸</small></h2>
         </div>
+
+        <div class="my-3 shadow" style="background: var(--primary-color);
+        width: auto; height: 55px;
+        border-radius: 10px; display: inline-flex">
+            <div class="dropdown">
+                <button class="shadow m-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort by
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?sort=lprice">Lowest Price 📈</a></li>
+                    <li><a class="dropdown-item" href="?sort=hprice">Highest Price 📉</a></li>
+                    <li><a class="dropdown-item" href="?sort=new">Newest ⏳</a></li>
+                    <li><a class="dropdown-item" href="?sort=old">Oldest ⌛</a></li>
+                </ul>
+            </div>
+
+            <div id="sort-text" style="margin: auto; font-weight: 500" class="mx-3">
+
+            </div>
+        </div>
+
         <div id="product-list" class="products">
 
             <!-- Products listing goes here -->

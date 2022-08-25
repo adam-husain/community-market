@@ -11,11 +11,36 @@ window.addEventListener('load', () => {
             window.location.href = 'accounts.html?action=login&code=5';
         } else {
             products = JSON.parse(response)
+
+            // Sort products
+            const urlParams = new URLSearchParams(window.location.search)
+            const sortBy = urlParams.get('sort')
+            console.log(sortBy)
+            switch (sortBy) {
+                case 'lprice':
+                    sortByLPrice()
+                    break
+                case 'hprice':
+                    sortByHPrice()
+                    break
+                case 'new':
+                    sortByNew()
+                    break
+                case 'old':
+                    sortByOld()
+                    break
+                default:
+                    sortByNew()
+            }
+
             displayProducts()
         }
     };
     oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=all", true)
     oReq.send()
+
+
+
 })
 
 function displayProducts() {
@@ -32,3 +57,40 @@ function displayProducts() {
         })
     }
 }
+
+function sortByLPrice() {
+    document.getElementById('sort-text').innerText = "Lowest Price 📈"
+    products.sort((a, b) =>
+        (
+            parseInt(a['price']) > parseInt(b['price']) ? 1 : -1
+        )
+    )
+}
+
+function sortByHPrice() {
+    document.getElementById('sort-text').innerText = "Highest Price 📉"
+    products.sort((a, b) =>
+        (
+            parseInt(a['price']) < parseInt(b['price']) ? 1 : -1
+        )
+    )
+}
+
+function sortByNew() {
+    document.getElementById('sort-text').innerText = "Newest ⏳"
+    products.sort((a, b) =>
+        (
+            a['submission_date'] < b['submission_date'] ? 1 : -1
+        )
+    )
+}
+
+function sortByOld() {
+    document.getElementById('sort-text').innerText = "Oldest ⌛"
+    products.sort((a, b) =>
+        (
+            a['submission_date'] > b['submission_date'] ? 1 : -1
+        )
+    )
+}
+
