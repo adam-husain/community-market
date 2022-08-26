@@ -36,6 +36,7 @@ switch ($action) {
         $ip = $_SERVER['REMOTE_ADDR'];
         $prodId = (int) $_GET['product'];
         report($ip, $prodId);
+        break;
     default:
         break;
 }
