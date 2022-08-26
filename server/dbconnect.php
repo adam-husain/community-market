@@ -14,11 +14,11 @@ $password = "adamH123#";
 function connect() {
     GLOBAL $servername, $username, $password;
 
-    return mysqli_connect($servername, $username, $password, 'smr_market');
+    return mysqli_connect($servername, $username, $password, 'market');
 }
 
 function redirect($url) {
-    header("Location: http://myresidence.shop/smr/".$url);
+    header("Location: http://myresidence.shop/".$url);
     exit();
 }
 
