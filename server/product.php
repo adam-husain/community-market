@@ -51,7 +51,7 @@ switch ($action) {
  * @param string $file
  * @return void
  */
-#[NoReturn] function newProduct(int $userId, string $title, string $desc, string $residence, float $price, string $file): void
+function newProduct(int $userId, string $title, string $desc, string $residence, float $price, string $file): void
 {
     $code = 0;
     if (!$userId || !$title || !$desc || !$price || !$file) {
@@ -77,7 +77,7 @@ switch ($action) {
 /**
  * @return void
  */
-#[NoReturn] function allProducts(): void
+function allProducts(): void
 {
     $conn = connect();
 
@@ -104,7 +104,7 @@ switch ($action) {
  * @param int $userId
  * @return void
  */
-#[NoReturn] function userProducts(int $userId): void
+function userProducts(int $userId): void
 {
     $conn = connect();
 
@@ -129,7 +129,7 @@ switch ($action) {
  * @param int $prodId
  * @return void
  */
-#[NoReturn] function delete(string $session, int $prodId): void
+function delete(string $session, int $prodId): void
 {
     $conn = connect();
     if (!$conn) exit('false, cannot connect to database');
@@ -151,7 +151,7 @@ switch ($action) {
  * @param int $prodId
  * @return void
  */
-#[NoReturn] function report(string $ip, int $prodId): void
+function report(string $ip, int $prodId): void
 {
     $conn = connect();
     if (!$conn) exit('false, cannot connect to database');
