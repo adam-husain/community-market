@@ -50,12 +50,12 @@ switch ($action) {
  * @param int $userId
  * @param string $title
  * @param string $desc
- * @param string $residence
+ * @param int $residence
  * @param float $price
  * @param string $file
  * @return void
  */
-function newProduct(int $userId, string $title, string $desc, string $residence, float $price, string $file): void
+function newProduct(int $userId, string $title, string $desc, int $residence, float $price, string $file): void
 {
     $code = 0;
     if (!$userId || !$title || !$desc || !$price || !$file) {
@@ -71,7 +71,7 @@ function newProduct(int $userId, string $title, string $desc, string $residence,
         $price = (int) ($price * 100); // Convert it to sen
         $sql = 'INSERT INTO Product (`title`, `description`, price, seller_id, image_url, residence) VALUES (?, ?, ?, ?, ?, ?)';
         $query = $conn->prepare($sql);
-        $query->bind_param('ssiss', $title, $desc, $price, $userId, $file, $residence);
+        $query->bind_param('ssissi', $title, $desc, $price, $userId, $file, $residence);
         $query->execute();
     }
 
