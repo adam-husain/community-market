@@ -15,20 +15,28 @@ window.addEventListener('load', () => {
 
 
             // Filter residences if necessary
-            const residenceSmr = urlParams.get('smr') != null
-            const residenceNadayu = urlParams.get('nadayu') != null
+            let residenceSmr = getCookie('smr') == '1'
+            let residenceNadayu = getCookie('nadayu') == '1'
+            if (urlParams.has('smr') || urlParams.has('nadayu'))
+            {
+                residenceSmr = urlParams.get('smr') != null
+                residenceNadayu = urlParams.get('nadayu') != null
+            }
             let finalArray = []
+            setCookie('smr', residenceSmr?'1':'0', 1000)
+            setCookie('nadayu', residenceNadayu?'1':'0', 1000)
+
             if (residenceSmr) {
                 document.getElementById('smrCheck').checked = true
                 const prodSmr = products.filter(p => p['residence'] == RESIDENCE.SMR)
-                finalArray.concat(prodSmr)
+                finalArray = finalArray.concat(prodSmr)
             }
             if (residenceNadayu) {
                 document.getElementById('nadayuCheck').checked = true
                 const prodNadayu = products.filter(p => p['residence'] == RESIDENCE.Nadayu)
-                finalArray.concat(prodNadayu)
+                finalArray = finalArray.concat(prodNadayu)
             }
-            if (finalArray.length !== 0) products = finalArray
+            products = finalArray
 
 
             // Sort products
@@ -81,7 +89,7 @@ function displayProducts() {
     else {
         products.map((p, i) => {
             const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
-            const price = '' + (parseFloat(p['price']) / 100)
+            const price = '' + (parseFloat(p['price']) / 100).toFixed(2)
             body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, price, false)
         })
     }

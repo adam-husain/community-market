@@ -29,7 +29,7 @@
     font-size: 24px;
     margin: 0 0 5px;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .product-carousel {
@@ -116,17 +116,18 @@
     }
 
     .product-title {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .product-image {
         width: 8rem;
-        height: 8rem;
+        height: 8.5rem;
     }
 
     .product-price {
         margin: 20px 10px 0 0;
-        font-size: 11px;
+        font-size: 12px;
+        display: contents;
     }
 
     .product-description {
