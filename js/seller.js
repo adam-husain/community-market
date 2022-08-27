@@ -19,7 +19,7 @@ function getProducts(userId) {
             displayProducts()
         }
     };
-    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=user&userId=" + userId, true)
+    oReq.open("get", "http://myresidence.shop/server/product.php?action=user&userId=" + userId, true)
     oReq.send()
 }
 
@@ -31,7 +31,7 @@ function displayProducts() {
     }
     else {
         products.map((p, i) => {
-            const imageUrl = 'http://myresidence.shop/smr/img/products/' + p['image_url'];
+            const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
             const price = '' + (parseFloat(p['price']) / 100)
             body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, price, true)
         })

@@ -69,7 +69,7 @@ function confirmDelete(prodId) {
     oReq.onload = function () {
         window.location.reload()
     };
-    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=delete&session=" + session + "&product=" + prodId, true)
+    oReq.open("get", "http://myresidence.shop/server/product.php?action=delete&session=" + session + "&product=" + prodId, true)
     oReq.send()
 }
 
@@ -82,7 +82,7 @@ function confirmReport(prodId) {
         console.log(reportToast)
         console.log(toast)
     };
-    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=report&product=" + prodId, true)
+    oReq.open("get", "http://myresidence.shop/server/product.php?action=report&product=" + prodId, true)
     oReq.send()
 }
 

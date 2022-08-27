@@ -13,6 +13,24 @@ window.addEventListener('load', () => {
             products = JSON.parse(response)
             const urlParams = new URLSearchParams(window.location.search)
 
+
+            // Filter residences if necessary
+            const residenceSmr = urlParams.get('smr') != null
+            const residenceNadayu = urlParams.get('nadayu') != null
+            let finalArray = []
+            if (residenceSmr) {
+                document.getElementById('smrCheck').checked = true
+                const prodSmr = products.filter(p => p['residence'] == RESIDENCE.SMR)
+                finalArray.concat(prodSmr)
+            }
+            if (residenceNadayu) {
+                document.getElementById('nadayuCheck').checked = true
+                const prodNadayu = products.filter(p => p['residence'] == RESIDENCE.Nadayu)
+                finalArray.concat(prodNadayu)
+            }
+            if (finalArray.length !== 0) products = finalArray
+
+
             // Sort products
             const sortBy = urlParams.get('sort')
             switch (sortBy) {
@@ -32,6 +50,7 @@ window.addEventListener('load', () => {
                     sortByNew()
             }
 
+
             // Show pagination if necessary
             const length = products.length
             const paginationLimit = 12
@@ -43,13 +62,13 @@ window.addEventListener('load', () => {
                     page = 1
                 showPagination((page - 1) * paginationLimit, page * paginationLimit, length / paginationLimit)
             }
+
+
             displayProducts()
         }
     };
-    oReq.open("get", "http://myresidence.shop/smr/server/product.php?action=all", true)
+    oReq.open("get", "http://myresidence.shop/server/product.php?action=all", true)
     oReq.send()
-
-
 
 })
 
@@ -61,7 +80,7 @@ function displayProducts() {
     }
     else {
         products.map((p, i) => {
-            const imageUrl = 'http://myresidence.shop/smr/img/products/' + p['image_url'];
+            const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
             const price = '' + (parseFloat(p['price']) / 100)
             body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, price, false)
         })

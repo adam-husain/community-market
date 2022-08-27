@@ -1,6 +1,8 @@
 <?php
 
 // Todo: remove in production
+use JetBrains\PhpStorm\NoReturn;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -15,28 +17,24 @@ switch ($action) {
         $userId = (int)getPost('userId');
         $title = getPost('title');
         $desc = getPost('desc');
+        $residence = getPost('residence');
         $price = floatval(getPost('price'));
         $file = uploadFile('image', '../img/products/');
         if (!is_string($file)) $file = 'default.jpeg';
-        newProduct($userId, $title, $desc, $price, $file);
-        break;
+        newProduct($userId, $title, $desc, $residence, $price, $file);
     case 'all':
         allProducts();
-        break;
     case 'user':
         $userId = (int) $_GET['userId'];
         userProducts($userId);
-        break;
     case 'delete':
         $session = $_GET['session'];
         $prodId = (int) $_GET['product'];
         delete($session, $prodId);
-        break;
     case 'report':
         $ip = $_SERVER['REMOTE_ADDR'];
         $prodId = (int) $_GET['product'];
         report($ip, $prodId);
-        break;
     default:
         break;
 }
@@ -48,11 +46,12 @@ switch ($action) {
  * @param int $userId
  * @param string $title
  * @param string $desc
+ * @param string $residence
  * @param float $price
  * @param string $file
  * @return void
  */
-function newProduct(int $userId, string $title, string $desc, float $price, string $file): int
+#[NoReturn] function newProduct(int $userId, string $title, string $desc, string $residence, float $price, string $file): void
 {
     $code = 0;
     if (!$userId || !$title || !$desc || !$price || !$file) {
@@ -66,9 +65,9 @@ function newProduct(int $userId, string $title, string $desc, float $price, stri
 
     if ($code == 0) {
         $price = (int) ($price * 100); // Convert it to sen
-        $sql = 'INSERT INTO Product (`title`, `description`, price, seller_id, image_url) VALUES (?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO Product (`title`, `description`, price, seller_id, image_url, residence) VALUES (?, ?, ?, ?, ?, ?)';
         $query = $conn->prepare($sql);
-        $query->bind_param('ssiss', $title, $desc, $price, $userId, $file);
+        $query->bind_param('ssiss', $title, $desc, $price, $userId, $file, $residence);
         $query->execute();
     }
 
@@ -78,13 +77,13 @@ function newProduct(int $userId, string $title, string $desc, float $price, stri
 /**
  * @return void
  */
-function allProducts()
+#[NoReturn] function allProducts(): void
 {
     $conn = connect();
 
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT * FROM Product INNER JOIN User ON Product.seller_id = User.user_id WHERE available = true';
+    $sql = 'SELECT * FROM Product INNER JOIN User ON Product.seller_id = User.user_id WHERE available = true and hidden = false';
     if ($result = $conn->query($sql))
     {
         $data = array();
@@ -105,13 +104,13 @@ function allProducts()
  * @param int $userId
  * @return void
  */
-function userProducts(int $userId)
+#[NoReturn] function userProducts(int $userId): void
 {
     $conn = connect();
 
     if (!$conn) exit('false, cannot connect to database');
 
-    $sql = 'SELECT * FROM Product WHERE seller_id = ? AND available = true';
+    $sql = 'SELECT * FROM Product WHERE seller_id = ? AND available = true and hidden = false';
     $query = $conn->prepare($sql);
     $query->bind_param('i', $userId);
     $query->execute();
@@ -130,7 +129,7 @@ function userProducts(int $userId)
  * @param int $prodId
  * @return void
  */
-function delete(string $session, int $prodId)
+#[NoReturn] function delete(string $session, int $prodId): void
 {
     $conn = connect();
     if (!$conn) exit('false, cannot connect to database');
@@ -152,7 +151,7 @@ function delete(string $session, int $prodId)
  * @param int $prodId
  * @return void
  */
-function report(string $ip, int $prodId)
+#[NoReturn] function report(string $ip, int $prodId): void
 {
     $conn = connect();
     if (!$conn) exit('false, cannot connect to database');

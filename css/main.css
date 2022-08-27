@@ -86,3 +86,45 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.checkBox {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    margin: 20px auto;
+    background: #fcfff4;
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    box-shadow: inset 0 1px 1px white, 0 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+.checkBox label {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 0 white;
+}
+.checkBox label:after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background: #27ae60;
+    background: linear-gradient(to bottom, #27ae60 0%, #145b32 100%);
+    box-shadow: inset 0 1px 1px white, 0 1px 3px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+}
+.checkBox label:hover::after {
+    opacity: 0.3;
+}
+.checkBox input[type=checkbox] {
+    visibility: hidden;
+}
+.checkBox input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}

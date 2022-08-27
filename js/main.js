@@ -1,3 +1,8 @@
+const RESIDENCE = {
+    SMR: 1,
+    Nadayu: 2,
+}
+
 window.addEventListener('load', () => {
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     const currentTheme = localStorage.getItem('theme');
@@ -74,7 +79,7 @@ function displayUser(user) {
     const number = user['whatsapp'].replace('+', '')
     const message = 'Hello ' + name + ', I am interested in purchasing the product you have listed on the SMR Marketplace site.'
     const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
-    const image_url = 'http://myresidence.shop/smr/img/profile/' + user['profile_url']
+    const image_url = 'http://myresidence.shop/img/profile/' + user['profile_url']
     frame.getElementById('title').innerHTML = name + '<small>' + pronouns + '</small>'
     frame.getElementById('contact').innerHTML = 'Contact: <a href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
     frame.getElementById('profile-pic').src = image_url;
