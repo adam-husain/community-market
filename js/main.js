@@ -77,7 +77,7 @@ function displayUser(user) {
     const name = user['name']
     const pronouns = ['', '', 'He/Him', 'She/Her', 'They/Them'][user['pronouns']]
     const number = user['whatsapp'].replace('+', '')
-    const message = 'Hello ' + name + ', I am interested in purchasing the product you have listed on the SMR Marketplace site.'
+    const message = 'Hello ' + name + ', I am interested in purchasing the product you have listed on the Residence Marketplace site.'
     const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
     const image_url = 'http://myresidence.shop/img/profile/' + user['profile_url']
     frame.getElementById('title').innerHTML = name + '<small>' + pronouns + '</small>'

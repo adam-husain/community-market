@@ -1,7 +1,6 @@
 <?php
 
 // Todo: remove in production
-use JetBrains\PhpStorm\NoReturn;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -22,19 +21,24 @@ switch ($action) {
         $file = uploadFile('image', '../img/products/');
         if (!is_string($file)) $file = 'default.jpeg';
         newProduct($userId, $title, $desc, $residence, $price, $file);
+        break;
     case 'all':
         allProducts();
+        break;
     case 'user':
         $userId = (int) $_GET['userId'];
         userProducts($userId);
+        break;
     case 'delete':
         $session = $_GET['session'];
         $prodId = (int) $_GET['product'];
         delete($session, $prodId);
+        break;
     case 'report':
         $ip = $_SERVER['REMOTE_ADDR'];
         $prodId = (int) $_GET['product'];
         report($ip, $prodId);
+        break;
     default:
         break;
 }
