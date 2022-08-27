@@ -107,15 +107,15 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
         '</div>' +
         //`<button onclick="like(${id})" class="product-button"><i class="fa fa-heart-o"></i></button>` +
         //`<button onclick="unlike(${id})" class="product-button hidden"><i class="fa fa-heart"></i></button>` +
-        `<button onclick="toggleDesc(${id})" class="product-button"><i class="fa fa-navicon"></i></button>` +
+        `<button onclick="toggleDesc(${id})" class="product-button"><i class="fa fa-navicon icon"></i></button>` +
         //`<button id="link0" onclick="openLink(${id})" class="product-button"><i class="fa fa-external-link"></i></button>` +
         '';
 
     if (deletable) {
-        cardHtml += `<button onclick="promptDelete(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>`;
+        cardHtml += `<button onclick="promptDelete(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash icon"></i></button>`;
     }
     else {
-        cardHtml += `<button onclick="promptReport(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fa fa-exclamation-circle"></i></button>`;
+        cardHtml += `<button onclick="promptReport(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fa fa-exclamation-circle icon"></i></button>`;
     }
 
     cardHtml += `<div class="product-price">RM ${price}</div>` +
