@@ -29,12 +29,12 @@ function filterProducts() {
 
 
     if (residenceSmr) {
-        document.getElementById('smrCheck').checked = true
+        //document.getElementById('smrCheck').checked = true
         const prodSmr = products.filter(p => p['residence'] == RESIDENCE.SMR)
         filteredProds = filteredProds.concat(prodSmr)
     }
     if (residenceNadayu) {
-        document.getElementById('nadayuCheck').checked = true
+        //document.getElementById('nadayuCheck').checked = true
         const prodNadayu = products.filter(p => p['residence'] == RESIDENCE.Nadayu)
         filteredProds = filteredProds.concat(prodNadayu)
     }
