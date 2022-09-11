@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
     }
 
     function switchTheme(e) {
-        if (e.target.checked) {
+        if (e.target?.checked || e?.checked) {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
         } else {
@@ -26,6 +26,12 @@ window.addEventListener('load', () => {
     }
 
     toggleSwitch?.addEventListener('change', switchTheme, false);
+
+    // Check if window is dark mode
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        toggleSwitch.checked = true
+        switchTheme(toggleSwitch)
+    }
 
     const queryString = window.location.search;
     if (queryString.includes('signout')) {

@@ -73,6 +73,9 @@
                         <a class="nav-link" href="about.html">About 💁‍♂️</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="help.html">Help 📑</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact 🤙</a>
                     </li>
                 </ul>
@@ -156,57 +159,55 @@
             </div>
 
             <div id="sort-text" style="margin: auto; font-weight: 500" class="mx-3">
-
+                Newest
             </div>
 
-            <nav id="page-nav" style="display: none" aria-label="Page navigation">
+            <nav id="page-nav" style="display: block" aria-label="Page navigation">
                 <ul id="page-nav-buttons" class="m-2 pagination">
-                    <!--<li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>-->
+
                 </ul>
             </nav>
         </div>
 
-        <form class="my-2 shadow" style="background: var(--primary-color);
-        width: auto; height: auto; padding: 5px;
-        border-radius: 10px;">
-            <div style="display: inline-flex">
-                <div class="checkBox shadow m-2">
-                    <input type="checkbox" id="smrCheck" name="smr" />
-                    <label for="smrCheck"></label>
-                </div>
-                <div style="margin: auto 20px auto 5px">
-                    SUNWAY MONASH RESIDENCE
-                </div>
-            </div>
+        <div class="dropdown">
+            <button class="shadow m-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Residence
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <div style="display: inline-flex">
+                        <div class="checkBox shadow m-2">
+                            <input type="checkbox" id="smrCheck" onclick="selectResidence(RESIDENCE.SMR)" />
+                            <label for="smrCheck"></label>
+                        </div>
+                        <div style="margin: auto 20px auto 5px">
+                            Sunway Monash Residence
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div style="display: inline-flex">
+                        <div class="checkBox shadow m-2">
+                            <input type="checkbox" id="nadayuCheck" onclick="selectResidence(RESIDENCE.Nadayu)"/>
+                            <label for="nadayuCheck"></label>
+                        </div>
+                        <div style="margin: auto 20px auto 5px">
+                            Nadayu
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-            <div style="display: inline-flex">
-                <div class="checkBox shadow m-2">
-                    <input type="checkbox" id="nadayuCheck" name="nadayu" />
-                    <label for="nadayuCheck"></label>
-                </div>
-                <div style="margin: auto 20px auto 5px">
-                    Nadayu
-                </div>
-            </div>
-
-            <button style="float: right" type="submit" class="mx-2 btn btn-secondary">APPLY</button>
-        </form>
         <div id="product-list" class="products">
 
-            <!-- Products listing goes here -->
-            <div id="emptyPrompt" style="margin-top: 20px; display: none;">We do not have any products listed 😕
-                <br>You can change that by becoming a Seller 💵</div>
 
+        </div>
+
+        <!-- Products listing goes here -->
+        <div id="emptyPrompt" style="margin-top: 20px; display: block; text-align: center">We do not have any products listed 😕
+            <br>Maybe your selected residence does not have anything to sell
+            <br>You can change that by becoming a Seller 💵
         </div>
     </section>
 

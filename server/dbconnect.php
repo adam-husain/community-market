@@ -1,20 +1,22 @@
 <?php
 
+/**
+ * Create a php file "credentials.php" in this dir
+ * Enter your database credentials there
+ */
+
 // Todo: remove in production
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'imageCompress.php';
-
-$servername = "localhost";
-$username = "snyper";
-$password = "adamH123#";
+include 'credentials.php';
 
 function connect() {
-    GLOBAL $servername, $username, $password;
+    GLOBAL $SERVER, $USER, $PASSWORD, $DATABASE;
 
-    return mysqli_connect($servername, $username, $password, 'market');
+    return mysqli_connect($SERVER, $USER, $PASSWORD, $DATABASE);
 }
 
 function redirect($url) {
