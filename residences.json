@@ -1,0 +1,20 @@
+[
+	{
+		"ID": 1,
+		"FullName": "Sunway Monash Residence",
+		"ShortName": "SMR",
+		"Enabled": 1
+	},
+	{
+		"ID": 2,
+		"FullName": "Nadayu28",
+		"ShortName": "Nadayu",
+		"Enabled": 1
+	},
+	{
+		"ID": 3,
+		"FullName": "SunU Residence",
+		"ShortName": "SunU",
+		"Enabled": 0
+	}
+]

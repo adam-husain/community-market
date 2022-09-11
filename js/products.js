@@ -133,7 +133,7 @@ function sortByOld(products) {
 }
 
 function showPagination(products, start, end, total) {
-    products = products.slice(start, end)
+    this.products = products.slice(start, end)
     document.getElementById('page-nav').style.display = 'block'
     const pagination = document.getElementById('page-nav-buttons')
     pagination.innerHTML += `<li class="page-item">
@@ -154,7 +154,6 @@ function showPagination(products, start, end, total) {
 function selectResidence(residence) {
     const smr = document.getElementById('smrCheck').checked
     const nadayu = document.getElementById('nadayuCheck').checked
-    console.log("residence selected: " + residence + " : " + smr + " : " + nadayu)
 
     switch (residence) {
         case 1:

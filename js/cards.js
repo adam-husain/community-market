@@ -1,5 +1,4 @@
 const MaxImagesAllowed = 5
-let interestedProd = 0
 
 function carouselChange(cardIndex, increment) {
     let currentImage = 0
@@ -79,8 +78,6 @@ function confirmReport(prodId) {
         const reportToast = document.getElementById('reportToast')
         const toast = new bootstrap.Toast(reportToast)
         toast.show()
-        console.log(reportToast)
-        console.log(toast)
     };
     oReq.open("get", "http://myresidence.shop/server/product.php?action=report&product=" + prodId, true)
     oReq.send()
