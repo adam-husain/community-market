@@ -90,8 +90,7 @@ function displayProducts(products) {
         document.getElementById('emptyPrompt').style.display = 'none';
         products.map((p, i) => {
             const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
-            const price = '' + (parseFloat(p['price']) / 100).toFixed(2)
-            body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, price, false)
+            body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, p['price'], false)
         })
     }
 }

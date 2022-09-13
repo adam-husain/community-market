@@ -58,9 +58,11 @@ switch ($action) {
 function newProduct(int $userId, string $title, string $desc, int $residence, float $price, string $file): void
 {
     $code = 0;
-    if (!$userId || !$title || !$desc || !$price || !$file) {
+    if (!$userId || !$title || !$desc || !$file) {
         $code = 1;
     }
+
+    if (!$price) $price = 0;
 
     if ($userId == -1) $code = 1;
 

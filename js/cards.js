@@ -84,11 +84,24 @@ function confirmReport(prodId) {
 }
 
 function contact(cardIndex) {
-    displayUser(products[cardIndex])
+    const info = products[cardIndex]
+    const name = info['name']
+    const title = info['title']
+    const pronouns = ['', '', 'He/Him', 'She/Her', 'They/Them'][info['pronouns']]
+    const number = info['whatsapp'].replace('+', '')
+    const message = `Hello ${name}, I am interested in purchasing the item ${title} you have listed on the Residence Marketplace site.`
+    const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
+    const image_url = 'http://myresidence.shop/img/profile/' + info['profile_url']
+    document.getElementById('title').innerHTML = name + '<small>' + pronouns + '</small>'
+    document.getElementById('contact').innerHTML = 'Contact: <a href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
+    document.getElementById('profile-pic').src = image_url;
 }
 
 
 function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
+    let priceRM = 'RM ' + (parseFloat(price) / 100).toFixed(2)
+    if (price === '0')
+        priceRM = 'FREE'
     const imageId = 'image0.' + id;
     let cardHtml = '<div class="product-card">' +
         `<div class="product-title">${title}</div><` +
@@ -115,7 +128,7 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
         cardHtml += `<button onclick="promptReport(${id})" class="product-button" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fa fa-exclamation-circle icon"></i></button>`;
     }
 
-    cardHtml += `<div class="product-price">RM ${price}</div>` +
+    cardHtml += `<div class="product-price">${priceRM}</div>` +
         `<div class="product-description">${desc}</div>`;
 
     if (!deletable) {
