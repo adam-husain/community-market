@@ -30,6 +30,10 @@ function carouselChange(cardIndex, increment) {
     document.getElementById("indicator" + cardIndex + "." + currentImage).classList.add("selected")
 }
 
+function getProduct(productId) {
+    return products.find((p) => p['product_id'] == productId)
+}
+
 function like(cardIndex) {
     document.getElementById("like" + cardIndex).classList.add("hidden")
     document.getElementById("unlike" + cardIndex).classList.remove("hidden")
@@ -40,8 +44,8 @@ function unlike(cardIndex) {
     document.getElementById("unlike" + cardIndex).classList.add("hidden")
 }
 
-function toggleDesc(cardIndex) {
-    const card = document.getElementsByClassName("product-card")[cardIndex]
+function toggleDesc(cardId) {
+    const card = document.getElementsByClassName("product-" + cardId)[0]
     if (card.classList.contains("product-card-expanded")) {
         card.classList.remove("product-card-expanded")
     } else {
@@ -49,15 +53,16 @@ function toggleDesc(cardIndex) {
     }
 }
 
-function promptDelete(cardIndex) {
-    const product = products[cardIndex];
+function promptDelete(cardId) {
+    const product = getProduct(cardId)
     document.getElementById('deleteModalLabel').innerHTML = 'Delete <b>' + product['title'] + '</b>';
     document.getElementById('deleteButton').onclick = () => confirmDelete(product['product_id']);
 }
 
 function promptReport(cardIndex) {
-    const id = products[cardIndex]['product_id'];
-    const title = products[cardIndex]['title'];
+    const product = getProduct(cardIndex)
+    const id = product['product_id'];
+    const title = product['title'];
     document.getElementById('reportModalBody').innerHTML = `You have reported <b>${title}</b>. Please don't spam reports. ` +
         "Reporting does not guarantee being taken down. That decision will be left to my discretion."
     document.getElementById('reportButton').onclick = () => confirmReport(id)
@@ -83,8 +88,8 @@ function confirmReport(prodId) {
     oReq.send()
 }
 
-function contact(cardIndex) {
-    const info = products[cardIndex]
+function contact(cardId) {
+    const info = getProduct(cardId)
     const name = info['name']
     const title = info['title']
     const pronouns = ['', '', 'He/Him', 'She/Her', 'They/Them'][info['pronouns']]
@@ -103,7 +108,7 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
     if (price === '0')
         priceRM = 'FREE'
     const imageId = 'image0.' + id;
-    let cardHtml = '<div class="product-card">' +
+    let cardHtml = `<div class="product-card product-${id}">` +
         `<div class="product-title">${title}</div><` +
         'div class="product-carousel">' +
         //'<button onclick="carouselChange(0, -1)" class="btn"><i class="fa fa-arrow-left"></i></button>' +

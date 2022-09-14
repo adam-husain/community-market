@@ -32,7 +32,7 @@ function displayProducts() {
     else {
         products.map((p, i) => {
             const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
-            body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, p['price'], true)
+            body.innerHTML += getCardLayout(p['product_id'], p['title'], p['description'], imageUrl, p['price'], true)
         })
     }
 }

@@ -91,7 +91,7 @@ function displayProducts(products) {
         document.getElementById('emptyPrompt').style.display = 'none';
         products.map((p, i) => {
             const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
-            body.innerHTML += getCardLayout(i, p['title'], p['description'], imageUrl, p['price'], false)
+            body.innerHTML += getCardLayout(p['product_id'], p['title'], p['description'], imageUrl, p['price'], false)
         })
     }
 }
