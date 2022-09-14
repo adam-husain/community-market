@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
     const oReq = new XMLHttpRequest()
     oReq.onload = function () {
         const response = this.responseText
-        console.log(response)
+        //console.log(response)
         if (response.toLowerCase().startsWith('false')) {
             window.location.href = 'accounts.html?action=login&code=5';
         } else {
