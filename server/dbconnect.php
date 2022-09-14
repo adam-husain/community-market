@@ -81,7 +81,7 @@ function uploadFile($tag, $dir)
     $fileDir = $dir . $filename;
 
     // Compress image
-    if (!compressImage($tmpFile , $fileDir , 70)) {
+    if (!compressImage($tmpFile , $fileDir , 50)) {
         return 2;
     }
 
