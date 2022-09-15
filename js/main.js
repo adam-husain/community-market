@@ -87,7 +87,7 @@ function displayUser(user) {
     const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
     const image_url = 'http://myresidence.shop/img/profile/' + user['profile_url']
     frame.getElementById('title').innerHTML = name + '<small>' + pronouns + '</small>'
-    frame.getElementById('contact').innerHTML = 'Contact: <a href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
+    frame.getElementById('contact').innerHTML = 'Contact: <a class="btn btn-primary" href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
     frame.getElementById('profile-pic').src = image_url;
 }
 

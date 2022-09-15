@@ -6,6 +6,7 @@ include 'dbconnect.php';
  * 0: Unknown
  * 1: Primary Poster QR Code
  * 2: Secondary Poster QR Code
+ * 3: Homepage
  */
 $method = (int) $_GET['method'];
 

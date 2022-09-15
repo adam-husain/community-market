@@ -98,7 +98,7 @@ function contact(cardId) {
     const wa_url = encodeURI('http://wa.me/' + number + '?text=' + message)
     const image_url = 'http://myresidence.shop/img/profile/' + info['profile_url']
     document.getElementById('title').innerHTML = name + '<small>' + pronouns + '</small>'
-    document.getElementById('contact').innerHTML = 'Contact: <a href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> +' + number + '</i></a>'
+    document.getElementById('contact').innerHTML = 'Contact: <a class="btn btn-primary" href="' + wa_url + '" target="_blank"><i class="fa fa-whatsapp"> ' + 'WhatsApp' + '</i></a>'
     document.getElementById('profile-pic').src = image_url;
 }
 
