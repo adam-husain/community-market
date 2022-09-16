@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
     if (code == null) code = 10
 
     if (action == null) {
-        showSignIn()
+        showRegister()
         return
     }
 
@@ -65,4 +65,8 @@ function showSignIn() {
 function showRegister() {
     loginForm.style.display = 'none'
     registerForm.style.display = 'block'
+}
+
+function showPassInfo() {
+    document.getElementById('pass-info').style.display = 'block';
 }

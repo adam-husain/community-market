@@ -54,7 +54,7 @@ function filterProducts() {
             || page > parseInt(length / paginationLimit) + 1
             || page <= 0)
             page = 1
-        showPagination(filteredProds, (page - 1) * paginationLimit, page * paginationLimit, length / paginationLimit)
+        filteredProds = showPagination(filteredProds, (page - 1) * paginationLimit, page * paginationLimit, length / paginationLimit)
     }
 
     displayProducts(filteredProds)
@@ -97,7 +97,7 @@ function displayProducts(products) {
 }
 
 function sortByLPrice(products) {
-    document.getElementById('sort-text').innerText = "Lowest Price 📈"
+    document.getElementById('sort-text').innerText = "Lowest Price"
     products.sort((a, b) =>
         (
             parseInt(a['price']) > parseInt(b['price']) ? 1 : -1
@@ -106,7 +106,7 @@ function sortByLPrice(products) {
 }
 
 function sortByHPrice(products) {
-    document.getElementById('sort-text').innerText = "Highest Price 📉"
+    document.getElementById('sort-text').innerText = "Highest Price"
     products.sort((a, b) =>
         (
             parseInt(a['price']) < parseInt(b['price']) ? 1 : -1
@@ -115,7 +115,7 @@ function sortByHPrice(products) {
 }
 
 function sortByNew(products) {
-    document.getElementById('sort-text').innerText = "Newest ⏳"
+    document.getElementById('sort-text').innerText = "Newest"
     products.sort((a, b) =>
         (
             a['submission_date'] < b['submission_date'] ? 1 : -1
@@ -124,7 +124,7 @@ function sortByNew(products) {
 }
 
 function sortByOld(products) {
-    document.getElementById('sort-text').innerText = "Oldest ⌛"
+    document.getElementById('sort-text').innerText = "Oldest"
     products.sort((a, b) =>
         (
             a['submission_date'] > b['submission_date'] ? 1 : -1
@@ -133,7 +133,7 @@ function sortByOld(products) {
 }
 
 function showPagination(products, start, end, total) {
-    this.products = products.slice(start, end)
+    const newProducts = products.slice(start, end)
     document.getElementById('page-nav').style.display = 'block'
     const pagination = document.getElementById('page-nav-buttons')
     pagination.innerHTML += `<li class="page-item">
@@ -149,6 +149,8 @@ function showPagination(products, start, end, total) {
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>`
+
+    return newProducts
 }
 
 function selectResidence(residence) {
