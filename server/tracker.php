@@ -20,8 +20,8 @@ $place = (int) $_GET['place'];
 $ip = $_SERVER['REMOTE_ADDR'];
 
 $conn = connect();
-$sql = 'INSERT INTO Tracker (method, place, tracker_ip) VALUES (?, ?, ?)';
+$sql = 'INSERT INTO Tracker (method, place, tracker_ip, device) VALUES (?, ?, ?, ?)';
 $query = $conn->prepare($sql);
-$query->bind_param('iis', $method, $place, $ip);
+$query->bind_param('iiss', $method, $place, $ip, $_SERVER['HTTP_USER_AGENT']);
 $query->execute();
 $query->close();

@@ -6,3 +6,4 @@
 *.iml
 *.iws
 /server/credentials.php
+/owa/owa-config.php
