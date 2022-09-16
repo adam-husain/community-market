@@ -28,6 +28,11 @@ function filterProducts() {
     let residenceSmr = getCookie('smr') === '1'
     let residenceNadayu = getCookie('nadayu') === '1'
 
+    if (!residenceSmr &&
+        !residenceNadayu) {
+        residenceSmr = true
+    }
+
 
     if (residenceSmr) {
         //document.getElementById('smrCheck').checked = true
@@ -89,7 +94,7 @@ function displayProducts(products) {
     }
     else {
         document.getElementById('emptyPrompt').style.display = 'none';
-        products.map((p, i) => {
+        products.map((p) => {
             const imageUrl = 'http://myresidence.shop/img/products/' + p['image_url'];
             body.innerHTML += getCardLayout(p['product_id'], p['title'], p['description'], imageUrl, p['price'], false)
         })
