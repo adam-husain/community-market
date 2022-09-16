@@ -63,8 +63,8 @@ function promptReport(cardIndex) {
     const product = getProduct(cardIndex)
     const id = product['product_id'];
     const title = product['title'];
-    document.getElementById('reportModalBody').innerHTML = `You have reported <b>${title}</b>. Please don't spam reports. ` +
-        "Reporting does not guarantee being taken down. That decision will be left to my discretion."
+    document.getElementById('reportModalBody').innerHTML = `Press <i>Report</i> to flag <b>${title}</b> as inappropriate. Please don't spam reports. ` +
+        "Content is moderated by an automated moderation algorithm."
     document.getElementById('reportButton').onclick = () => confirmReport(id)
 }
 
