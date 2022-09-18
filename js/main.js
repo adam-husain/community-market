@@ -58,7 +58,7 @@ function getCookie(key) {
 
 function setCookie(key, value, days) {
     const d = new Date();
-    d.setTime(d.getTime() + (days*24*60*60*1000));
+    d.setTime(d.getTime() + (days*24*60*60));
     let expires = "expires="+ d.toUTCString();
     document.cookie = key + "=" + value + ";" + expires + ";path=/";
 }

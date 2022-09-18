@@ -38,6 +38,15 @@
     <script src="js/cards.js"></script>
     <script src="js/products.js"></script>
 
+    <script>
+        window.addEventListener('load', ()=>{
+            if (getCookie('instaPromo') === "") {
+                $('#instaModal').modal('show')
+                setCookie('instaPromo', '1', 2)
+            }
+        })
+    </script>
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -142,6 +151,26 @@
         </div>
     </div>
 
+    <!-- Instagram follow Modal -->
+    <div class="modal fade" id="instaModal" tabindex="-1" aria-labelledby="instaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="color: black">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModalLabel">Follow our Instagram <i class="fa fa-instagram"></i></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Follow us on our
+                    <a href="https://www.instagram.com/myresidence.shop/" target="_blank">Instagram page</a>
+                    to keep up with the latest featured products.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Report Successful Toast -->
     <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
@@ -212,7 +241,7 @@
             </ul>
         </div-->
 
-        <div id="product-list" class="products">
+        <div id="product-list" class="products mb-5">
             <!-- Google Adsense -->
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1981166567864449"
                     crossorigin="anonymous"></script>
