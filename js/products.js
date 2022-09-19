@@ -139,7 +139,6 @@ function sortByOld(products) {
 
 function showPagination(products, start, end, total) {
     const newProducts = products.slice(start, end)
-    document.getElementById('page-nav').style.display = 'block'
     const pagination = document.getElementById('page-nav-buttons')
     pagination.innerHTML += `<li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">

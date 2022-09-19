@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Community Market</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
 
     <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700' rel='stylesheet'
+          type='text/css'>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/fadein.css" rel="stylesheet">
     <link href="css/cards.css" rel="stylesheet">
@@ -26,20 +29,24 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XWWSH8JX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-D0XWWSH8JX');
     </script>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cards.js"></script>
-    <script src="js/products.js"></script>
+    <script src="js/products.js?v=1.1"></script>
 
     <script>
-        window.addEventListener('load', ()=>{
+        window.addEventListener('load', () => {
             if (getCookie('instaPromo') === "") {
                 $('#instaModal').modal('show')
                 setCookie('instaPromo', '1', 2)
@@ -48,180 +55,180 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
+    <link href="favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="favicon/site.webmanifest" rel="manifest">
 </head>
 
 <body>
 
-    <div id="fadein"></div>
+<div id="fadein"></div>
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a href="#" class="navbar-brand">
-                <b>RESIDENCE MARKETPLACE</b>
-            </a>
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="checkbox">
-                    <input type="checkbox" id="checkbox" />
-                    <div class="slider round"></div>
-                </label>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="seller.html">Seller Portal 💵</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About 💁‍♂️</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="help.html">Help 📑</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact 🤙</a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <b>RESIDENCE MARKETPLACE</b>
+        </a>
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input id="checkbox" type="checkbox"/>
+                <div class="slider round"></div>
+            </label>
         </div>
-    </nav>
+        <button class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="seller.html">Seller Portal 💵</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About 💁‍♂️</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="help.html">Help 📑</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact 🤙</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <div class="mb-3"></div>
+<div class="mb-3"></div>
 
-    <!-- Report product popup -->
-    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="color: black">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="reportModalLabel">Found something sussy? 🤨</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div id="reportModalBody" class="modal-body">
-                    You have reported {product}. Please don't spam reports.
-                    Content is moderated by an automated moderation algorithm.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="reportButton" type="button" class="btn btn-primary" data-bs-dismiss="modal">Report</button>
-                </div>
+<!-- Report product popup -->
+<div aria-hidden="true" aria-labelledby="reportModalLabel" class="modal fade" id="reportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="color: black">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">Found something sussy? 🤨</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body" id="reportModalBody">
+                You have reported {product}. Please don't spam reports.
+                Content is moderated by an automated moderation algorithm.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" id="reportButton" type="button">Report</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Contact details popup -->
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="background: var(--bg-color); color: var(--font-color);">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="contactModalLabel">Contact the seller 🤙</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    The seller contact details are displayed below 👇.
-                    Click on the Whatsapp number to start chatting 💬.
-                    Keep your chats nice and friendly 🤗<br><br>
+<!-- Contact details popup -->
+<div aria-hidden="true" aria-labelledby="contactModalLabel" class="modal fade" id="contactModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: var(--bg-color); color: var(--font-color);">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Contact the seller 🤙</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                The seller contact details are displayed below 👇.
+                Click on the Whatsapp number to start chatting 💬.
+                Keep your chats nice and friendly 🤗<br><br>
 
-                    <!-- start profile -->
-                    <div class="profile">
-                        <figure>
-                            <img id="profile-pic" class="profile-pic" src="img/profile/default.jpeg" alt="" />
-                        </figure>
-                        <header>
-                            <h1 id="title">
-                                <small></small></h1>
-                            <br>
-                            <div id="contact" class="contact">
-                                Contact: <a class="btn btn-primary" href="#"><i class="fa fa-whatsapp"></i></a>
-                            </div>
-                        </header>
-
-                    </div>
-                    <!-- end profile -->
+                <!-- start profile -->
+                <div class="profile">
+                    <figure>
+                        <img alt="" class="profile-pic" id="profile-pic" src="img/profile/default.jpeg"/>
+                    </figure>
+                    <header>
+                        <h1 id="title">
+                            <small></small></h1>
+                        <br>
+                        <div class="contact" id="contact">
+                            Contact: <a class="btn btn-primary" href="#"><i class="fa fa-whatsapp"></i></a>
+                        </div>
+                    </header>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                <!-- end profile -->
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Instagram follow Modal -->
-    <div class="modal fade" id="instaModal" tabindex="-1" aria-labelledby="instaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="color: black">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="instaModalLabel">Follow our Instagram <i class="fa fa-instagram"></i></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Follow us on our
-                    <a href="https://www.instagram.com/myresidence.shop/" target="_blank">Instagram page</a>
-                    to keep up with the latest featured products.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+<!-- Instagram follow Modal -->
+<div aria-hidden="true" aria-labelledby="instaModalLabel" class="modal fade" id="instaModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="color: black">
+            <div class="modal-header">
+                <h5 class="modal-title" id="instaModalLabel">Follow our Instagram <i class="fa fa-instagram"></i></h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                Follow us on our
+                <a href="https://www.instagram.com/myresidence.shop/" target="_blank">Instagram page</a>
+                to keep up with the latest featured products.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- Report Successful Toast -->
-    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-        <div id="reportToast" class="d-flex">
-            <div class="toast-body">
-                Your report has been received 👮
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+<!-- Report Successful Toast -->
+<div aria-atomic="true" aria-live="assertive" class="toast align-items-center" role="alert">
+    <div class="d-flex" id="reportToast">
+        <div class="toast-body">
+            Your report has been received 👮
         </div>
+        <button aria-label="Close" class="btn-close me-2 m-auto" data-bs-dismiss="toast" type="button"></button>
     </div>
+</div>
 
-    <section class="container">
-        <h5>Buy and Sell within your residence 💸</h5>
+<section class="container">
+    <h5>Buy and Sell within your residence 💸</h5>
 
-        <div class="my-3 shadow" style="background: var(--primary-color);
+    <div class="my-3 shadow" style="background: var(--primary-color);
         width: auto; height: 55px;
         border-radius: 10px; display: inline-flex">
-            <div class="dropdown">
-                <button class="shadow m-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sort by
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'lprice')">Lowest Price 📈</a></li>
-                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'hprice')">Highest Price 📉</a></li>
-                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'new')">Newest ⏳</a></li>
-                    <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'old')">Oldest ⌛</a></li>
-                </ul>
-            </div>
-
-            <div id="sort-text" style="margin: auto; font-weight: 500" class="mx-3">
-                Newest
-            </div>
-
-
+        <div class="dropdown">
+            <button aria-expanded="false" class="shadow m-2 btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    type="button">
+                Sort by
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'lprice')">Lowest Price 📈</a></li>
+                <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'hprice')">Highest Price 📉</a></li>
+                <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'new')">Newest ⏳</a></li>
+                <li><a class="dropdown-item" href="javascript:addUrlParam('sort', 'old')">Oldest ⌛</a></li>
+            </ul>
         </div>
 
-        <nav id="page-nav" style="display: block" aria-label="Page navigation">
-            <ul id="page-nav-buttons" class="m-2 pagination">
+        <div class="mx-3" id="sort-text" style="margin: auto; font-weight: 500">
+            Newest
+        </div>
 
-            </ul>
-        </nav>
+
+    </div>
+
+    <nav aria-label="Page navigation" id="page-nav" style="background: var(--primary-color);
+        width: auto; height: 55px;
+        border-radius: 10px; display: inline-flex">
 
         <!--div class="dropdown">
-            <button class="shadow m-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button aria-expanded="false" class="shadow m-2 btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    type="button">
                 Residence
             </button>
             <ul class="dropdown-menu">
                 <li>
                     <div style="display: inline-flex">
                         <div class="checkBox shadow m-2">
-                            <input type="checkbox" id="smrCheck" onclick="selectResidence(RESIDENCE.SMR)" />
+                            <input id="smrCheck" onclick="selectResidence(RESIDENCE.SMR)" type="checkbox"/>
                             <label for="smrCheck"></label>
                         </div>
                         <div style="margin: auto 20px auto 5px">
@@ -232,7 +239,7 @@
                 <li>
                     <div style="display: inline-flex">
                         <div class="checkBox shadow m-2">
-                            <input type="checkbox" id="nadayuCheck" onclick="selectResidence(RESIDENCE.Nadayu)"/>
+                            <input id="nadayuCheck" onclick="selectResidence(RESIDENCE.Nadayu)" type="checkbox"/>
                             <label for="nadayuCheck"></label>
                         </div>
                         <div style="margin: auto 20px auto 5px">
@@ -243,30 +250,37 @@
             </ul>
         </div-->
 
-        <div id="product-list" class="products mb-3">
+        <ul class="m-2 pagination" id="page-nav-buttons">
 
-        </div>
+        </ul>
+    </nav>
 
-        <!-- Products listing goes here -->
-        <div id="emptyPrompt" style="margin-top: 20px; display: block; text-align: center">We do not have any products listed 😕
-            <br>Maybe your selected residence does not have anything to sell
-            <br>You can change that by becoming a Seller 💵
-        </div>
 
-        <!-- Google Adsense -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1981166567864449"
-                crossorigin="anonymous"></script>
-        <!-- Main Ad -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-1981166567864449"
-             data-ad-slot="5571362350"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </section>
+    <div class="products mb-3" id="product-list">
+
+    </div>
+
+    <!-- Products listing goes here -->
+    <div id="emptyPrompt" style="margin-top: 20px; display: block; text-align: center">We do not have any products
+        listed 😕
+        <br>Maybe your selected residence does not have anything to sell
+        <br>You can change that by becoming a Seller 💵
+    </div>
+
+    <!-- Google Adsense -->
+    <script async crossorigin="anonymous"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1981166567864449"></script>
+    <!-- Main Ad -->
+    <ins class="adsbygoogle"
+         data-ad-client="ca-pub-1981166567864449"
+         data-ad-format="auto"
+         data-ad-slot="5571362350"
+         data-full-width-responsive="true"
+         style="display:block"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</section>
 
 
 </body>
