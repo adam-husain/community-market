@@ -46,11 +46,7 @@ function unlike(cardIndex) {
 
 function toggleDesc(cardId) {
     const card = document.getElementsByClassName("product-" + cardId)[0]
-    if (card.classList.contains("product-card-expanded")) {
-        card.classList.remove("product-card-expanded")
-    } else {
-        card.classList.add("product-card-expanded")
-    }
+    card.classList.toggle("expanded")
 }
 
 function promptDelete(cardId) {
@@ -112,7 +108,7 @@ function getCardLayout(id, title, desc, imageUrl, price, deletable = false) {
         `<div class="product-title">${title}</div><` +
         'div class="product-carousel">' +
         //'<button onclick="carouselChange(0, -1)" class="btn"><i class="fa fa-arrow-left"></i></button>' +
-        `<img id="${imageId}" src="${imageUrl}" class="product-image" alt="Product">` +
+        `<img id="${imageId}" src="${imageUrl}" class="product-image" alt="Product" onclick="toggleDesc(${id})">` +
         //'<button onclick="carouselChange(0, 1)" class="btn"><i class="fa fa-arrow-right"></i></button>' +
         '</div>' +
         '<div class="carousel-indicator">' +
