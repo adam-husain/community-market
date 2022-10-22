@@ -7,3 +7,5 @@
 *.iws
 /server/credentials.php
 /owa/owa-config.php
+/server/node_modules/
+/server/.env

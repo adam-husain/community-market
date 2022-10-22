@@ -1,0 +1,26 @@
+{
+  "name": "community-market-server",
+  "version": "0.1.0",
+  "description": "An online Buy and Sell platform of selected Residences in Malaysia",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adam-husain/community-market.git"
+  },
+  "author": "Adam Husain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adam-husain/community-market/issues"
+  },
+  "homepage": "https://github.com/adam-husain/community-market#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20"
+  }
+}
