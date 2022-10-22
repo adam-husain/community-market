@@ -9,3 +9,6 @@
 /owa/owa-config.php
 /server/node_modules/
 /server/.env
+/node_modules/.package-lock.json
+/package-lock.json
+/package.json
