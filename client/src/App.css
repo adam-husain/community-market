@@ -1,25 +1,39 @@
 :root {
-    --primary-color: #aeb8c4; /* Misty Blue */
-    --secondary-color: #738fa7; /* Blue Gray */
-    --font-color: #000401; /* Black */
-    --bg-color: #e5e8e8; /* White */
-    --heading-color: #0c0c1e; /* Darker Blue */
+	--primary-color: #aeb8c4; /* Misty Blue */
+	--secondary-color: #738fa7; /* Blue Gray */
+	--font-color: #000401; /* Black */
+	--bg-color: #e5e8e8; /* White */
+	--heading-color: #0c0c1e; /* Darker Blue */
 }
 
 [data-theme="dark"] {
-    --primary-color: #36454f; /* Charcoal */
-    --secondary-color: #44444c; /* Ebony */
-    --font-color: #e5e8e8;  /* White */
-    --bg-color: #24262b; /* Light Black */
-    --heading-color: #f5f5f5; /* Ivory */
+	--primary-color: #36454f; /* Charcoal */
+	--secondary-color: #44444c; /* Ebony */
+	--font-color: #e5e8e8;  /* White */
+	--bg-color: #24262b; /* Light Black */
+	--heading-color: #f5f5f5; /* Ivory */
 }
 
 
 body {
-    background-color: var(--bg-color);
-    color: var(--font-color);
-    font-family: "Raleway", sans-serif;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	font-family: "Raleway", sans-serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.custom-checkbox {
+	width: 25px;
+	height: 25px;
+	background: lightgray;
+	border-radius: 5px;
+	margin: 10px;
+	border: 5px double;
+}
+
+.checked {
+	background: mediumspringgreen;
+	border: 5px dashed darkgreen;
 }
