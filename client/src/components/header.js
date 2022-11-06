@@ -1,7 +1,8 @@
 import React from "react";
-import {Dropdown, Pagination} from "react-bootstrap";
+import {Button, Dropdown, Pagination} from "react-bootstrap";
+import {useNavigate, useNavigation} from "react-router-dom";
 
-function header({title, residences}) {
+function header({title, residences, mainButtonText: profileButtonText}) {
 	const filterStyle = {
 		background: "var(--primary-color)",
 		margin: "20px 0 0 0",
@@ -11,8 +12,13 @@ function header({title, residences}) {
 		display: "flex"
 	};
 	
+	const mainButtonStyle = {
+		float: 'right',
+	}
+	
 	const filters = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
 	
+	const navigate = useNavigate();
 	const activePage = 1;
 	const pageNums = [];
 	for (let number = 1; number <= 5; number++) {
@@ -23,9 +29,17 @@ function header({title, residences}) {
 		);
 	}
 	
+	const profileButton = () => {
+		navigate('/profile')
+	}
+	
 	return (
 		<div className="custom-header shadow">
+			<Button style={mainButtonStyle} variant={"secondary"} onClick={profileButton}>
+				{profileButtonText}
+			</Button>
 			<h2>{title}</h2><br/>
+			
 			{
 				Object.entries(residences).map(([k, r]) => {
 					if (r.selected)

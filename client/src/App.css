@@ -139,9 +139,10 @@ body {
 }
 
 .custom-tags {
+	font-size: 12px;
 	margin: 0 10px 0 0;
-	padding: 10px;
-	height: min-content;
+	padding: 5px 10px;
+	height: 26px;
 	width: max-content;
 	background: var(--secondary-color);
 	border-radius: 50px;

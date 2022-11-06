@@ -12,8 +12,7 @@ import logo from './images/logo.png'
 import Home from './components/home';
 import About from './components/about';
 import Chat from './components/chat';
-import Contact from './components/contact';
-import Dashboard from './components/dashboard';
+import Profile from './components/profile';
 import Forum from './components/forum';
 import Help from './components/help';
 import Login from './components/login';
@@ -38,7 +37,7 @@ function App() {
 		<div className="app">
 			<Navbar bg="dark" variant="dark" expand="sm">
 				<Container>
-					<Navbar.Brand>
+					<Navbar.Brand href={'/'}>
 						<img
 							src={logo}
 							width="30"
@@ -67,6 +66,7 @@ function App() {
 			<Routes>
 				<Route path='/' element={<Home residences={residences} />}/>
 				<Route path='/market' element={<Market residences={residences} />}/>
+				<Route path='/profile' element={<Profile />}/>
 				<Route path='/about' element={<About residences={residences} />}/>
 				<Route path='*' element={<Invalid/>}/>
 			</Routes>

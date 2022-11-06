@@ -104,7 +104,7 @@ function Market({residences}) {
 	
 	return (
 		<Container>
-			<Header title={'Market'} residences={residences}/>
+			<Header title={'Market'} residences={residences} mainButtonText={'Sell Items'} />
 			
 			<div style={pageStyle}>
 				{
