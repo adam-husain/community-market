@@ -1,8 +1,9 @@
 import React, {useCallback, useState} from "react";
 import {Button, Container, Dropdown, Modal, Pagination} from "react-bootstrap";
 import Card from "./card";
+import Header from "./header";
 
-function Market(props) {
+function Market({residences}) {
 	
 	const exampleProducts = [
 		{
@@ -31,17 +32,6 @@ function Market(props) {
 		}
 	]
 	
-	const residences = props.residences;
-	
-	const filterStyle = {
-		background: "var(--primary-color)",
-		margin: "20px 0 0 0",
-		padding: "10px",
-		width: "min-content",
-		borderRadius: "10px",
-		display: "flex"
-	};
-	
 	const pageStyle = {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -52,7 +42,6 @@ function Market(props) {
 		backdropFilter: 'blur(8px)'
 	}
 	
-	const filters = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
 	
 	const [show, setShow] = useState(false);
 	const [modalTitle, setModalTitle] = useState('');
@@ -111,51 +100,11 @@ function Market(props) {
 		// todo: submit removal
 	}
 	
-	const activePage = 1;
-	const pageNums = [];
-	for (let number = 1; number <= 5; number++) {
-		pageNums.push(
-			<Pagination.Item key={number} active={number === activePage}>
-				{number}
-			</Pagination.Item>,
-		);
-	}
+	
 	
 	return (
 		<Container>
-			<div className="custom-header shadow">
-				<h2>Market</h2><br/>
-				{
-					Object.entries(residences).map(([k, r]) => {
-						if (r.selected)
-						return (<div className="custom-tags shadow">
-							{r.fullName}
-						</div>)
-					})
-				}
-				
-				<div className="shadow" style={filterStyle}>
-					<Pagination className={'my-auto me-4'}>
-						{pageNums}
-					</Pagination>
-					
-					<Dropdown>
-						<Dropdown.Toggle variant="secondary" id="filter-dropdown">
-							Newest
-						</Dropdown.Toggle>
-						
-						<Dropdown.Menu>
-							{
-								filters.map((f) => {
-									return (
-										<Dropdown.Item href="#/action-1">{f}</Dropdown.Item>
-									)
-								})
-							}
-						</Dropdown.Menu>
-					</Dropdown>
-				</div>
-			</div>
+			<Header title={'Market'} residences={residences}/>
 			
 			<div style={pageStyle}>
 				{
