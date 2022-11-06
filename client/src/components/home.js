@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import Cookies from "universal-cookie";
 import Container from "react-bootstrap/Container";
 import {Button, Form, Toast,} from "react-bootstrap";
@@ -9,51 +10,41 @@ function Home(props) {
 	const residences = props.residences;
 	
 	const imgStyle = {
-		opacity: 0.5,
-		zIndex: -5,
-		width: "-webkit-fill-available",
-		position: "fixed",
-		mixBlendMode: 'overlay'
+		opacity: 0.5, zIndex: -5, width: "-webkit-fill-available", position: "fixed", mixBlendMode: 'overlay'
 	};
 	
+	const navigate = useNavigate();
 	const [show, setShow] = useState(false);
-	const selectedRes = {}
-	for (const r of residences) {
-		selectedRes[r.shortName] = r.selected;
-	}
 	
 	const handleChange = (e) => {
-		const name = e.target.id;
+		const id = e.target.id;
 		
-		selectedRes[name] = !selectedRes[name];
-		if (selectedRes[name])
-			e.target.classList.add('checked')
-		else e.target.classList.remove('checked')
+		residences[id].selected = !residences[id].selected;
 		document.getElementById('select-error').style.opacity = 0;
 		
 		const cookies = new Cookies();
-		cookies.set(name, selectedRes[name] ? '1' : '0')
+		cookies.set(id, residences[id].selected ? '1' : '0')
 	}
 	
 	const handleSubmit = (e) => {
 		let anyChecked = false;
-		for (const r in selectedRes) {
-			if (selectedRes[r]) {
+		for (const r in residences) {
+			if (residences[r].selected) {
 				anyChecked = true;
 				break;
 			}
 		}
 		
-		if (selectedRes === {} || !anyChecked) {
+		if (!anyChecked) {
 			document.getElementById('select-error').style.opacity = 1;
 			return
 		}
 		
-		setShow(true);
+		//setShow(true);
+		navigate('/market')
 	}
 	
-	return (
-		<div>
+	return (<div>
 			<img src={imgResidences} style={imgStyle} alt='Residences background'/>
 			<Container>
 				
@@ -73,23 +64,20 @@ function Home(props) {
 				</p>
 				
 				<div>
-					{
-						residences.map((r, i) => {
-							if (r.enabled == 0) return;
-							const label = r.fullName;
-							const id = r.shortName;
-							return (
-								<div>
-									<button
-										className={selectedRes[id] ? "custom-checkbox checked" : "custom-checkbox"}
-										id={id}
-										onClick={handleChange}
-									/>
-									{label}
-								</div>
-							)
-						})
-					}
+					{Object.entries(residences).map(([k, r]) => {
+						if (r.enabled == 0) return (<div></div>);
+						const label = r.fullName;
+						const id = r.shortName;
+						return (<div className="checkbox-wrapper" style={{
+							display: "flex", alignItems: "end"
+						}}>
+								<input type="checkbox" id={id} onChange={handleChange} defaultChecked={residences[id].selected}/>
+								<label htmlFor={id}>
+									<div className="tick_mark"></div>
+								</label>
+								{label}
+							</div>)
+					})}
 					
 					<Form.Text style={{opacity: 0}} id="select-error">
 						You need to select at least one residence
@@ -97,18 +85,17 @@ function Home(props) {
 					<br/>
 					
 					<Button className={"mb-3"} id='changeBtn' variant="secondary" onClick={handleSubmit}>
-						Submit
+						Let's Go
 					</Button>
 					<Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
 						<Toast.Header>
 							<strong className="me-auto">SAVED RESIDENCE PREFERENCE</strong>
 						</Toast.Header>
 					</Toast>
-					
+				
 				</div>
 			</Container>
-		</div>
-	);
+		</div>);
 }
 
 export default Home;

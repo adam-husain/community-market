@@ -21,20 +21,22 @@ import Register from './components/register';
 import Market from './components/market';
 import Invalid from './components/invalid';
 
-const residences = require('./residences.json');
+const residencesRaw = require('./residences.json');
 
 function App() {
 	const cookies = new Cookies();
 	
-	for (const r in residences) {
-		const resData = cookies.get(residences[r].shortName)
-		console.log(resData);
-		residences[r].selected = !(resData == undefined || resData == '0');
+	const residences = {}
+	for (const r of residencesRaw) {
+		const id = r.shortName;
+		residences[id] = r;
+		const resData = cookies.get(id)
+		residences[id].selected = !(resData == undefined || resData == '0');
 	}
 	
 	return (
 		<div className="app">
-			<Navbar bg="dark" variant="dark" expand="lg">
+			<Navbar bg="dark" variant="dark" expand="sm">
 				<Container>
 					<Navbar.Brand>
 						<img
@@ -64,7 +66,8 @@ function App() {
 			<div className='my-4'/>
 			<Routes>
 				<Route path='/' element={<Home residences={residences} />}/>
-				<Route path='/market' element={<Market />}/>
+				<Route path='/market' element={<Market residences={residences} />}/>
+				<Route path='/about' element={<About residences={residences} />}/>
 				<Route path='*' element={<Invalid/>}/>
 			</Routes>
 		</div>
