@@ -15,8 +15,7 @@ import Chat from './components/chat';
 import Profile from './components/profile';
 import Forum from './components/forum';
 import Help from './components/help';
-import Login from './components/login';
-import Register from './components/register';
+import Account from './components/account';
 import Market from './components/market';
 import Invalid from './components/invalid';
 
@@ -67,6 +66,8 @@ function App() {
 				<Route path='/' element={<Home residences={residences} />}/>
 				<Route path='/market' element={<Market residences={residences} />}/>
 				<Route path='/profile' element={<Profile />}/>
+				<Route path='/account' element={<Account />}/>
+				<Route path='/help' element={<Help />}/>
 				<Route path='/about' element={<About residences={residences} />}/>
 				<Route path='*' element={<Invalid/>}/>
 			</Routes>

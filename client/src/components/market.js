@@ -1,5 +1,5 @@
-import React, {useCallback, useState} from "react";
-import {Button, Container, Dropdown, Modal, Pagination} from "react-bootstrap";
+import React, {useState} from "react";
+import {Button, Container, Modal} from "react-bootstrap";
 import Card from "./card";
 import Header from "./header";
 
@@ -104,7 +104,7 @@ function Market({residences}) {
 	
 	return (
 		<Container>
-			<Header title={'Market'} residences={residences} mainButtonText={'Sell Items'} />
+			<Header title={'Market'} residences={residences} profileButtonText={'Sell Items'} />
 			
 			<div style={pageStyle}>
 				{

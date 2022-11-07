@@ -1,8 +1,8 @@
 import React from "react";
 import {Button, Dropdown, Pagination} from "react-bootstrap";
-import {useNavigate, useNavigation} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-function header({title, residences, mainButtonText: profileButtonText}) {
+function header({title, residences, profileButtonText}) {
 	const filterStyle = {
 		background: "var(--primary-color)",
 		margin: "20px 0 0 0",
@@ -12,7 +12,7 @@ function header({title, residences, mainButtonText: profileButtonText}) {
 		display: "flex"
 	};
 	
-	const mainButtonStyle = {
+	const buttonStyle = {
 		float: 'right',
 	}
 	
@@ -35,7 +35,7 @@ function header({title, residences, mainButtonText: profileButtonText}) {
 	
 	return (
 		<div className="custom-header shadow">
-			<Button style={mainButtonStyle} variant={"secondary"} onClick={profileButton}>
+			<Button style={buttonStyle} variant={"secondary"} onClick={profileButton}>
 				{profileButtonText}
 			</Button>
 			<h2>{title}</h2><br/>
