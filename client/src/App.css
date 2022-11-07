@@ -152,3 +152,9 @@ body {
 .shadow {
 	box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
+
+.quote-box {
+	border-radius: 10px;
+	background: var(--primary-color);
+	display: inline-block;
+}

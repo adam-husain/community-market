@@ -5,11 +5,6 @@ function About(props) {
 	
 	const residences = props.residences;
 	
-	const quoteBox = {
-		borderRadius: "10px",
-		background: "var(--primary-color)",
-		display: "inline-block"
-	}
 	return (<Container>
 			<h1 className="my-3">Hello There 👋</h1>
 			<p>
@@ -20,8 +15,7 @@ function About(props) {
 			</p>
 			<br/>
 			<h3>What is it? 🤔</h3>
-			<div className="my-3 p-3"
-			     style={quoteBox}>
+			<div className="quote-box my-3 p-3">
 				One man's trash is another man's treasure
 			</div>
 			<p>
@@ -40,8 +34,7 @@ function About(props) {
 			
 			<br/>
 			<h3>Who is this for? 👥</h3>
-			<div className="my-3 p-3"
-			     style={quoteBox}>
+			<div className="quote-box my-3 p-3">
 				I plan to expand this website to other residences also.
 			</div>
 			<p>
@@ -67,8 +60,7 @@ function About(props) {
 			<br/>
 			
 			<h3>Disclaimer ‼️</h3>
-			<div className="my-3 p-3"
-			     style={quoteBox}>
+			<div className="quote-box my-3 p-3">
 				Please be nice and respectful. I put a lot of work into this 😥.
 			</div>
 			<p>
