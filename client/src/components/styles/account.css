@@ -1,0 +1,43 @@
+.hide-header-0 {
+	transform: translateX(-50%) scale(0.8);
+	opacity: 0;
+	transition: all 0.5s ease-out;
+	pointer-events: none;
+	position: fixed;
+}
+
+.hide-header-1 {
+	transform: translate(50%) scale(0.8);
+	opacity: 0;
+	transition: all 0.5s ease-out;
+	pointer-events: none;
+}
+
+.show-header {
+	transform: translateX(0%) scale(1);
+	opacity: 1;
+	pointer-events: auto;
+	transition: all 0.5s ease-in 0.2s;
+}
+
+@keyframes right-arrow {
+	0% {transform: translateX(-100%); opacity: 0}
+	20% {transform: translateX(40%); opacity: 1}
+	40% {transform: translateX(0); opacity: 0.5}
+	60% {transform: translateX(40%); opacity: 1}
+	80% {transform: translateX(0); opacity: 0.5}
+	100% {transform: translateX(100%); opacity: 0}
+}
+.right-arrow {
+	margin: 0 5px;
+	animation-name: right-arrow;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
+.left-arrow {
+	margin: 0 10px 0 0;
+	animation-name: right-arrow;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-direction: reverse;
+}

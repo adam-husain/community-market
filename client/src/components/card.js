@@ -1,6 +1,6 @@
 import React from "react";
 
-import './card.css';
+import './styles/card.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 

@@ -19,6 +19,18 @@ function Profile() {
 		navigate('/');
 	}
 	
+	const mainButtonStyle = {
+		width: '100px',
+		height: '100px',
+		borderRadius: '20px',
+		margin: '20px auto',
+	}
+	
+	const mainButtonText = {
+		fontSize: '12px',
+		marginTop: '5px'
+	}
+	
 	const accordionStyle = {
 		background: 'var(--secondary-color)',
 		marginTop: '20px',
@@ -88,7 +100,22 @@ function Profile() {
 				<small>Manage your profile, product listings and forum posts</small>
 			</div>
 			
-			<div className={'accordion'} style={accordionStyle} onClick={toggleAccordion}>
+			<div style={{display: 'flex', maxWidth: '380px'}}>
+				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+					<FontAwesomeIcon icon={solid("user")} size={"2xl"}/>
+					<div style={mainButtonText}>Edit<br/>Profile</div>
+				</Button>
+				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+					<FontAwesomeIcon icon={solid("shopping-bag")} size={"2xl"}/>
+					<div style={mainButtonText}>Add<br/>Product</div>
+				</Button>
+				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+					<FontAwesomeIcon icon={solid("calendar-plus")} size={"2xl"}/>
+					<div style={mainButtonText}>New<br/>Post</div>
+				</Button>
+			</div>
+			
+			<div className={'accordion'} style={{...accordionStyle, maxWidth: '380px'}} onClick={toggleAccordion}>
 				<FontAwesomeIcon style={arrowStyle} icon={solid("angle-down")}/>
 				Profile
 				<div style={accordionBodyStyle} className={'shadow'}>
@@ -122,10 +149,6 @@ function Profile() {
 							{user.email}
 						</div>
 					</div>
-					
-					<Button variant={'secondary'} onClick={editProfile}>
-						Edit
-					</Button>
 				</div>
 			</div>
 			
