@@ -39,7 +39,7 @@ function Profile() {
 		overflow: 'hidden',
 		// todo: Change maxHeight to 60px
 		maxHeight: '1000px',
-		transition: 'max-height 1s'
+		transition: 'max-height 0.5s ease-out'
 	}
 	
 	const arrowStyle = {
@@ -101,15 +101,15 @@ function Profile() {
 			</div>
 			
 			<div style={{display: 'flex', maxWidth: '380px'}}>
-				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+				<Button disabled={true} variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
 					<FontAwesomeIcon icon={solid("user")} size={"2xl"}/>
 					<div style={mainButtonText}>Edit<br/>Profile</div>
 				</Button>
 				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
 					<FontAwesomeIcon icon={solid("shopping-bag")} size={"2xl"}/>
-					<div style={mainButtonText}>Add<br/>Product</div>
+					<div style={mainButtonText}>New<br/>Product</div>
 				</Button>
-				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+				<Button disabled={true} variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
 					<FontAwesomeIcon icon={solid("calendar-plus")} size={"2xl"}/>
 					<div style={mainButtonText}>New<br/>Post</div>
 				</Button>
