@@ -41,3 +41,11 @@
 	animation-iteration-count: infinite;
 	animation-direction: reverse;
 }
+
+.picture-preview {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin: 20px auto auto;
+	display: block;
+}

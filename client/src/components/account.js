@@ -27,6 +27,8 @@ function Account() {
 		
 	]
 	
+	const DefaultImage = 'https://myresidence.shop/img/profile/default.jpeg';
+	
 	const toggleForms = () => {
 		const headers = document.getElementsByClassName('custom-header');
 		Array.from(headers).map((h) => {
@@ -71,6 +73,12 @@ function Account() {
 					</Button>
 					
 					<Form className='my-5'>
+						<Form.Group className="mb-3">
+							<Form.Label>Choose profile picture</Form.Label>
+							<Form.Control type="file" />
+							<img className='picture-preview' src={DefaultImage} alt='Profile picture preview'/>
+						</Form.Group>
+						
 						<Form.Group className="mb-3">
 							<Form.Label>Username</Form.Label>
 							<Form.Control name='username' type="text" placeholder="Username" required/>
@@ -131,6 +139,8 @@ function Account() {
 						</Button>
 					</Form>
 				</div>
+				
+				
 			</div>
 			
 			
