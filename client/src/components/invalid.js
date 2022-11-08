@@ -4,7 +4,7 @@ import './styles/invalid.css'
 
 function Invalid() {
 	return (
-		<div>
+		<div className='main'>
 			<section className="advice">
 				<h1 className="advice__title">This section is still under construction</h1>
 				<small className="advice__description">
