@@ -74,14 +74,14 @@ function Account() {
 					
 					<Form className='my-5'>
 						<Form.Group className="mb-3">
-							<Form.Label>Choose profile picture</Form.Label>
+							<Form.Label>Upload your profile picture</Form.Label>
 							<Form.Control type="file" />
 							<img className='picture-preview' src={DefaultImage} alt='Profile picture preview'/>
 						</Form.Group>
 						
 						<Form.Group className="mb-3">
 							<Form.Label>Username</Form.Label>
-							<Form.Control name='username' type="text" placeholder="Username" required/>
+							<Form.Control name='username' type="text" placeholder="5-10 characters" required/>
 							<Form.Text className="text-muted">
 								Choose a unique username
 							</Form.Text>
@@ -89,9 +89,17 @@ function Account() {
 						
 						<Form.Group className="mb-3">
 							<Form.Label>Password</Form.Label>
-							<Form.Control name='password' type="password" placeholder="Password" required/>
+							<Form.Control name='password' type="password" placeholder="5-50 characters" required/>
 							<Form.Text className="text-muted">
 								Your password will be encrypted
+							</Form.Text>
+						</Form.Group>
+						
+						<Form.Group className="mb-3">
+							<Form.Label>Username</Form.Label>
+							<Form.Control name='name' type="text" placeholder="2-20 characters" required/>
+							<Form.Text className="text-muted">
+								Your name will be displayed publicly
 							</Form.Text>
 						</Form.Group>
 						
@@ -108,15 +116,6 @@ function Account() {
 							</Form.Select>
 							<Form.Text className="text-muted">
 								Helps to ease user interaction
-							</Form.Text>
-						</Form.Group>
-						
-						
-						<Form.Group className="mb-3">
-							<Form.Label>Email</Form.Label>
-							<Form.Control name='email' type="email" placeholder="example@email.com" />
-							<Form.Text className="text-muted">
-								(Optional)
 							</Form.Text>
 						</Form.Group>
 						

@@ -71,7 +71,7 @@ function Product({residences}) {
 				</InputGroup>
 				
 				<Form.Group className="mb-5">
-					<Form.Label>Choose profile picture</Form.Label>
+					<Form.Label>Upload a picture</Form.Label>
 					<Form.Control type="file"/>
 					<img style={previewStyle} src={DefaultImage} alt='Profile picture preview'/>
 				</Form.Group>
