@@ -87,7 +87,11 @@ function Profile() {
 	}
 	
 	const editProfile = () => {
-		navigate('/account')
+		navigate('/account');
+	}
+	
+	const editProduct = () => {
+		navigate('/product');
 	}
 	
 	return (
@@ -105,7 +109,7 @@ function Profile() {
 					<FontAwesomeIcon icon={solid("user")} size={"2xl"}/>
 					<div style={mainButtonText}>Edit<br/>Profile</div>
 				</Button>
-				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProduct}>
 					<FontAwesomeIcon icon={solid("shopping-bag")} size={"2xl"}/>
 					<div style={mainButtonText}>New<br/>Product</div>
 				</Button>

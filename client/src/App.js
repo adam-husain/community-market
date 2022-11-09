@@ -12,6 +12,7 @@ import logo from './images/logo.png'
 import Home from './components/home';
 import About from './components/about';
 import Chat from './components/chat';
+import Product from './components/product';
 import Profile from './components/profile';
 import Forum from './components/forum';
 import Help from './components/help';
@@ -67,6 +68,7 @@ function App() {
 				<Route path='/market' element={<Market residences={residences} />}/>
 				<Route path='/profile' element={<Profile />}/>
 				<Route path='/account' element={<Account />}/>
+				<Route path='/product' element={<Product residences={residences}/>}/>
 				<Route path='/help' element={<Help />}/>
 				<Route path='/about' element={<About residences={residences} />}/>
 				<Route path='*' element={<Invalid/>}/>
