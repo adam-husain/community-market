@@ -75,7 +75,7 @@ function Account() {
 					<Form className='my-5'>
 						<Form.Group className="mb-3">
 							<Form.Label>Upload your profile picture</Form.Label>
-							<Form.Control type="file" />
+							<Form.Control name='profilePicture' type="file" />
 							<img className='picture-preview' src={DefaultImage} alt='Profile picture preview'/>
 						</Form.Group>
 						

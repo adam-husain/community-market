@@ -1,3 +1,6 @@
+/**
+ * A design that puts the user at the center
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';

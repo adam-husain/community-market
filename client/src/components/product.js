@@ -29,7 +29,7 @@ function Product({residences}) {
 			<Form style={formStyle} className='my-5 p-4 shadow'>
 				<Form.Group className="mb-3">
 					<Form.Label>Title</Form.Label>
-					<Form.Control type="text" placeholder="<20 characters" required/>
+					<Form.Control name='title' type="text" placeholder="<20 characters" required/>
 					<Form.Text className="text-muted">
 						Choose a small title
 					</Form.Text>
@@ -38,6 +38,7 @@ function Product({residences}) {
 				<Form.Group className="mb-3">
 					<Form.Label>Description</Form.Label>
 					<Form.Control
+						name='description'
 						as="textarea"
 						placeholder="<100 characters"
 						style={{ height: '100px' }}
@@ -49,8 +50,8 @@ function Product({residences}) {
 				</Form.Group>
 				
 				<Form.Group className="mb-3">
-					<Form.Label name='pronouns'>Select a residence you want to sell to</Form.Label>
-					<Form.Select name='pronouns' defaultValue={0}>
+					<Form.Label>Select a residence you want to sell to</Form.Label>
+					<Form.Select name='residence' defaultValue={0}>
 						{
 							Object.entries(residences).map(([k, r]) => {
 								if (r.enabled === 0) return ''
@@ -67,14 +68,16 @@ function Product({residences}) {
 				
 				<InputGroup className="mb-3">
 					<InputGroup.Text>RM</InputGroup.Text>
-					<Form.Control placeholder="Price" required/>
+					<Form.Control name='price' placeholder="Price" required/>
 				</InputGroup>
 				
 				<Form.Group className="mb-5">
 					<Form.Label>Upload a picture</Form.Label>
-					<Form.Control type="file"/>
+					<Form.Control name='productPicture' type="file"/>
 					<img style={previewStyle} src={DefaultImage} alt='Profile picture preview'/>
 				</Form.Group>
+				
+				<Form.Control type='hidden' value={1/**Todo**/}></Form.Control>
 				
 				<Button variant="secondary" type="submit">
 					Submit

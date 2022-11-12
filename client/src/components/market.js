@@ -3,34 +3,11 @@ import {Button, Container, Modal} from "react-bootstrap";
 import Card from "./card";
 import Header from "./header";
 
-function Market({residences}) {
+function Market({residences, products, user}) {
 	
-	const exampleProducts = [
-		{
-			name: 'iPhone 12',
-			desc: 'desc',
-			price: '1000',
-			image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/4de62b68299019.5b603c2a5a02b.jpg'
-		},
-		{
-			name: 'Sample Product',
-			desc: 'desc',
-			price: '12',
-			image: 'https://myresidence.shop/img/products/default.jpeg'
-		},
-		{
-			name: 'Camera',
-			desc: 'desc',
-			price: '3000',
-			image: 'https://static3.depositphotos.com/1007298/228/i/450/depositphotos_2284302-stock-photo-digital-slr-camera.jpg'
-		},
-		{
-			name: 'Keyboard',
-			desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo nulla nec iaculis tristique. Donec ultricies efficitur elit, eget ullamcorper mauris accumsan eget. Nunc libero lacus, porta sed pharetra non, interdum mollis libero. Donec tincidunt ullamcorper velit, id porta enim',
-			price: '50',
-			image: 'https://www.itlinks.com.au/wp-content/uploads/2018/05/Keyboard-Logitech-K120.jpg'
-		}
-	]
+	const sortList = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
+	const maxItemsPerPage = 12;
+	const pageCount = Math.ceil(products.length / maxItemsPerPage);
 	
 	const pageStyle = {
 		display: 'flex',
@@ -48,21 +25,18 @@ function Market({residences}) {
 	const [modalBody, setModalBody] = useState('');
 	const [modalAction, setModalAction] = useState(-1);
 	const [selectedProduct, setSelectedProduct] = useState({});
-	let modalSubmit = () => {}
 	
 	const contact = (p) => {
-		setModalTitle('Purchase ' + p.name);
+		setModalTitle('Purchase ' + p.title);
 		setModalBody('If you are interested in this product, ' +
 			'you can start chatting by clicking on the Chat button below. ' +
 			'You will be redirected to the Chat window');
-		modalSubmit = () => alert('Chat for ' + p.name);
 	}
 	
 	const report = (p) => {
-		setModalTitle('Report ' + p.name);
-		setModalBody('If you are interested in this product, ' +
-			'you can start chatting by clicking on the Chat button below. ' +
-			'You will be redirected to the Chat window');
+		setModalTitle('Found anything offensive or inappropriate?');
+		setModalBody('Submit a report and the listing will be evaluated ' +
+			'to see if it follows the community guidelines');
 	}
 	
 	const remove = (p) => {
@@ -91,7 +65,7 @@ function Market({residences}) {
 	}
 	const showChat = (p) => {
 		// todo: Show chat window
-		alert('Chat window for ' + p.name);
+		alert('Chat window for ' + p.title);
 	}
 	const submitReport = (p) => {
 		// todo: Submit report
@@ -100,15 +74,33 @@ function Market({residences}) {
 		// todo: submit removal
 	}
 	
+	const [sort, setSort] = useState(0);
+	const sortBy = (sortId) => {
+		setSort(sortId);
+	}
 	
+	const [page, setPage] = useState(1);
+	const pageNav = (pageNum) => {
+		setPage(pageNum);
+	}
 	
 	return (
 		<Container>
-			<Header title={'Market'} residences={residences} profileButtonText={'Sell Items'} />
+			<Header title={'Market'}
+			        residences={residences}
+			        sortBy={sortBy}
+			        currentSort={sort}
+			        sortList={sortList}
+			        profileButtonText={'Sell Items'}
+			        pageNav={pageNav}
+			        currentPage={page}
+			        pageCount={pageCount} />
 			
 			<div style={pageStyle}>
 				{
-					exampleProducts.map((p) => {
+					products.map((p) => {
+						if (user != undefined && user._id == p.seller)
+							return '';
 						return (<Card product={p} show={handleShow}
 						              hasContact={true}
 						              hasReport={true}

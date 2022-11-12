@@ -29,13 +29,13 @@ function Card({product, show, hasContact, hasReport, hasRemove}) {
 	};
 	
 	return (
-		<div id={product.name} className={"card shadow"}>
+		<div id={product._id} className={"card shadow"}>
 			<div className={"card-title"}>
-				{product.name}
+				{product.title}
 			</div>
-			<img onClick={(e) => expandCard(product.name)} className={'card-image'} src={product.image} alt={'image of ' + product.name}/>
+			<img onClick={(e) => expandCard(product._id)} className={'card-image'} src={product.image} alt={'image of ' + product.name}/>
 			<div>
-				<button onClick={() => expandCard(product.name)} className={'card-button'}>
+				<button onClick={() => expandCard(product._id)} className={'card-button'}>
 					<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("navicon")}/>
 				</button>
 				{
@@ -57,7 +57,7 @@ function Card({product, show, hasContact, hasReport, hasRemove}) {
 				</div>
 			</div>
 			<div className={'product-description'}>
-				{product.desc}
+				{product.description}
 			</div>
 			{
 				hasContact ? (

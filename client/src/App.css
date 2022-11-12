@@ -28,6 +28,41 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.loaderPage {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--bg-color);
+	opacity: 1;
+}
+
+.loaderPage.fade {
+	opacity: 0;
+	transition: opacity 1s 0.5s ease-out;
+	pointer-events: none;
+}
+
+.errorPage {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 8;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background: var(--bg-color);
+	opacity: 1;
+	text-align: center;
+}
+
+.errorPage.show {
+	display: flex;
+}
+
 .checkbox-wrapper * {
 	-webkit-tap-highlight-color: transparent;
 	outline: none;

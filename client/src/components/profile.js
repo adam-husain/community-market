@@ -16,7 +16,7 @@ function Profile() {
 	
 	const navigate = useNavigate();
 	const logout = () => {
-		navigate('/');
+		navigate('/market');
 	}
 	
 	const mainButtonStyle = {

@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Dropdown, Pagination} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 
-function header({title, residences, profileButtonText}) {
+function header({title, residences, profileButtonText,
+	                sortBy, currentSort, sortList,
+	                pageNav, currentPage, pageCount}) {
+	
+	const [sort, setSort] = useState(0);
+	const [page, setPage] = useState(1);
+	
 	const filterStyle = {
 		background: "var(--primary-color)",
 		margin: "20px 0 0 0",
@@ -16,14 +22,12 @@ function header({title, residences, profileButtonText}) {
 		float: 'right',
 	}
 	
-	const filters = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
 	
 	const navigate = useNavigate();
-	const activePage = 1;
 	const pageNums = [];
-	for (let number = 1; number <= 5; number++) {
+	for (let number = 1; number <= pageCount; number++) {
 		pageNums.push(
-			<Pagination.Item key={number} active={number === activePage}>
+			<Pagination.Item onClick={()=>pageNav(number)} key={number} active={number === currentPage}>
 				{number}
 			</Pagination.Item>,
 		);
@@ -41,7 +45,7 @@ function header({title, residences, profileButtonText}) {
 			<h2>{title}</h2><br/>
 			
 			{
-				Object.entries(residences).map(([k, r]) => {
+				residences.map(r => {
 					if (r.selected)
 						return (<div className="custom-tags shadow">
 							{r.fullName}
@@ -56,14 +60,14 @@ function header({title, residences, profileButtonText}) {
 				
 				<Dropdown>
 					<Dropdown.Toggle variant="secondary" id="filter-dropdown">
-						Newest
+						{sortList[currentSort]}
 					</Dropdown.Toggle>
 					
 					<Dropdown.Menu>
 						{
-							filters.map((f) => {
+							sortList.map((f, i) => {
 								return (
-									<Dropdown.Item href="#/action-1">{f}</Dropdown.Item>
+									<Dropdown.Item onClick={()=>sortBy(i)}>{f}</Dropdown.Item>
 								)
 							})
 						}

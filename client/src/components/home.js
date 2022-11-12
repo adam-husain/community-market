@@ -6,9 +6,7 @@ import {Button, Form, Toast,} from "react-bootstrap";
 
 import imgResidences from '../images/residences.svg';
 
-function Home(props) {
-	const residences = props.residences;
-	
+function Home({residences}) {
 	const imgStyle = {
 		opacity: 0.5, zIndex: -5, width: "-webkit-fill-available", position: "fixed", mixBlendMode: 'overlay'
 	};
@@ -40,11 +38,11 @@ function Home(props) {
 			return
 		}
 		
-		//setShow(true);
 		navigate('/market')
 	}
 	
-	return (<div>
+	return (
+		<div>
 			<img src={imgResidences} style={imgStyle} alt='Residences background'/>
 			<Container>
 				
@@ -64,20 +62,23 @@ function Home(props) {
 				</p>
 				
 				<div>
-					{Object.entries(residences).map(([k, r]) => {
-						if (r.enabled == 0) return (<div></div>);
-						const label = r.fullName;
-						const id = r.shortName;
-						return (<div className="checkbox-wrapper" style={{
-							display: "flex", alignItems: "end"
-						}}>
-								<input type="checkbox" id={id} onChange={handleChange} defaultChecked={residences[id].selected}/>
-								<label htmlFor={id}>
-									<div className="tick_mark"></div>
-								</label>
-								{label}
-							</div>)
-					})}
+					{
+						residences.map((r, i) => {
+							if (r.enabled == 0) return '';
+							const label = r.fullName;
+							const id = i;
+							return (
+								<div className="checkbox-wrapper"
+								     style={{display: "flex", alignItems: "end"}}>
+									<input type="checkbox" id={id} onChange={handleChange} defaultChecked={r.selected}/>
+									<label htmlFor={id}>
+										<div className="tick_mark"></div>
+									</label>
+									{label}
+								</div>
+							)
+						})
+					}
 					
 					<Form.Text style={{opacity: 0}} id="select-error">
 						You need to select at least one residence
@@ -95,7 +96,8 @@ function Home(props) {
 				
 				</div>
 			</Container>
-		</div>);
+		</div>
+	);
 }
 
 export default Home;
