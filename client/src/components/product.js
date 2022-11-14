@@ -3,6 +3,8 @@ import {Button, Container, Form, InputGroup} from "react-bootstrap";
 
 function Product({residences}) {
 	
+	const DefaultImage = 'http://localhost/public/products/default.jpeg';
+	
 	const formStyle = {
 		borderRadius: '10px',
 		display: 'block',
@@ -17,7 +19,6 @@ function Product({residences}) {
 		margin: '20px auto',
 		display: 'block'
 	}
-	const DefaultImage = 'https://myresidence.shop/img/products/default.jpeg';
 	
 	return (
 		<Container>
@@ -73,7 +74,7 @@ function Product({residences}) {
 				
 				<Form.Group className="mb-5">
 					<Form.Label>Upload a picture</Form.Label>
-					<Form.Control name='productPicture' type="file"/>
+					<Form.Control name='productPicture' type="file" accept="image/*"/>
 					<img style={previewStyle} src={DefaultImage} alt='Profile picture preview'/>
 				</Form.Group>
 				

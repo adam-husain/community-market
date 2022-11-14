@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, Route, Routes } from 'react-router-dom';
 import Cookies from "universal-cookie";
 import Container from 'react-bootstrap/Container';
@@ -20,77 +20,72 @@ import Market from './components/market';
 import Invalid from './components/invalid';
 import {Alert, Spinner} from "react-bootstrap";
 
-// todo convert to class
-class App extends React.Component {
+function App() {
 	
-	constructor(props) {
-		super(props);
-		this.state = {
-			residences: [],
-			products: [],
-			user: {}
-		}
-		
-		this.mainUrl = 'http://localhost:5000/api/v1/';
-	}
+	const apiV1 = 'http://localhost:5000/api/v1/';
+	const profileImage = 'http://localhost:5000/public/profile/';
+	const productImage = 'http://localhost:5000/public/product/';
+	const [residences, setResidences] = useState([]);
+	const [products, setProducts] = useState([]);
+	const [user, setUser] = useState({});
 	
-	async componentDidMount() {
-		
+	useEffect(getAllData, []);
+	
+	/**
+	 * This async function will wait till
+	 * all the data is retrieved from the database.
+	 * @returns {Promise<void>}
+	 */
+	async function getAllData() {
 		try {
-		
+			await getProducts();
 		}
 		catch (e) {
-			this.error();
+			error();
 		}
 		
-		await this.getProducts();
-		await this.getResidences();
-		await this.cookieLogin();
+		await getResidences();
+		await cookieLogin();
 		document.getElementsByClassName('loaderPage')[0]
 			.classList.add('fade');
-		
 	}
 	
-	error() {
+	function error() {
 		document.getElementsByClassName('errorPage')[0].classList.add('show');
 	}
 	
-	async cookieLogin() {
+	async function cookieLogin() {
 		const cookies = new Cookies();
 		const session = cookies.get('session');
 		
-		if (session == undefined) return;
+		if (session == undefined || session == '') return;
 		
-		const response = await axios.post(this.mainUrl + 'account/cookieLogin', {session});
-		if (response.status == 0) return;
+		const response = await axios.post(apiV1 + 'account/cookieLogin', {session});
+		if (!response.data.status) return;
 		
-		this.setState({
-			user: response.result
-		});
+		setUser(response.data.result);
 	}
 	
-	async getProducts() {
-		const response = await axios.get(this.mainUrl + 'product/all');
+	async function getProducts() {
+		const response = await axios.get(apiV1 + 'product/all');
 		const status = response.data.status;
 		const result = response.data.result;
 		
-		if (status == 0 || response.status == 400) {
-			this.error();
+		if (!status || response.status == 400) {
+			error();
 			return;
 		}
 		
-		this.setState({
-			products: result
-		});
+		setProducts(result);
 	}
 	
-	async getResidences() {
-		const response = await axios.get(this.mainUrl + 'residence/');
+	async function getResidences() {
+		const response = await axios.get(apiV1 + 'residence/');
 		const status = response.data.status;
 		const result = response.data.result;
 		
-		if (status == 0 || response.status == 400) {
-			this.error();
+		if (!status || response.status == 400) {
+			error();
 			return;
 		}
 		
@@ -102,15 +97,22 @@ class App extends React.Component {
 			resCopy.push(r);
 		}
 		
-		this.setState({
-			residences: resCopy
-		});
+		setResidences(resCopy);
 	}
 	
-	render() {
-		const residences = this.state.residences;
-		const products = this.state.products;
-		const user = this.state.user;
+	
+	function login(user) {
+		const session = user.sessions[user.sessions.length-1]._id;
+		const cookies = new Cookies();
+		cookies.set('session', session);
+		setUser(user);
+	}
+	
+	function logout() {
+		setUser({})
+		const cookies = new Cookies();
+		cookies.set('session', '')
+	}
 		
 		return (
 			<div className="app">
@@ -157,18 +159,29 @@ class App extends React.Component {
 				</Navbar>
 				<div className='my-4'/>
 				<Routes>
-					<Route path='/' element={<Home residences={residences}/>}/>
-					<Route path='/market' element={<Market residences={residences} products={products} user={user}/>}/>
-					<Route path='/profile' element={<Profile residences={residences} products={products} user={user}/>}/>
-					<Route path='/account' element={<Account user={user}/>}/>
-					<Route path='/product' element={<Product residences={residences} products={products}/>}/>
+					<Route path='/' element={<Home residences={residences} />}/>
+					<Route path='/market' element={<Market residences={residences}
+					                                       products={products}
+					                                       productImage={productImage}
+					                                       user={user} />}/>
+					<Route path='/profile' element={<Profile residences={residences}
+					                                         products={products}
+					                                         user={user}
+					                                         profileImage={profileImage}
+					                                         logoutFn={logout} />}/>
+					<Route path='/account' element={<Account user={user}
+					                                         apiV1={apiV1}
+					                                         profileImage={profileImage}
+					                                         loginFn={login} />}/>
+					<Route path='/product' element={<Product residences={residences}
+					                                         productImage={productImage}
+					                                         products={products} />}/>
 					<Route path='/help' element={<Help/>}/>
 					<Route path='/about' element={<About residences={residences}/>}/>
 					<Route path='*' element={<Invalid/>}/>
 				</Routes>
 			</div>
 		);
-	}
 	
 }
 

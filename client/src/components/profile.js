@@ -1,21 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Container, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-function Profile() {
-	
-	const user = {
-		name: 'Adam Husain',
-		profilePic: 'https://myresidence.shop/img/profile/default.jpeg',
-		pronouns: 'He/Him',
-		whatsapp: '96872282361',
-		email: 'adamhusain12@gmail.com'
-	}
+function Profile({residences, products, user, profileImage, logoutFn}) {
 	
 	const navigate = useNavigate();
+	
+	useEffect(() => {
+		if (user.name === undefined) {
+			navigate('/account#login')
+		}
+	}, [])
+	
+	
 	const logout = () => {
+		logoutFn();
 		navigate('/market');
 	}
 	
@@ -52,13 +53,6 @@ function Profile() {
 		marginTop: '10px',
 		padding: '20px',
 		borderRadius: '10px',
-	}
-	
-	const pictureStyle = {
-		margin: '0 auto 20px',
-		maxWidth: '80px',
-		borderRadius: '50%',
-		display: 'block'
 	}
 	
 	const profileContentStyle = {
@@ -124,8 +118,14 @@ function Profile() {
 				Profile
 				<div style={accordionBodyStyle} className={'shadow'}>
 					
-					<img src={user.profilePic} style={pictureStyle} alt='Profile Picture'/>
+					<img src={profileImage + user.profilePicture} className='picture-preview mb-4' alt='Profile Picture'/>
 					
+					<div style={profileContentStyle}>
+						<b>Email</b>
+						<div>
+							{user.email}
+						</div>
+					</div>
 					<div style={profileContentStyle}>
 						<b>Name</b>
 						<div>
@@ -140,19 +140,6 @@ function Profile() {
 						</div>
 					</div>
 					
-					<div style={profileContentStyle}>
-						<b>Contact</b>
-						<div>
-							+{user.whatsapp}
-						</div>
-					</div>
-					
-					<div style={profileContentStyle}>
-						<b></b>
-						<div>
-							{user.email}
-						</div>
-					</div>
 				</div>
 			</div>
 			

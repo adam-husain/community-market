@@ -11,12 +11,10 @@ const sessionSchema = new Schema({
 
 const UserSchema = new Schema(
 	{
-		username: {
+		email: {
 			type: String,
 			required: true,
-			unique: true,
-			minLength: 5,
-			maxLength: 10
+			unique: true
 		},
 		password: {
 			type: String,
@@ -28,15 +26,12 @@ const UserSchema = new Schema(
 			maxLength: 20
 		},
 		pronouns: {
-			type: Number,
-			default: 0
+			type: String,
+			default: 'Rather not say'
 		},
 		profilePicture: {
 			type: String,
 			default: 'https://myresidence.shop/public/profile/default.jpg'
-		},
-		whatsapp: {
-			type: String
 		},
 		sessions: [sessionSchema]
 	},

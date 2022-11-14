@@ -9,8 +9,8 @@ router.route('/new').post(newProduct);
 function allProducts(req, res) {
 	console.log('Incoming: Product All');
 	Product.find({hidden: false})
-		.then(products => res.json({status: 1, result:products}))
-		.catch(err => res.status(400).json({status:0, result: err}));
+		.then(products => res.json({status: true, result:products}))
+		.catch(err => res.status(400).json({status: false, result: err}));
 }
 
 function newProduct(req, res) {
@@ -27,8 +27,8 @@ function newProduct(req, res) {
 	
 	console.log(newProd);
 	newProd.save()
-		.then(prod => res.json({status: 1, result: prod}))
-		.catch(err => res.status(400).json({status: 0, result: err}));
+		.then(prod => res.json({status: true, result: prod}))
+		.catch(err => res.status(400).json({status: false, result: err}));
 }
 
 module.exports = router;

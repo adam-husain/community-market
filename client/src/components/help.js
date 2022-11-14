@@ -23,7 +23,7 @@ function Help() {
 				Please go through the following checklist before buying:
 			</p>
 			<ul>
-				<li>The contact form has a direct link to the seller's Whatsapp chat.</li>
+				<li>The contact form has a direct link to the seller's chat.</li>
 				<li>Remember to be polite.</li>
 				<li>Try to ask all the important questions before meeting up. This can prevent
 					wasting yours and the seller's time
