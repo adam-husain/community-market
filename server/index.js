@@ -28,10 +28,12 @@ connection.once('open', () => {
 
 const accountRouter = require('./routes/account');
 const productRouter = require('./routes/product');
+const chatRouter = require('./routes/chat');
 const residenceRouter = require('./routes/residence');
 
 app.use('/api/v1/account', accountRouter);
 app.use('/api/v1/product', productRouter);
+app.use('/api/v1/chat', chatRouter);
 app.use('/api/v1/residence', residenceRouter);
 
 app.get('/public/profile/:file',

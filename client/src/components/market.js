@@ -2,9 +2,14 @@ import React, {useState} from "react";
 import {Button, Container, Modal} from "react-bootstrap";
 import Card from "./card";
 import Header from "./header";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import Cookies from "universal-cookie";
 
-function Market({residences, products, user}) {
+function Market({residences, products, productImage, user, apiV1}) {
 	
+	const navigate = useNavigate();
+	const cookies = new Cookies();
 	const sortList = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
 	const maxItemsPerPage = 12;
 	const pageCount = Math.ceil(products.length / maxItemsPerPage);
@@ -19,59 +24,46 @@ function Market({residences, products, user}) {
 		backdropFilter: 'blur(8px)'
 	}
 	
-	
-	const [show, setShow] = useState(false);
-	const [modalTitle, setModalTitle] = useState('');
-	const [modalBody, setModalBody] = useState('');
-	const [modalAction, setModalAction] = useState(-1);
+	const [showContactModal, setShowContactModal] = useState(false);
+	const [showReportModal, setShowReportModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
 	
-	const contact = (p) => {
-		setModalTitle('Purchase ' + p.title);
-		setModalBody('If you are interested in this product, ' +
-			'you can start chatting by clicking on the Chat button below. ' +
-			'You will be redirected to the Chat window');
+	const contactModal = (p) => {
+		setSelectedProduct(p);
+		setShowContactModal(true);
 	}
 	
-	const report = (p) => {
-		setModalTitle('Found anything offensive or inappropriate?');
-		setModalBody('Submit a report and the listing will be evaluated ' +
-			'to see if it follows the community guidelines');
+	const reportModal = (p) => {
+		setSelectedProduct(p);
+		setShowReportModal(true);
 	}
 	
-	const remove = (p) => {
-	
+	const closeModal = () => {
+		setShowContactModal(false);
+		setShowReportModal(false);
 	}
 	
-	const handleClose = () => setShow(false);
-	const handleShow = (product, action) => {
-		switch (action) {
-			case 0:
-				contact(product);
-				break;
-			case 1:
-				report(product);
-				break;
-			case 2:
-				remove(product);
-				break;
-			default:
-				console.error('Internal error. Action undefined.')
+	const showChat = async (product) => {
+		// Check for a chat-session
+		// Create and save a unique chat-session for this user
+		let chatSession = cookies.get('chat-session');
+		if (!chatSession) {
+			chatSession = crypto.randomUUID();
+			cookies.set('chat-session', chatSession, { path: '/', maxAge: 51840000 });
 		}
 		
-		setSelectedProduct(product);
-		setModalAction(action);
-		setShow(true);
-	}
-	const showChat = (p) => {
-		// todo: Show chat window
-		alert('Chat window for ' + p.title);
+		const data = {
+			chatSession,
+			product: product._id,
+			buyer: user._id, // Can be undefined
+		};
+		const response = await axios.post(apiV1 + 'chat/new', data);
+		if (response.data.status) {
+			navigate('/chats#' + response.data.result);
+		}
 	}
 	const submitReport = (p) => {
 		// todo: Submit report
-	}
-	const submitRemove = (p) => {
-		// todo: submit removal
 	}
 	
 	const [sort, setSort] = useState(0);
@@ -99,38 +91,49 @@ function Market({residences, products, user}) {
 			<div style={pageStyle}>
 				{
 					products.map((p) => {
-						if (user != undefined && user._id == p.seller)
+						if (user._id == p.seller)
 							return '';
-						return (<Card product={p} show={handleShow}
-						              hasContact={true}
-						              hasReport={true}
-						              hasRemove={false}
-						/>);
+						return (<Card product={p}
+						              productImage={productImage}
+						              contactFn={contactModal}
+						              reportFn={reportModal}
+						              removeFn={undefined} />);
 					})
 				}
 			</div>
 			
-			<Modal style={modalBgStyle} show={show} onHide={handleClose}>
+			<Modal style={modalBgStyle} show={showContactModal} onHide={closeModal}>
 				<Modal.Header style={{background: 'var(--primary-color)'}} closeButton>
-					<Modal.Title>{modalTitle}</Modal.Title>
+					<Modal.Title>{'Purchase ' + selectedProduct.title}</Modal.Title>
 				</Modal.Header>
-				<Modal.Body style={{background: 'var(--primary-color)'}}>{modalBody}</Modal.Body>
-				<Modal.Footer style={{background: 'var(--primary-color)'}}>
+				<Modal.Body style={{background: 'var(--primary-color)'}}>
 					{
-						modalAction === 0 ? (
-							<Button onClick={() => showChat(selectedProduct)} variant="secondary">
-								Chat
-							</Button>
-						) : modalAction === 1 ? (
-							<Button onClick={() => submitReport(selectedProduct)} variant="secondary">
-								Report
-							</Button>
-						) : modalAction === 2 ? (
-							<Button onClick={() => submitRemove(selectedProduct)} variant="secondary">
-								Remove
-							</Button>
-						) : ''
+						'If you are interested in this product, ' +
+						'you can start chatting by clicking on the Chat button below. ' +
+						'You will be redirected to the Chat window'
 					}
+				</Modal.Body>
+				<Modal.Footer style={{background: 'var(--primary-color)'}}>
+					<Button onClick={() => showChat(selectedProduct)} variant="secondary">
+						Chat
+					</Button>
+				</Modal.Footer>
+			</Modal>
+			
+			<Modal style={modalBgStyle} show={showReportModal} onHide={closeModal}>
+				<Modal.Header style={{background: 'var(--primary-color)'}} closeButton>
+					<Modal.Title>Found anything offensive or inappropriate?</Modal.Title>
+				</Modal.Header>
+				<Modal.Body style={{background: 'var(--primary-color)'}}>
+					{
+						'Submit a report and the listing will be evaluated ' +
+						'to see if it follows the community guidelines'
+					}
+				</Modal.Body>
+				<Modal.Footer style={{background: 'var(--primary-color)'}}>
+					<Button onClick={() => submitReport(selectedProduct)} variant="secondary">
+						Report
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</Container>

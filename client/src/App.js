@@ -12,6 +12,7 @@ import logo from './images/logo.png'
 
 import Home from './components/home';
 import About from './components/about';
+import Chats from './components/chats';
 import Product from './components/product';
 import Profile from './components/profile';
 import Help from './components/help';
@@ -25,9 +26,12 @@ function App() {
 	const apiV1 = 'http://localhost:5000/api/v1/';
 	const profileImage = 'http://localhost:5000/public/profile/';
 	const productImage = 'http://localhost:5000/public/product/';
+	
+	const cookies = new Cookies();
 	const [residences, setResidences] = useState([]);
 	const [products, setProducts] = useState([]);
 	const [user, setUser] = useState({});
+	const [errorMessage, setErrorMessage] = useState('');
 	
 	useEffect(getAllData, []);
 	
@@ -50,12 +54,12 @@ function App() {
 			.classList.add('fade');
 	}
 	
-	function error() {
+	function error(message = 'Error! Cannot connect to database\nTry again later') {
+		setErrorMessage(message)
 		document.getElementsByClassName('errorPage')[0].classList.add('show');
 	}
 	
 	async function cookieLogin() {
-		const cookies = new Cookies();
 		const session = cookies.get('session');
 		
 		if (session == undefined || session == '') return;
@@ -90,7 +94,6 @@ function App() {
 		}
 		
 		let resCopy = [];
-		const cookies = new Cookies();
 		for (const r of result) {
 			const resData = cookies.get(r.shortName)
 			r.selected = !(resData == undefined || resData == '0');
@@ -103,14 +106,13 @@ function App() {
 	
 	function login(user) {
 		const session = user.sessions[user.sessions.length-1]._id;
-		const cookies = new Cookies();
-		cookies.set('session', session);
+		// Set cookie for 600 days
+		cookies.set('session', session,  { path: '/', maxAge: 51840000 });
 		setUser(user);
 	}
 	
 	function logout() {
 		setUser({})
-		const cookies = new Cookies();
 		cookies.set('session', '')
 	}
 		
@@ -126,8 +128,7 @@ function App() {
 				</div>
 				<div className='errorPage'>
 					<Alert variant="danger">
-						Error! Cannot connect to database<br/>
-						Try again later
+						{errorMessage}
 					</Alert>
 				</div>
 				<Navbar bg="dark" variant="dark" expand="sm">
@@ -144,9 +145,9 @@ function App() {
 						<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 						<Navbar.Collapse id="basic-navbar-nav">
 							<Nav className="me-auto">
-								<Nav.Link as={Link} to={'/'}>Home</Nav.Link>
 								<Nav.Link as={Link} to={'/market'}>Market</Nav.Link>
 								<Nav.Link as={Link} to={'/forum'}>Forum</Nav.Link>
+								<Nav.Link as={Link} to={'/profile'}>Dashboard</Nav.Link>
 								<NavDropdown title="Support" id="basic-nav-dropdown">
 									<NavDropdown.Item as={Link} to={'/contact'}>Contact</NavDropdown.Item>
 									<NavDropdown.Item as={Link} to={'/help'}>Help</NavDropdown.Item>
@@ -163,22 +164,29 @@ function App() {
 					<Route path='/market' element={<Market residences={residences}
 					                                       products={products}
 					                                       productImage={productImage}
+					                                       apiV1={apiV1}
 					                                       user={user} />}/>
 					<Route path='/profile' element={<Profile residences={residences}
 					                                         products={products}
 					                                         user={user}
 					                                         profileImage={profileImage}
+					                                         productImage={productImage}
 					                                         logoutFn={logout} />}/>
 					<Route path='/account' element={<Account user={user}
 					                                         apiV1={apiV1}
 					                                         profileImage={profileImage}
 					                                         loginFn={login} />}/>
 					<Route path='/product' element={<Product residences={residences}
-					                                         productImage={productImage}
-					                                         products={products} />}/>
-					<Route path='/help' element={<Help/>}/>
-					<Route path='/about' element={<About residences={residences}/>}/>
-					<Route path='*' element={<Invalid/>}/>
+					                                         user={user}
+					                                         apiV1={apiV1}
+					                                         refresh={getAllData}
+					                                         productImage={productImage} />}/>
+					<Route path='/chats' element={<Chats user={user}
+					                                     profileImage={profileImage}
+					                                     apiV1={apiV1} />}/>
+					<Route path='/help' element={<Help />}/>
+					<Route path='/about' element={<About residences={residences} />}/>
+					<Route path='*' element={<Invalid />}/>
 				</Routes>
 			</div>
 		);

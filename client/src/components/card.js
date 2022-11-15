@@ -4,7 +4,16 @@ import './styles/card.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-function Card({product, show, hasContact, hasReport, hasRemove}) {
+/**
+ * The product card component
+ * @param product Product object
+ * @param contactFn Contact function (set undefined to hide button)
+ * @param reportFn Report function (set undefined to hide button)
+ * @param removeFn Remove product function (set undefined to hide button)
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function Card({product, productImage, contactFn, reportFn, removeFn}) {
 	
 	const expandCard = (id) => {
 		const target = document.getElementById(id);
@@ -33,21 +42,23 @@ function Card({product, show, hasContact, hasReport, hasRemove}) {
 			<div className={"card-title"}>
 				{product.title}
 			</div>
-			<img onClick={(e) => expandCard(product._id)} className={'card-image'} src={product.image} alt={'image of ' + product.name}/>
+			<img onClick={(e) => expandCard(product._id)} className={'card-image'}
+			     src={productImage + product.picture}
+			     alt={'image of ' + product.title}/>
 			<div>
 				<button onClick={() => expandCard(product._id)} className={'card-button'}>
 					<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("navicon")}/>
 				</button>
 				{
-					hasReport ? (
-						<button onClick={() => show(product, 1)} className={'card-button'}>
+					reportFn != undefined ? (
+						<button onClick={() => reportFn(product)} className={'card-button'}>
 							<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("warning")}/>
 						</button>
 					) : ''
 				}
 				{
-					hasRemove ? (
-						<button onClick={() => show(product, 1)} className={'card-button'}>
+					removeFn != undefined ? (
+						<button onClick={() => removeFn(product)} className={'card-button'}>
 							<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("trash-can")}/>
 						</button>
 					) : ''
@@ -60,8 +71,8 @@ function Card({product, show, hasContact, hasReport, hasRemove}) {
 				{product.description}
 			</div>
 			{
-				hasContact ? (
-					<button type="button" className="card-button-long" onClick={() => show(product, 0)}>
+				contactFn != undefined ? (
+					<button type="button" className="card-button-long" onClick={() => contactFn(product)}>
 						Contact
 					</button>
 				) : ''

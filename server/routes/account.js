@@ -1,8 +1,7 @@
 const router = require('express').Router();
-let User = require('../models/user.model');
+const User = require('../models/user.model');
 const crypto = require('crypto');
 const sharp = require('sharp');
-const fs = require('fs');
 
 const multer = require("multer");
 const upload = multer({ dest: 'public/profile/' });
@@ -36,7 +35,6 @@ async function register(req, res) {
 	const pronouns = body.pronouns;
 	const newUser = new User({email, password, name, pronouns, profilePicture});
 	
-	console.log(newUser);
 	newUser.save()
 		.then(user => res.json({status: true, result: user}))
 		.catch(err => res.status(400).json({status: false, result: err}));
@@ -58,7 +56,7 @@ async function login(req, res) {
 		res.status(400).json({status: 0, result: err})
 	}
 	
-	res.json({status: user != null || user != undefined, result: user})
+	res.json({status: !!user, result: user})
 }
 
 function cookieLogin(req, res) {

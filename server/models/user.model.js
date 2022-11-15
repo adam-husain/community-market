@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const sessionSchema = new Schema({
+const SessionSchema = new Schema({
 	loginDate: {
 		type: Date,
 		default: Date.now()
@@ -30,10 +30,13 @@ const UserSchema = new Schema(
 			default: 'Rather not say'
 		},
 		profilePicture: {
-			type: String,
-			default: 'https://myresidence.shop/public/profile/default.jpg'
+			type: String
 		},
-		sessions: [sessionSchema]
+		whatsapp: {
+			type: String,
+			required: false
+		},
+		sessions: [SessionSchema]
 	},
 	{
 		timestamps: true

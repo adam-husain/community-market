@@ -38,7 +38,7 @@ function header({title, residences, profileButtonText,
 	}
 	
 	return (
-		<div className="custom-header shadow">
+		<div className="custom-header shadow-lg">
 			<Button style={buttonStyle} variant={"secondary"} onClick={profileButton}>
 				{profileButtonText}
 			</Button>

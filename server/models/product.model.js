@@ -24,7 +24,6 @@ const ProductSchema = new Schema(
 		},
 		picture: {
 			type: String,
-			default: 'https://myresidence.shop/public/product/default.jpg'
 		},
 		seller: {
 			type: Schema.Types.ObjectId,
@@ -35,11 +34,16 @@ const ProductSchema = new Schema(
 			default: false
 		},
 		removeDate: {
-			type: Date
+			type: Date,
+			required: false
 		},
 		removeReason: {
-			type: Number
+			type: Number,
+			required: false
 		}
+	},
+	{
+		timestamps: true
 	}
 );
 

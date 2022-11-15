@@ -7,7 +7,7 @@ import {Alert, Button, Container, Form} from "react-bootstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
-function Account({user, loginFn, apiV1}) {
+function Account({user, profileImage, loginFn, apiV1}) {
 	
 	const navigate = useNavigate();
 	
@@ -15,7 +15,7 @@ function Account({user, loginFn, apiV1}) {
 		navigate('/profile');
 	}
 	
-	const DefaultImage = 'http://localhost:5000/public/profile/default.jpg';
+	const DefaultImage = profileImage + 'default.jpg';
 	const [previewUrl, setPreviewUrl] = useState(DefaultImage);
 	const [isLoading, setIsLoading] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
@@ -28,7 +28,7 @@ function Account({user, loginFn, apiV1}) {
 		})
 	}
 	
-	const previewRegisterImage = (e) => {
+	const previewProfileImage = (e) => {
 		if (!e.target.files || e.target.files.length === 0) {
 			return
 		}
@@ -82,6 +82,16 @@ function Account({user, loginFn, apiV1}) {
 		if (!resultEmail.data.status) {
 			target[1].classList.add('is-invalid');
 			setAlertMessage('Email is already in use');
+			setIsLoading(false);
+			return;
+		}
+		
+		// Check if password meets requirements
+		if (password.length < 5)
+		{
+			target[2].classList.add('is-invalid');
+			setAlertMessage('Password is too short');
+			setIsLoading(false);
 			return;
 		}
 		
@@ -127,14 +137,6 @@ function Account({user, loginFn, apiV1}) {
 	
 	return (
 		<Container>
-			{
-				alertMessage === '' ? '' : (
-					<Alert variant='danger'>
-						{alertMessage}
-					</Alert>
-				)
-			}
-			
 			<div style={{display: 'flex', justifyContent: 'center', overflow: "hidden"}}>
 				<div className={'custom-header shadow hide-header-0 p-4 ' + (showLoginFirst() ? 'show-header' : '')}>
 					<h2>Login</h2><br/>
@@ -172,7 +174,7 @@ function Account({user, loginFn, apiV1}) {
 					<Form method='post' onSubmit={registerSubmit} className='my-5'>
 						<Form.Group className="mb-3">
 							<Form.Label>Upload your profile picture</Form.Label>
-							<Form.Control onChange={previewRegisterImage} name='profilePicture'
+							<Form.Control onChange={previewProfileImage} name='profilePicture'
 							              type="file" accept="image/*"/>
 							<img className='picture-preview mt-5' src={previewUrl} alt='Profile picture preview'/>
 						</Form.Group>
@@ -228,10 +230,15 @@ function Account({user, loginFn, apiV1}) {
 						</Button>
 					</Form>
 				</div>
-			
-			
 			</div>
-		
+			
+			{
+				alertMessage === '' ? '' : (
+					<Alert variant='danger'>
+						{alertMessage}
+					</Alert>
+				)
+			}
 		
 		</Container>
 	)
