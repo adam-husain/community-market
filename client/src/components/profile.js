@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Container, Form, Modal} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 import Card from "./card";
 
 function Profile({residences, products, user, profileImage, productImage, logoutFn}) {
@@ -89,8 +89,8 @@ function Profile({residences, products, user, profileImage, productImage, logout
 		}
 	}
 	
-	const showChats = () => {
-		navigate('/chats');
+	const editProfile = () => {
+		navigate('/editAccount');
 	}
 	
 	const newProduct = () => {
@@ -133,9 +133,9 @@ function Profile({residences, products, user, profileImage, productImage, logout
 			</div>
 			
 			<div style={{display: 'flex', maxWidth: '380px'}}>
-				<Button variant={"outline-light"} style={mainButtonStyle} onClick={showChats}>
-					<FontAwesomeIcon icon={solid("comments-dollar")} size={"2xl"}/>
-					<div style={mainButtonText}>Show<br/>Chats</div>
+				<Button variant={"outline-light"} style={mainButtonStyle} onClick={editProfile}>
+					<FontAwesomeIcon icon={solid("user")} size={"2xl"}/>
+					<div style={mainButtonText}>Edit<br/>Profile</div>
 				</Button>
 				<Button variant={"outline-light"} style={mainButtonStyle} onClick={newProduct}>
 					<FontAwesomeIcon icon={solid("shopping-bag")} size={"2xl"}/>
@@ -173,6 +173,28 @@ function Profile({residences, products, user, profileImage, productImage, logout
 							{user.pronouns}
 						</div>
 					</div>
+					
+					{
+						user.whatsapp ?
+							<div style={profileContentStyle}>
+								<b>Whatsapp</b>
+								<div>
+									{user.whatsapp}
+								</div>
+							</div>
+							: ''
+					}
+					
+					{
+						user.whatsapp ?
+							<div style={profileContentStyle}>
+								<b>Prefer Whatsapp contact</b>
+								<div>
+									{user.preferWhatsapp ? 'Yes' : 'No'}
+								</div>
+							</div>
+							: ''
+					}
 					
 				</div>
 			</div>

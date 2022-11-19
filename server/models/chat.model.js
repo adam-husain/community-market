@@ -36,6 +36,10 @@ const ChatSchema = new Schema(
 		},
 		messages: {
 			type: [MessageSchema]
+		},
+		visible: {
+			type: Boolean,
+			default: true
 		}
 	},
 	{

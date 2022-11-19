@@ -76,6 +76,10 @@ function Account({user, profileImage, loginFn, apiV1}) {
 		const password = target[2].value;
 		const name = target[3].value;
 		const pronouns = pronounsList[target[4].value];
+		const whatsapp = target[5].value;
+		const preferWhatsapp = target[6].value;
+		
+		console.log('whatsapp', whatsapp, preferWhatsapp);
 		
 		// Check if email is unique
 		const resultEmail = await axios.post(apiV1 + 'account/checkEmailUnique', {email});
@@ -101,6 +105,8 @@ function Account({user, profileImage, loginFn, apiV1}) {
 		data.append('password', password);
 		data.append('name', name);
 		data.append('pronouns', pronouns);
+		data.append('whatsapp', whatsapp);
+		data.append('preferWhatsapp', preferWhatsapp);
 		
 		const result = await axios.post(apiV1 + 'account/register', data,
 			{headers: {'Content-Type': 'multipart/form-data'}});
@@ -125,14 +131,6 @@ function Account({user, profileImage, loginFn, apiV1}) {
 	
 	const showLoginFirst = () => {
 		return window.location.hash == '#login'
-	}
-	
-	/**
-	 * Show Edit Profile form
-	 * @returns {boolean}
-	 */
-	const isEdit = () => {
-		return window.location.hash == '#edit'
 	}
 	
 	return (
@@ -162,6 +160,8 @@ function Account({user, profileImage, loginFn, apiV1}) {
 						</Button>
 					</Form>
 				</div>
+				
+				
 				
 				<div className={'custom-header shadow hide-header-1 p-4 ' + (showLoginFirst() ? '' : 'show-header')}>
 					<h2>Register</h2><br/>
@@ -219,10 +219,30 @@ function Account({user, profileImage, loginFn, apiV1}) {
 							</Form.Text>
 						</Form.Group>
 						
+						<Form.Group className='mb-3'>
+							<Form.Label>Prefer Whatsapp for contact</Form.Label>
+							<div className="checkbox-wrapper"
+							     style={{display: "flex", alignItems: "end"}}>
+								<input type="checkbox" id='whatsapp-checkbox'/>
+								<label htmlFor='whatsapp-checkbox'>
+									<div className="tick_mark"></div>
+								</label>
+							</div>
+							<Form.Text className="text-muted">
+								If enabled, you will be contacted via Whatsapp rather than the in-app chat
+							</Form.Text>
+						</Form.Group>
+						
+						<Form.Group className="mb-3">
+							<Form.Label>Whatsapp</Form.Label>
+							<Form.Control name='name' type="text" placeholder="+60123456789"/>
+							<Form.Text className="text-muted">
+								Your whatsapp number should start with a '+'
+							</Form.Text>
+						</Form.Group>
+						
 						<div className="mb-3 text-muted">
-							Your email will not be shared with anyone.
-							It will be used to send you notifications in case someone is
-							interested in your products or replied to your forum post.
+						
 						</div>
 						
 						<Button variant="secondary" type="submit">

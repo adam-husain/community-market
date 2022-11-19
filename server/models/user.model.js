@@ -32,6 +32,10 @@ const UserSchema = new Schema(
 		profilePicture: {
 			type: String
 		},
+		preferWhatsapp: {
+			type: Boolean,
+			default: false
+		},
 		whatsapp: {
 			type: String,
 			required: false

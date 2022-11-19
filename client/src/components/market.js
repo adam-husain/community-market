@@ -94,6 +94,7 @@ function Market({residences, products, productImage, user, apiV1}) {
 						if (user._id == p.seller)
 							return '';
 						return (<Card product={p}
+						              residences={residences}
 						              productImage={productImage}
 						              contactFn={contactModal}
 						              reportFn={reportModal}

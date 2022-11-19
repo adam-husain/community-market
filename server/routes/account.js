@@ -7,6 +7,7 @@ const multer = require("multer");
 const upload = multer({ dest: 'public/profile/' });
 router.route('/register').post(upload.single('profilePicture'), register);
 router.route('/login').post(login);
+router.route('/edit').post(upload.single('profilePicture'), edit);
 router.route('/cookieLogin').post(cookieLogin);
 router.route('/checkEmailUnique').post(checkEmailUnique);
 // Todo: Update/Remove account
@@ -33,7 +34,9 @@ async function register(req, res) {
 	const password = hashPassword(body.password);
 	const name = body.name;
 	const pronouns = body.pronouns;
-	const newUser = new User({email, password, name, pronouns, profilePicture});
+	const preferWhatsapp = body.preferWhatsapp;
+	const whatsapp = body.whatsapp;
+	const newUser = new User({email, password, name, pronouns, profilePicture, preferWhatsapp, whatsapp});
 	
 	newUser.save()
 		.then(user => res.json({status: true, result: user}))
@@ -57,6 +60,33 @@ async function login(req, res) {
 	}
 	
 	res.json({status: !!user, result: user})
+}
+
+async function edit(req, res) {
+	const body = req.body;
+	const file = req.file;
+	
+	const _id = body.id;
+	const name = body.name;
+	const pronouns = body.pronouns;
+	const preferWhatsapp = body.preferWhatsapp;
+	const whatsapp = body.whatsapp;
+	
+	const currentUser = await User.findOne({_id});
+	if (!currentUser || !currentUser._id) res.json({status: false, result: {}});
+	
+	
+	let profilePicture = currentUser.profilePicture;
+	if (file != undefined) {
+		profilePicture = file.filename + '.jpg';
+		await sharp(file.path).rotate()
+			.jpeg({quality: 80})
+			.toFile(file.destination + profilePicture);
+		//fs.unlink(file.path, (err) => {console.log(err)}); // remove temp file
+	}
+	
+	const response = await User.updateOne({_id}, {name, profilePicture, pronouns, preferWhatsapp, whatsapp});
+	res.json({status: true, result: response});
 }
 
 function cookieLogin(req, res) {

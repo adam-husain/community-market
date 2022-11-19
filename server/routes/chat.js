@@ -3,22 +3,34 @@ const mongoose = require("mongoose");
 let Chat = require('../models/chat.model');
 const Product = require('../models/product.model');
 const User = require('../models/user.model');
-const {stringify} = require("nodemon/lib/utils");
 
+router.route('/:chatId').get(getChat);
 router.route('/all').post(allChat);
 router.route('/new').post(newChat);
+router.route('/send').post(sendChat);
+router.route('/delete').post(deleteChat);
+
+
+async function getChat(req, res) {
+	const chatId = req.params.chatId;
+	const chat = await Chat.findOne({_id: chatId});
+	res.json({status: true, result: chat});
+}
 
 async function allChat(req, res) {
 	const body = req.body;
 	const chatSession = body.chatSession;
 	const userId = body.userId;
 	
-	const myProducts = await Product.find({seller: userId});
+	const myProducts = await Product.find({seller: userId}, {_id: 1});
+	let myProductIds = [];
+	myProducts.map((i) => myProductIds.push(i._id));
 	const filter = {
 		$or: [
 			{chatSession},
-			{$in: myProducts['_id']}
-		]
+			{product: {$in: myProductIds}}
+		],
+		visible: true
 	}
 	const chats = await Chat.find(filter);
 	let result = chats.map(async chat => {
@@ -61,11 +73,31 @@ async function newChat(req, res) {
 		return;
 	}
 	
-	//const messages = [{}] //todo: System generated welcome
-	const newChat = new Chat({chatSession, product, buyer});
+	const productObj = await Product.findOne({_id: product});
+	const message = '!System Generated! I am interested in your item: ' + productObj.title;
+	const messages = [{message, sender: buyer}]
+	const newChat = new Chat({chatSession, product, buyer, messages});
 	
 	const result = await newChat.save();
 	res.json({status: true, result: result._id});
+}
+
+async function sendChat(req, res) {
+	const body = req.body;
+	
+	const chatSession = body.chatSession;
+	const message = body.message;
+	const sender = body.sender;
+	
+	const response = await Chat.updateOne({chatSession}, {$push: {messages: {message, sender}}, visible: true});
+	res.json({status: true, result: response});
+}
+
+async function deleteChat(req, res) {
+	const body = req.body;
+	const _id = body.id;
+	const response = await Chat.updateOne({_id}, {visible: false});
+	res.json({status: true, result: response});
 }
 
 module.exports = router;

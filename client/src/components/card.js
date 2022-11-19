@@ -2,7 +2,7 @@ import React from "react";
 
 import './styles/card.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 
 /**
  * The product card component

@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import {Button, Form, Toast,} from "react-bootstrap";
 
 import imgResidences from '../images/residences.svg';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 
 function Home({residences}) {
 	const imgStyle = {
@@ -12,31 +14,32 @@ function Home({residences}) {
 	};
 	
 	const navigate = useNavigate();
-	const [show, setShow] = useState(false);
 	
-	const handleChange = (e) => {
-		const id = e.target.id;
-		
-		residences[id].selected = !residences[id].selected;
-		document.getElementById('select-error').style.opacity = 0;
-		
-		const cookies = new Cookies();
-		cookies.set(id, residences[id].selected ? '1' : '0')
+	const mainButtonStyle = {
+		width: '120px',
+		height: '120px',
+		borderRadius: '20px',
+		margin: '20px',
+	}
+	const mainButtonText = {
+		fontSize: '14px',
+		marginTop: '5px'
+	}
+	
+	const createCheckbox = (id, label, onChange, defaultChecked = false) => {
+		return (
+			<div className="checkbox-wrapper"
+			     style={{display: "flex", alignItems: "end"}}>
+				<input type="checkbox" id={id} onChange={onChange} defaultChecked={defaultChecked}/>
+				<label htmlFor={id}>
+					<div className="tick_mark"></div>
+				</label>
+				{label}
+			</div>
+		)
 	}
 	
 	const handleSubmit = (e) => {
-		let anyChecked = false;
-		for (const r in residences) {
-			if (residences[r].selected) {
-				anyChecked = true;
-				break;
-			}
-		}
-		
-		if (!anyChecked) {
-			document.getElementById('select-error').style.opacity = 1;
-			return
-		}
 		
 		navigate('/market')
 	}
@@ -53,48 +56,25 @@ function Home({residences}) {
 						This is a student run venture to build a better community experience.</sub>
 				</h1>
 				
-				<div className='my-5'/>
-				
-				<p>
-					Select your residence. <br/>
-					By doing so, only relevant products and posts will be shown to you.
-					You can change this anytime.
-				</p>
-				
-				<div>
-					{
-						residences.map((r, i) => {
-							if (r.enabled == 0) return '';
-							const label = r.fullName;
-							const id = i;
-							return (
-								<div className="checkbox-wrapper"
-								     style={{display: "flex", alignItems: "end"}}>
-									<input type="checkbox" id={id} onChange={handleChange} defaultChecked={r.selected}/>
-									<label htmlFor={id}>
-										<div className="tick_mark"></div>
-									</label>
-									{label}
-								</div>
-							)
-						})
-					}
-					
-					<Form.Text style={{opacity: 0}} id="select-error">
-						You need to select at least one residence
-					</Form.Text>
-					<br/>
-					
-					<Button className={"mb-3"} id='changeBtn' variant="secondary" onClick={handleSubmit}>
-						Let's Go
+				<div style={{marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '380px'}}>
+					<Button variant={"outline-light"} style={mainButtonStyle} onClick={()=>navigate('/market')}>
+						<FontAwesomeIcon icon={solid("store")} size={"2xl"}/>
+						<div style={mainButtonText}>Market</div>
 					</Button>
-					<Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
-						<Toast.Header>
-							<strong className="me-auto">SAVED RESIDENCE PREFERENCE</strong>
-						</Toast.Header>
-					</Toast>
-				
+					<Button variant={"outline-light"} style={mainButtonStyle} onClick={()=>navigate('/forum')}>
+						<FontAwesomeIcon icon={solid("users")} size={"2xl"}/>
+						<div style={mainButtonText}>Forum</div>
+					</Button>
+					<Button variant={"outline-light"} style={mainButtonStyle} onClick={()=>navigate('/chats')}>
+						<FontAwesomeIcon icon={solid("comments-dollar")} size={"2xl"}/>
+						<div style={mainButtonText}>Chats</div>
+					</Button>
+					<Button variant={"outline-light"} style={mainButtonStyle} onClick={()=>navigate('/profile')}>
+						<FontAwesomeIcon icon={solid("user")} size={"2xl"}/>
+						<div style={mainButtonText}>Dashboard</div>
+					</Button>
 				</div>
+				
 			</Container>
 		</div>
 	);
