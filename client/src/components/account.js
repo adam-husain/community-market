@@ -19,7 +19,7 @@ function Account({user, profileImage, loginFn, apiV1}) {
 	const [previewUrl, setPreviewUrl] = useState(DefaultImage);
 	const [isLoading, setIsLoading] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
-	const pronounsList = ['Rather not say', 'He/Him', 'She/Her', 'They/THem'];
+	const pronounsList = ['Rather not say', 'He/Him', 'She/Her', 'They/Them'];
 	
 	const toggleForms = () => {
 		const headers = document.getElementsByClassName('custom-header');
@@ -42,25 +42,25 @@ function Account({user, profileImage, loginFn, apiV1}) {
 		e.preventDefault();
 		clearErrors();
 		if (isLoading) return;
-		setIsLoading(true);
 		
 		const target = e.target;
-		const email = target[0].value;
+		const username = target[0].value;
 		const password = target[1].value;
 		
 		const data = {
-			email, password
+			username, password
 		};
 		
+		setIsLoading(true);
 		const response = await axios.post(apiV1 + 'account/login', data);
-		
 		setIsLoading(false);
+		
 		if (response.data.status) {
 			loginFn(response.data.result);
 			navigate('/profile');
 		}
 		else {
-			setAlertMessage('Invalid email or password!');
+			setAlertMessage('Invalid username or password!');
 		}
 	}
 	
@@ -68,25 +68,36 @@ function Account({user, profileImage, loginFn, apiV1}) {
 		e.preventDefault();
 		clearErrors();
 		if (isLoading) return;
-		setIsLoading(true);
 		
 		const target = e.target;
 		const profilePicture = target[0].files[0];
-		const email = target[1].value;
+		const username = target[1].value;
 		const password = target[2].value;
 		const name = target[3].value;
 		const pronouns = pronounsList[target[4].value];
 		const whatsapp = target[5].value;
 		const preferWhatsapp = target[6].value;
 		
-		console.log('whatsapp', whatsapp, preferWhatsapp);
-		
-		// Check if email is unique
-		const resultEmail = await axios.post(apiV1 + 'account/checkEmailUnique', {email});
-		if (!resultEmail.data.status) {
+		// check if username meets length requirements
+		if (username.length > 20 || username.length < 5) {
 			target[1].classList.add('is-invalid');
-			setAlertMessage('Email is already in use');
-			setIsLoading(false);
+			setAlertMessage('Username needs to be between 5 to 20 characters');
+			return;
+		}
+		
+		// Check if username has invalid characters
+		const usernameRegex = /^[a-zA-Z0-9]+$/;
+		if (!username.match(usernameRegex)) {
+			target[1].classList.add('is-invalid');
+			setAlertMessage('Username must not contain invalid characters');
+			return;
+		}
+		
+		// Check if username is unique
+		const resultUsername = await axios.post(apiV1 + 'account/checkUnique', {username});
+		if (!resultUsername.data.status) {
+			target[1].classList.add('is-invalid');
+			setAlertMessage('Username is already in use');
 			return;
 		}
 		
@@ -95,23 +106,23 @@ function Account({user, profileImage, loginFn, apiV1}) {
 		{
 			target[2].classList.add('is-invalid');
 			setAlertMessage('Password is too short');
-			setIsLoading(false);
 			return;
 		}
 		
 		const data = new FormData();
 		data.append('profilePicture', profilePicture);
-		data.append('email', email);
+		data.append('username', username);
 		data.append('password', password);
 		data.append('name', name);
 		data.append('pronouns', pronouns);
 		data.append('whatsapp', whatsapp);
 		data.append('preferWhatsapp', preferWhatsapp);
 		
+		setIsLoading(true);
 		const result = await axios.post(apiV1 + 'account/register', data,
 			{headers: {'Content-Type': 'multipart/form-data'}});
-		
 		setIsLoading(false);
+		
 		if (result.data.status) {
 			navigate('/account#login');
 		}
@@ -146,8 +157,8 @@ function Account({user, profileImage, loginFn, apiV1}) {
 					
 					<Form method='post' onSubmit={loginSubmit} className='my-5'>
 						<Form.Group className="mb-3">
-							<Form.Label>Email</Form.Label>
-							<Form.Control name='email' type='email' placeholder='example@email.com' required/>
+							<Form.Label>Username</Form.Label>
+							<Form.Control name='username' type='text' placeholder='Username' required/>
 						</Form.Group>
 						
 						<Form.Group className="mb-3">
@@ -159,6 +170,14 @@ function Account({user, profileImage, loginFn, apiV1}) {
 							Submit
 						</Button>
 					</Form>
+					
+					{
+						alertMessage === '' ? '' : (
+							<Alert variant='danger'>
+								{alertMessage}
+							</Alert>
+						)
+					}
 				</div>
 				
 				
@@ -180,10 +199,10 @@ function Account({user, profileImage, loginFn, apiV1}) {
 						</Form.Group>
 						
 						<Form.Group className="mb-3">
-							<Form.Label>Email</Form.Label>
-							<Form.Control name='email' type="email" placeholder="example@email.com" required/>
+							<Form.Label>Username</Form.Label>
+							<Form.Control name='username' type="text" placeholder="5-20 characters" required/>
 							<Form.Text className="text-muted">
-								You do not need to verify this email
+								Your username must be unique
 							</Form.Text>
 						</Form.Group>
 						
@@ -249,16 +268,16 @@ function Account({user, profileImage, loginFn, apiV1}) {
 							Submit
 						</Button>
 					</Form>
+					
+					{
+						alertMessage === '' ? '' : (
+							<Alert variant='danger'>
+								{alertMessage}
+							</Alert>
+						)
+					}
 				</div>
 			</div>
-			
-			{
-				alertMessage === '' ? '' : (
-					<Alert variant='danger'>
-						{alertMessage}
-					</Alert>
-				)
-			}
 		
 		</Container>
 	)

@@ -2,12 +2,9 @@ import React, {useState} from "react";
 import {Button, Dropdown, Pagination} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 
-function header({title, residences, profileButtonText,
+function header({title, residences, buttonText, buttonFn,
 	                sortBy, currentSort, sortList,
 	                pageNav, currentPage, pageCount}) {
-	
-	const [sort, setSort] = useState(0);
-	const [page, setPage] = useState(1);
 	
 	const filterStyle = {
 		background: "var(--primary-color)",
@@ -33,14 +30,10 @@ function header({title, residences, profileButtonText,
 		);
 	}
 	
-	const profileButton = () => {
-		navigate('/profile')
-	}
-	
 	return (
 		<div className="custom-header shadow-lg">
-			<Button style={buttonStyle} variant={"secondary"} onClick={profileButton}>
-				{profileButtonText}
+			<Button style={buttonStyle} variant={"secondary"} onClick={buttonFn}>
+				{buttonText}
 			</Button>
 			<h2>{title}</h2><br/>
 			
@@ -67,13 +60,14 @@ function header({title, residences, profileButtonText,
 						{
 							sortList.map((f, i) => {
 								return (
-									<Dropdown.Item onClick={()=>sortBy(i)}>{f}</Dropdown.Item>
+									<Dropdown.Item onClick={() => sortBy(i)}>{f}</Dropdown.Item>
 								)
 							})
 						}
 					</Dropdown.Menu>
 				</Dropdown>
 			</div>
+			
 		</div>
 	)
 }

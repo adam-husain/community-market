@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Button, Container, Modal} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Container, Modal, Toast} from "react-bootstrap";
 import Card from "./card";
 import Header from "./header";
 import axios from "axios";
@@ -13,6 +13,17 @@ function Market({residences, products, productImage, user, apiV1}) {
 	const sortList = ['Newest', 'Oldest', 'Lowest Price', 'Highest Price'];
 	const maxItemsPerPage = 12;
 	const pageCount = Math.ceil(products.length / maxItemsPerPage);
+	const [displayProducts, setDisplayProducts] = useState([]);
+	const [showReportSuccess, setShowReportSuccess] = useState(false);
+	
+	useEffect(() => {
+		if (products.length === 0) {
+			navigate('/')
+			return;
+		}
+		pageNav(1);
+		sortBy(0);
+	}, [])
 	
 	const pageStyle = {
 		display: 'flex',
@@ -62,35 +73,102 @@ function Market({residences, products, productImage, user, apiV1}) {
 			navigate('/chats#' + response.data.result);
 		}
 	}
-	const submitReport = (p) => {
-		// todo: Submit report
+	const submitReport = async (p) => {
+		setShowReportModal(false);
+		const data = {
+			id: p._id
+		}
+		const response = await axios.post(apiV1 + 'product/report', data);
+		if (response.data.status) {
+			setShowReportSuccess(true);
+		}
 	}
 	
 	const [sort, setSort] = useState(0);
 	const sortBy = (sortId) => {
 		setSort(sortId);
+		const sort0 = () => {
+			return products.sort(function(a, b) {
+				const x = a.date; const y = b.date;
+				return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+			});
+		}
+		
+		const sort1 = () => {
+			return products.sort(function(a, b) {
+				const x = a.date; const y = b.date;
+				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+			});
+		}
+		
+		const sort2 = () => {
+			return products.sort(function(a, b) {
+				const x = a.price; const y = b.price;
+				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+			});
+		}
+		
+		const sort3 = () => {
+			return products.sort(function(a, b) {
+				const x = a.price; const y = b.price;
+				return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+			});
+		}
+		
+		switch (sortId) {
+			case 0:
+				products = sort0();
+				break;
+			case 1:
+				products = sort1();
+				break;
+			case 2:
+				products = sort2();
+				break;
+			case 3:
+				products = sort3();
+				break
+			default:
+				break;
+		}
+		
+		pageNav(page)
 	}
 	
 	const [page, setPage] = useState(1);
 	const pageNav = (pageNum) => {
 		setPage(pageNum);
+		const start = (pageNum - 1) * maxItemsPerPage;
+		const end = start + maxItemsPerPage;
+		setDisplayProducts(products.slice(start, end));
+	}
+	
+	const editPage = () => {
+		navigate('/product');
 	}
 	
 	return (
 		<Container>
+			<Toast delay={2000} show={showReportSuccess} onClose={() => setShowReportSuccess(false)} autohide>
+				<Toast.Header>
+					<strong className="me-auto">Report Successful</strong>
+					<small></small>
+				</Toast.Header>
+			</Toast>
 			<Header title={'Market'}
 			        residences={residences}
 			        sortBy={sortBy}
 			        currentSort={sort}
 			        sortList={sortList}
-			        profileButtonText={'Sell Items'}
+			        buttonText={'Sell Items'}
+			        buttonFn={editPage}
 			        pageNav={pageNav}
 			        currentPage={page}
 			        pageCount={pageCount} />
 			
 			<div style={pageStyle}>
 				{
-					products.map((p) => {
+					displayProducts.map((p) => {
 						if (user._id == p.seller)
 							return '';
 						return (<Card product={p}

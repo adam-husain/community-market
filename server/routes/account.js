@@ -9,8 +9,7 @@ router.route('/register').post(upload.single('profilePicture'), register);
 router.route('/login').post(login);
 router.route('/edit').post(upload.single('profilePicture'), edit);
 router.route('/cookieLogin').post(cookieLogin);
-router.route('/checkEmailUnique').post(checkEmailUnique);
-// Todo: Update/Remove account
+router.route('/checkUnique').post(checkUnique);
 
 function hashPassword(password) {
 	return crypto.createHash('sha256').update(password).digest('hex');
@@ -30,13 +29,13 @@ async function register(req, res) {
 	}
 	
 	const profilePicture = filename;
-	const email = body.email;
+	const username = body.username;
 	const password = hashPassword(body.password);
 	const name = body.name;
 	const pronouns = body.pronouns;
 	const preferWhatsapp = body.preferWhatsapp;
 	const whatsapp = body.whatsapp;
-	const newUser = new User({email, password, name, pronouns, profilePicture, preferWhatsapp, whatsapp});
+	const newUser = new User({username, password, name, pronouns, profilePicture, preferWhatsapp, whatsapp});
 	
 	newUser.save()
 		.then(user => res.json({status: true, result: user}))
@@ -46,11 +45,11 @@ async function register(req, res) {
 async function login(req, res) {
 	const body = req.body;
 	
-	const email = body.email;
+	const username = body.username;
 	const password = hashPassword(body.password);
 	let user;
 	try {
-		const filter = {email, password};
+		const filter = {username, password};
 		const update = {$push: {sessions: {}}};
 		const options = {returnDocument: 'after'};
 		user = await User.findOneAndUpdate(filter, update, options);
@@ -94,13 +93,13 @@ function cookieLogin(req, res) {
 	
 	const session = body.session;
 	User.findOne({sessions: {$elemMatch: {_id: session}}})
-		.then(user => res.json({status: true, result: user}))
+		.then(user => res.json({status: user != null, result: user}))
 		.catch(err => res.status(400).json({status: false, result: err}));
 }
 
-function checkEmailUnique(req, res) {
-	const email = req.body.email;
-	User.find({email})
+function checkUnique(req, res) {
+	const username = req.body.username;
+	User.find({username})
 		.then(users => res.json({status: users.length === 0, result: {}}))
 		.catch(err => res.status(400).json({status: false, result: err}));
 }

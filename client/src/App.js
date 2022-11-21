@@ -33,6 +33,7 @@ function App() {
 	const [products, setProducts] = useState([]);
 	const [user, setUser] = useState({});
 	const [errorMessage, setErrorMessage] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
 	
 	useEffect(getAllData, []);
 	
@@ -42,6 +43,7 @@ function App() {
 	 * @returns {Promise<void>}
 	 */
 	async function getAllData() {
+		setIsLoading(true);
 		try {
 			await getProducts();
 		} catch (e) {
@@ -50,8 +52,8 @@ function App() {
 		
 		await getResidences();
 		await cookieLogin();
-		document.getElementsByClassName('loaderPage')[0]
-			.classList.add('fade');
+		//document.getElementsByClassName('loaderPage')[0].classList.add('fade');
+		setIsLoading(false);
 	}
 	
 	function error(message = 'Error! Cannot connect to database\nTry again later') {
@@ -62,7 +64,7 @@ function App() {
 	async function cookieLogin() {
 		const session = cookies.get('session');
 		
-		if (session == undefined || session == '') return;
+		if (session === undefined || session === '') return;
 		
 		const response = await axios.post(apiV1 + 'account/cookieLogin', {session});
 		if (!response.data.status) return;
@@ -75,11 +77,15 @@ function App() {
 		const status = response.data.status;
 		const result = response.data.result;
 		
-		if (!status || response.status == 400) {
+		if (!status || response.status === 400) {
 			error();
 			return;
 		}
 		
+		for (let i = 0; i < result.length; i++) {
+			if (typeof result[i].date === "string")
+				result[i].date = Date.parse(result[i].date);
+		}
 		setProducts(result);
 	}
 	
@@ -88,7 +94,7 @@ function App() {
 		const status = response.data.status;
 		const result = response.data.result;
 		
-		if (!status || response.status == 400) {
+		if (!status || response.status === 400) {
 			error();
 			return;
 		}
@@ -96,7 +102,7 @@ function App() {
 		let resCopy = [];
 		for (const r of result) {
 			const resData = cookies.get(r.shortName)
-			r.selected = !(resData == undefined || resData == '0');
+			r.selected = !(resData === undefined || resData == 0);
 			resCopy.push(r);
 		}
 		
@@ -116,8 +122,8 @@ function App() {
 		cookies.set('session', '')
 	}
 	
-	return (
-		<div className="app">
+	if (isLoading) {
+		return (
 			<div className='loaderPage'>
 				<h3 className='me-2'>
 					Loading
@@ -126,75 +132,89 @@ function App() {
 				<Spinner className='mx-2' animation="grow" size='sm'/>
 				<Spinner className='mx-2' animation="grow" size='sm'/>
 			</div>
-			<div className='errorPage'>
-				<Alert variant="danger">
-					{errorMessage}
-				</Alert>
+		)
+	}
+	else {
+		return (
+			<div className="app">
+				<div className='loaderPage fade'>
+					<h3 className='me-2'>
+						Loading
+					</h3>
+					<Spinner className='mx-2' animation="grow" size='sm'/>
+					<Spinner className='mx-2' animation="grow" size='sm'/>
+					<Spinner className='mx-2' animation="grow" size='sm'/>
+				</div>
+				<div className='errorPage'>
+					<Alert variant="danger">
+						{errorMessage}
+					</Alert>
+				</div>
+				<Navbar bg="dark" variant="dark" expand="sm">
+					<Container>
+						<Navbar.Brand as={Link} to={'/'}>
+							<img
+								src={logo}
+								width="30"
+								height="30"
+								className="d-inline-block align-top"
+								alt="Logo"
+							/>
+						</Navbar.Brand>
+						<Navbar.Toggle aria-controls="basic-navbar-nav"/>
+						<Navbar.Collapse id="basic-navbar-nav">
+							<Nav variant='pills' className="me-auto">
+								<Nav.Link as={Link} to={'/market'}>Market</Nav.Link>
+								<Nav.Link as={Link} to={'/forum'}>Forum</Nav.Link>
+								<Nav.Link as={Link} to={'/profile'}>Dashboard</Nav.Link>
+								<Nav.Link as={Link} to={'/chats'}>Chats</Nav.Link>
+								<NavDropdown title="Support" id="basic-nav-dropdown">
+									<NavDropdown.Item as={Link} to={'/contact'}>Contact</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to={'/help'}>Help</NavDropdown.Item>
+									<NavDropdown.Divider/>
+									<NavDropdown.Item as={Link} to={'/about'}>About</NavDropdown.Item>
+								</NavDropdown>
+							</Nav>
+						</Navbar.Collapse>
+					</Container>
+				</Navbar>
+				<div className='my-4'/>
+				<Routes>
+					<Route path='/' element={<Home residences={residences}/>}/>
+					<Route path='/market' element={<Market residences={residences}
+					                                       products={products}
+					                                       productImage={productImage}
+					                                       apiV1={apiV1}
+					                                       user={user}/>}/>
+					<Route path='/profile' element={<Profile residences={residences}
+					                                         products={products}
+					                                         user={user}
+					                                         profileImage={profileImage}
+					                                         productImage={productImage}
+					                                         logoutFn={logout}/>}/>
+					<Route path='/account' element={<Account user={user}
+					                                         apiV1={apiV1}
+					                                         profileImage={profileImage}
+					                                         loginFn={login}/>}/>
+					<Route path='/editAccount' element={<EditAccount user={user}
+					                                                 apiV1={apiV1}
+					                                                 refresh={getAllData}
+					                                                 profileImage={profileImage} />}/>
+					<Route path='/product' element={<Product residences={residences}
+					                                         user={user}
+					                                         apiV1={apiV1}
+					                                         refresh={getAllData}
+					                                         productImage={productImage}/>}/>
+					<Route path='/chats' element={<Chats user={user}
+					                                     profileImage={profileImage}
+					                                     apiV1={apiV1}/>}/>
+					<Route path='/help' element={<Help/>}/>
+					<Route path='/about' element={<About residences={residences}/>}/>
+					<Route path='*' element={<Invalid/>}/>
+				</Routes>
 			</div>
-			<Navbar bg="dark" variant="dark" expand="sm">
-				<Container>
-					<Navbar.Brand as={Link} to={'/'}>
-						<img
-							src={logo}
-							width="30"
-							height="30"
-							className="d-inline-block align-top"
-							alt="Logo"
-						/>
-					</Navbar.Brand>
-					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav variant='pills' className="me-auto">
-							<Nav.Link as={Link} to={'/market'}>Market</Nav.Link>
-							<Nav.Link as={Link} to={'/forum'}>Forum</Nav.Link>
-							<Nav.Link as={Link} to={'/profile'}>Dashboard</Nav.Link>
-							<Nav.Link as={Link} to={'/chats'}>Chats</Nav.Link>
-							<NavDropdown title="Support" id="basic-nav-dropdown">
-								<NavDropdown.Item as={Link} to={'/contact'}>Contact</NavDropdown.Item>
-								<NavDropdown.Item as={Link} to={'/help'}>Help</NavDropdown.Item>
-								<NavDropdown.Divider/>
-								<NavDropdown.Item as={Link} to={'/about'}>About</NavDropdown.Item>
-							</NavDropdown>
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
-			<div className='my-4'/>
-			<Routes>
-				<Route path='/' element={<Home residences={residences}/>}/>
-				<Route path='/market' element={<Market residences={residences}
-				                                       products={products}
-				                                       productImage={productImage}
-				                                       apiV1={apiV1}
-				                                       user={user}/>}/>
-				<Route path='/profile' element={<Profile residences={residences}
-				                                         products={products}
-				                                         user={user}
-				                                         profileImage={profileImage}
-				                                         productImage={productImage}
-				                                         logoutFn={logout}/>}/>
-				<Route path='/account' element={<Account user={user}
-				                                         apiV1={apiV1}
-				                                         profileImage={profileImage}
-				                                         loginFn={login}/>}/>
-				<Route path='/editAccount' element={<EditAccount user={user}
-				                                                 apiV1={apiV1}
-				                                                 refresh={getAllData}
-				                                                 profileImage={profileImage} />}/>
-				<Route path='/product' element={<Product residences={residences}
-				                                         user={user}
-				                                         apiV1={apiV1}
-				                                         refresh={getAllData}
-				                                         productImage={productImage}/>}/>
-				<Route path='/chats' element={<Chats user={user}
-				                                     profileImage={profileImage}
-				                                     apiV1={apiV1}/>}/>
-				<Route path='/help' element={<Help/>}/>
-				<Route path='/about' element={<About residences={residences}/>}/>
-				<Route path='*' element={<Invalid/>}/>
-			</Routes>
-		</div>
-	);
+		);
+	}
 	
 }
 

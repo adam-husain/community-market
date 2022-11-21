@@ -7,6 +7,7 @@ import { solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 /**
  * The product card component
  * @param product Product object
+ * @param productImage
  * @param contactFn Contact function (set undefined to hide button)
  * @param reportFn Report function (set undefined to hide button)
  * @param removeFn Remove product function (set undefined to hide button)
@@ -64,7 +65,7 @@ function Card({product, productImage, contactFn, reportFn, removeFn}) {
 					) : ''
 				}
 				<div className={'product-price'}>
-					RM {product.price}
+					RM {product.price === 0 ? 'FREE' : product.price}
 				</div>
 			</div>
 			<div className={'product-description'}>

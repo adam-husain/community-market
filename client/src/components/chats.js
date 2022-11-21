@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Badge, Button, Container, ListGroup} from "react-bootstrap";
+import {Alert, Badge, Button, Container, ListGroup, Modal} from "react-bootstrap";
 import './styles/chats.css';
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -14,6 +14,11 @@ function Chats({user, profileImage, apiV1}) {
 	const [showChat, setShowChat] = useState(false);
 	const [chats, setChats] = useState([]);
 	const [currentChat, setCurrentChat] = useState({});
+	const [contactModel, setContactModal] = useState(false);
+	
+	const modalBgStyle = {
+		backdropFilter: 'blur(8px)'
+	}
 	
 	useEffect(setup, []);
 	function setup() {
@@ -59,7 +64,13 @@ function Chats({user, profileImage, apiV1}) {
 		const chatId = getChatID();
 		const response = await axios.get(apiV1 + 'chat/' + chatId);
 		if (response.data.status)
-			setCurrentChat(response.data.result);
+		{
+			const chat = response.data.result;
+			setCurrentChat(chat);
+			if (chat.seller.preferWhatsapp) {
+				setContactModal(true);
+			}
+		}
 	}
 	
 	function closeChat() {
@@ -195,6 +206,30 @@ function Chats({user, profileImage, apiV1}) {
 				</form>
 				
 			</div>
+			
+			<Modal centered style={modalBgStyle} show={contactModel} onHide={() => setContactModal(false)}>
+				<Modal.Header style={{background: 'var(--primary-color)'}}  closeButton>
+					<Modal.Title>Contact {currentChat.seller? currentChat.seller.name : ' this seller '} through Whatsapp</Modal.Title>
+				</Modal.Header>
+				<Modal.Body style={{background: 'var(--primary-color)'}} >
+					This seller prefers to chat through Whatsapp.
+					The below button will redirect you to Whatsapp chat.
+				</Modal.Body>
+				<Modal.Footer style={{background: 'var(--primary-color)'}} >
+					<a className={'btn btn-primary'} target="_blank" href={
+						currentChat.seller ?
+						'https://wa.me/' +
+						currentChat.seller.whatsapp.slice(1) +
+						'?text=Hello.%20I%20am%20interested%20in%20purchasing%20' +
+						currentChat.product.title +
+						'%20you%20have%20listed%20in%20the%20Residence%20Marketplace%20website'
+							:
+							''
+					}>
+						Start Chatting
+					</a>
+				</Modal.Footer>
+			</Modal>
 		</Container>
 	);
 }

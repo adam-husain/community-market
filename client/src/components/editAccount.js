@@ -23,7 +23,7 @@ function EditAccount({user, profileImage, apiV1, refresh}) {
 	const [previewUrl, setPreviewUrl] = useState(DefaultImage);
 	const [isLoading, setIsLoading] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
-	const pronounsList = ['Rather not say', 'He/Him', 'She/Her', 'They/THem'];
+	const pronounsList = ['Rather not say', 'He/Him', 'She/Her', 'They/Them'];
 	
 	const previewProfileImage = (e) => {
 		if (!e.target.files || e.target.files.length === 0) {
@@ -66,7 +66,6 @@ function EditAccount({user, profileImage, apiV1, refresh}) {
 		setIsLoading(true);
 		const result = await axios.post(apiV1 + 'account/edit', data,
 			{headers: {'Content-Type': 'multipart/form-data'}});
-		console.log(result);
 		setIsLoading(false);
 		
 		if (result.data.status) {
@@ -101,10 +100,10 @@ function EditAccount({user, profileImage, apiV1, refresh}) {
 					</Form.Group>
 					
 					<Form.Group className="mb-3">
-						<Form.Label>Email</Form.Label>
-						<Form.Control disabled={true} name='email' type="email" defaultValue={user.email}/>
+						<Form.Label>Username</Form.Label>
+						<Form.Control disabled={true} name='username' type="text" defaultValue={user.username}/>
 						<Form.Text className="text-muted">
-							You cannot edit email
+							You cannot edit username
 						</Form.Text>
 					</Form.Group>
 					

@@ -11,8 +11,11 @@ function Profile({residences, products, user, profileImage, productImage, logout
 	
 	useEffect(() => {
 		if (user.name === undefined) {
-			navigate('/account#login')
+			navigate('/account#login');
+			return;
 		}
+		
+		
 	}, [])
 	
 	const [showRemoveProductModal, setShowRemoveProductModal] = useState(false);
@@ -50,7 +53,8 @@ function Profile({residences, products, user, profileImage, productImage, logout
 	
 	const arrowStyle = {
 		marginRight: '10px',
-		transform: 'rotate(0deg)',
+		// todo: Change to rotate(0deg)
+		transform: 'rotate(180deg)',
 		transition: 'transform 0.5s ease'
 	}
 	
@@ -76,6 +80,7 @@ function Profile({residences, products, user, profileImage, productImage, logout
 	const modalBgStyle = {
 		backdropFilter: 'blur(8px)'
 	}
+	
 	
 	const toggleAccordion = (e) => {
 		const target = e.target;
@@ -155,9 +160,9 @@ function Profile({residences, products, user, profileImage, productImage, logout
 					<img src={profileImage + user.profilePicture} className='picture-preview mb-4' alt='Profile Picture'/>
 					
 					<div style={profileContentStyle}>
-						<b>Email</b>
+						<b>Username</b>
 						<div>
-							{user.email}
+							{user.username}
 						</div>
 					</div>
 					<div style={profileContentStyle}>
@@ -213,6 +218,11 @@ function Profile({residences, products, user, profileImage, productImage, logout
 							              removeFn={removeProductModal}
 							/>)
 						})
+					}
+					
+					{
+						document.getElementsByClassName('card').length === 0 ?
+							'You do not have any products at the moment' : ''
 					}
 				
 				</div>

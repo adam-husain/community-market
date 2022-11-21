@@ -8,6 +8,8 @@ router.route('/all').get(allProducts);
 const multer = require("multer");
 const upload = multer({ dest: 'public/product/' });
 router.route('/new').post(upload.single('picture'), newProduct);
+router.route('/edit').post(edit);
+router.route('/report').post(report);
 
 
 function allProducts(req, res) {
@@ -40,6 +42,14 @@ async function newProduct(req, res) {
 	newProd.save()
 		.then(prod => res.json({status: true, result: prod}))
 		.catch(err => res.status(400).json({status: false, result: err}));
+}
+
+function edit(req, res) {
+
+}
+
+function report(req, res) {
+	res.json({status: true, result: {}})
 }
 
 module.exports = router;

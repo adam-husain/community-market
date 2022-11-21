@@ -13,7 +13,19 @@ router.route('/delete').post(deleteChat);
 
 async function getChat(req, res) {
 	const chatId = req.params.chatId;
-	const chat = await Chat.findOne({_id: chatId});
+	let chat = await Chat.findOne({_id: chatId});
+	const product = await Product.findOne({_id: chat.product})
+	const seller = await User.findOne({_id: product.seller});
+	const buyer = await User.findOne({_id: chat.buyer});
+	chat = {
+		_id: chat._id,
+		chatSession: chat.chatSession,
+		messages: chat.messages,
+		visible: chat.visible,
+		createdAt: chat.createdAt,
+		updatedAt: chat.updatedAt,
+		product, seller, buyer
+	};
 	res.json({status: true, result: chat});
 }
 
@@ -68,7 +80,6 @@ async function newChat(req, res) {
 	const existing = await Chat.findOne({chatSession, product, buyer});
 	
 	if (existing) {
-		console.log('Existing:', existing);
 		res.json({status: true, result: existing._id})
 		return;
 	}
@@ -90,6 +101,7 @@ async function sendChat(req, res) {
 	const sender = body.sender;
 	
 	const response = await Chat.updateOne({chatSession}, {$push: {messages: {message, sender}}, visible: true});
+	console.log(response);
 	res.json({status: true, result: response});
 }
 
