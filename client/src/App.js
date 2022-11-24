@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Route, Routes} from 'react-router-dom';
+import {Alert, Spinner} from "react-bootstrap";
 import Cookies from "universal-cookie";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -20,7 +21,7 @@ import Account from './components/account';
 import EditAccount from './components/editAccount';
 import Market from './components/market';
 import Invalid from './components/invalid';
-import {Alert, Spinner} from "react-bootstrap";
+import EditProduct from "./components/editProduct";
 
 function App() {
 	
@@ -189,6 +190,8 @@ function App() {
 					<Route path='/profile' element={<Profile residences={residences}
 					                                         products={products}
 					                                         user={user}
+					                                         apiV1={apiV1}
+					                                         refresh={getAllData}
 					                                         profileImage={profileImage}
 					                                         productImage={productImage}
 					                                         logoutFn={logout}/>}/>
@@ -201,6 +204,11 @@ function App() {
 					                                                 refresh={getAllData}
 					                                                 profileImage={profileImage} />}/>
 					<Route path='/product' element={<Product residences={residences}
+					                                         user={user}
+					                                         apiV1={apiV1}
+					                                         refresh={getAllData}
+					                                         productImage={productImage}/>}/>
+					<Route path='/editProduct' element={<EditProduct residences={residences}
 					                                         user={user}
 					                                         apiV1={apiV1}
 					                                         refresh={getAllData}

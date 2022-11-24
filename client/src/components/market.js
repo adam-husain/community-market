@@ -175,8 +175,7 @@ function Market({residences, products, productImage, user, apiV1}) {
 						              residences={residences}
 						              productImage={productImage}
 						              contactFn={contactModal}
-						              reportFn={reportModal}
-						              removeFn={undefined} />);
+						              reportFn={reportModal} />);
 					})
 				}
 			</div>

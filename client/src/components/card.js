@@ -11,10 +11,11 @@ import { solid} from '@fortawesome/fontawesome-svg-core/import.macro'
  * @param contactFn Contact function (set undefined to hide button)
  * @param reportFn Report function (set undefined to hide button)
  * @param removeFn Remove product function (set undefined to hide button)
+ * @param editFn
  * @returns {JSX.Element}
  * @constructor
  */
-function Card({product, productImage, contactFn, reportFn, removeFn}) {
+function Card({product, productImage, contactFn, reportFn, removeFn, editFn}) {
 	
 	const expandCard = (id) => {
 		const target = document.getElementById(id);
@@ -47,9 +48,12 @@ function Card({product, productImage, contactFn, reportFn, removeFn}) {
 			     src={productImage + product.picture}
 			     alt={'image of ' + product.title}/>
 			<div>
-				<button onClick={() => expandCard(product._id)} className={'card-button'}>
-					<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("navicon")}/>
-				</button>
+				{
+					editFn == undefined ? (
+					<button onClick={() => expandCard(product._id)} className={'card-button'}>
+						<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("navicon")}/>
+					</button>) : ''
+				}
 				{
 					reportFn != undefined ? (
 						<button onClick={() => reportFn(product)} className={'card-button'}>
@@ -61,6 +65,13 @@ function Card({product, productImage, contactFn, reportFn, removeFn}) {
 					removeFn != undefined ? (
 						<button onClick={() => removeFn(product)} className={'card-button'}>
 							<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("trash-can")}/>
+						</button>
+					) : ''
+				}
+				{
+					editFn != undefined ? (
+						<button onClick={() => editFn(product)} className={'card-button'}>
+							<FontAwesomeIcon style={{width: '-webkit-fill-available'}} icon={solid("edit")}/>
 						</button>
 					) : ''
 				}

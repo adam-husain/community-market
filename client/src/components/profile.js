@@ -4,19 +4,15 @@ import {useNavigate} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 import Card from "./card";
+import axios from "axios";
 
-function Profile({residences, products, user, profileImage, productImage, logoutFn}) {
+function Profile({residences, apiV1, refresh, products, user, profileImage, productImage, logoutFn}) {
 	
 	const navigate = useNavigate();
-	
-	useEffect(() => {
-		if (user.name === undefined) {
-			navigate('/account#login');
-			return;
-		}
-		
-		
-	}, [])
+	if (user.name === undefined) {
+		navigate('/account#login');
+		return;
+	}
 	
 	const [showRemoveProductModal, setShowRemoveProductModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
@@ -110,17 +106,27 @@ function Profile({residences, products, user, profileImage, productImage, logout
 		setShowRemoveProductModal(false);
 	}
 	
-	const removeProductModal = (p) => {
+	function removeProductModal(p) {
 		setSelectedProduct(p);
 		setShowRemoveProductModal(true);
+	}
+	
+	const editProduct = (p) => {
+		navigate('/editProduct#' + p._id);
 	}
 	
 	const removePostModal = (p) => {
 	
 	}
 	
-	const submitRemoveProduct = (p) => {
-		// todo: submit removal
+	const submitRemoveProduct = async (p) => {
+		const data = {
+			id: p._id
+		};
+		const response = await axios.post(apiV1 + 'product/remove', data);
+		if (response.data.status) {
+			refresh();
+		}
 	}
 	
 	const submitRemovePost = (p) => {
@@ -216,13 +222,9 @@ function Profile({residences, products, user, profileImage, productImage, logout
 							return (<Card product={p}
 							              productImage={productImage}
 							              removeFn={removeProductModal}
+							              editFn={editProduct}
 							/>)
 						})
-					}
-					
-					{
-						document.getElementsByClassName('card').length === 0 ?
-							'You do not have any products at the moment' : ''
 					}
 				
 				</div>
@@ -230,7 +232,7 @@ function Profile({residences, products, user, profileImage, productImage, logout
 			
 			<Modal style={modalBgStyle} show={showRemoveProductModal} onHide={closeModal}>
 				<Modal.Header style={{background: 'var(--primary-color)'}} closeButton>
-					<Modal.Title>Remove {selectedProduct}</Modal.Title>
+					<Modal.Title>Remove {selectedProduct.title}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body style={{background: 'var(--primary-color)'}}>
 					{

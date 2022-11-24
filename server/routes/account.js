@@ -72,7 +72,10 @@ async function edit(req, res) {
 	const whatsapp = body.whatsapp;
 	
 	const currentUser = await User.findOne({_id});
-	if (!currentUser || !currentUser._id) res.json({status: false, result: {}});
+	if (currentUser === null || !currentUser._id) {
+		res.json({status: false, result: {}});
+		return;
+	}
 	
 	
 	let profilePicture = currentUser.profilePicture;
