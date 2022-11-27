@@ -765,7 +765,7 @@ function SqlParser(req, res) {
 		field = field.slice(1, -1);
 		const values = field.split(',');
 		for (let i = 0; i < finalUser.length; i++){
-			if (finalUser[i].tempId === values[1]) {
+			if (finalUser[i].tempId == values[1]) {
 				finalUser[i].sessions.push({
 					_id: values[0].slice(1, -1)
 				})
@@ -799,7 +799,7 @@ function SqlParser(req, res) {
 			});
 	}
 	
-	res.json(finalProduct)
+	res.json(finalUser)
 }
 
 module.exports = router;

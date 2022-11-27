@@ -96,7 +96,7 @@ function cookieLogin(req, res) {
 	
 	const session = body.session;
 	console.log(session);
-	User.findOne({sessions: {$elemMatch: {_id: session}}})
+	User.findOne({sessions: {$elemMatch: {session}}})
 		.then(user => res.json({status: user != null, result: user}))
 		.catch(err => res.status(400).json({status: false, result: err}));
 }

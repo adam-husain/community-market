@@ -62,15 +62,18 @@ function App() {
 		document.getElementsByClassName('errorPage')[0].classList.add('show');
 	}
 	
-	async function cookieLogin() {
+	function cookieLogin() {
 		const session = cookies.get('session');
 		
 		if (session === undefined || session === '') return;
 		
-		const response = await axios.post(apiV1 + 'account/cookieLogin', {session});
-		if (!response.data.status) return;
+		axios.post(apiV1 + 'account/cookieLogin', {session})
+			.then(response => {
+				if (!response.data.status) return;
+				setUser(response.data.result);
+			})
+			.catch(e => console.error(e));
 		
-		setUser(response.data.result);
 	}
 	
 	async function getProducts() {
