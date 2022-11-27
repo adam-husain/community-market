@@ -25,9 +25,9 @@ import EditProduct from "./components/editProduct";
 
 function App() {
 	
-	const apiV1 = 'http://localhost:5000/api/v1/';
-	const profileImage = 'http://localhost:5000/public/profile/';
-	const productImage = 'http://localhost:5000/public/product/';
+	const apiV1 = 'http://34.143.254.186:5000/api/v1/';
+	const profileImage = 'http://34.143.254.186:5000/public/profile/';
+	const productImage = 'http://34.143.254.186:5000/public/product/';
 	
 	const cookies = new Cookies();
 	const [residences, setResidences] = useState([]);

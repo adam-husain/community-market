@@ -9,10 +9,12 @@ import axios from "axios";
 function Profile({residences, apiV1, refresh, products, user, profileImage, productImage, logoutFn}) {
 	
 	const navigate = useNavigate();
-	if (user.name === undefined) {
-		navigate('/account#login');
-		return;
-	}
+	
+	useEffect(() => {
+		if (!user.name) {
+			navigate('/account#login');
+		}
+	}, []);
 	
 	const [showRemoveProductModal, setShowRemoveProductModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
