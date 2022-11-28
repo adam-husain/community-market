@@ -5,13 +5,6 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const fs = require('fs');
 
-const http = require('http');
-const https = require('https');
-const privateKey = fs.readFileSync('cert/private.key', 'utf8');
-const certificate = fs.readFileSync('cert/certificate.crt', 'utf8');
-
-const credentials = {key: privateKey, cert: certificate};
-
 require('dotenv').config();
 
 const app = express();
@@ -64,8 +57,6 @@ app.get('/public/product/:file',
 		res.sendFile(path.join(file))
 	});
 
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
-
-httpServer.listen(80);
-httpsServer.listen(443);
+app.listen(port, () => {
+	console.log(`Server is running on port: ${port}`);
+});
