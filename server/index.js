@@ -64,8 +64,10 @@ app.get('/public/product/:file',
 	});
 
 app.use(express.static(path.join(__dirname, 'build')));
-const routes = ['/', '/:page'];
-app.get(routes, function (req, res) {
+app.get('/', function (req, res) {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+app.get('/:page', function (req, res) {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
