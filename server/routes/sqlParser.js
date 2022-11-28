@@ -767,7 +767,7 @@ function SqlParser(req, res) {
 		for (let i = 0; i < finalUser.length; i++){
 			if (finalUser[i].tempId == values[1]) {
 				finalUser[i].sessions.push({
-					_id: values[0].slice(1, -1)
+					session: values[0].slice(1, -1)
 				})
 			}
 		}
