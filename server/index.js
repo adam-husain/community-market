@@ -14,7 +14,7 @@ const credentials = {key: privateKey, cert: certificate};
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 443;
 
 app.use(cors());
 app.use(bodyParser.json());         // to support JSON-encoded bodies
@@ -63,8 +63,12 @@ app.get('/public/product/:file',
 		res.sendFile(path.join(file))
 	});
 
-const server = https.createServer(credentials, app);
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', function (req, res) {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
+const server = https.createServer(credentials, app);
 server.listen(port, () => {
 	console.log("server starting on port : " + port)
 });
