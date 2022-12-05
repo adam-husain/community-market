@@ -1,8 +1,7 @@
 sudo forever stopall
-sudo fuser -k 443/tcp
 git pull
-cd ./server/
-sudo forever start index.js
-cd ../client/
+cd ./client/
 sudo npm run build
-sudo serve -s build -l 443 --ssl-cert "cert/certificate.crt" --ssl-key "cert/private.key" --no-port-switching
+sudo mv -f build ../server/build
+cd ../server/
+sudo forver start index.js
