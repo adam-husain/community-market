@@ -1,4 +1,5 @@
 sudo forever stopall
+sudo killall -9 node
 git pull
 cd ./server/
 sudo forever start index.js
