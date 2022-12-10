@@ -22,6 +22,7 @@ import EditAccount from './components/editAccount';
 import Market from './components/market';
 import Invalid from './components/invalid';
 import EditProduct from "./components/editProduct";
+import Contact from "./components/contact";
 
 function App() {
 	
@@ -106,7 +107,7 @@ function App() {
 		let resCopy = [];
 		for (const r of result) {
 			const resData = cookies.get(r.shortName)
-			r.selected = !(resData === undefined || resData == 0);
+			r.selected = !(resData === undefined || resData === '0');
 			resCopy.push(r);
 		}
 		
@@ -221,6 +222,7 @@ function App() {
 					                                     apiV1={apiV1}/>}/>
 					<Route path='/help' element={<Help/>}/>
 					<Route path='/about' element={<About residences={residences}/>}/>
+					<Route path='/contact' element={<Contact />}/>
 					<Route path='*' element={<Invalid/>}/>
 				</Routes>
 			</div>
