@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Button, Container, Form, InputGroup} from "react-bootstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
@@ -6,10 +6,12 @@ import {useNavigate} from "react-router-dom";
 function Product({residences, productImage, apiV1, user, refresh}) {
 	
 	const navigate = useNavigate();
-	
-	if (user.name == undefined) {
-		navigate('/market');
-	}
+
+	useEffect(() => {
+		if (!user.name) {
+			navigate('/account');
+		}
+	}, []);
 	
 	const DefaultImage = productImage + 'default.jpg';
 	const [previewUrl, setPreviewUrl] = useState(DefaultImage);
