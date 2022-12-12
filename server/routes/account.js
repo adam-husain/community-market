@@ -20,7 +20,7 @@ async function register(req, res) {
 	const file = req.file;
 	
 	let filename = 'default.jpg';
-	if (file != undefined) {
+	if (file !== undefined) {
 		filename = file.filename + '.jpg';
 		await sharp(file.path).rotate()
 			.jpeg({quality: 80})
@@ -33,7 +33,7 @@ async function register(req, res) {
 	const password = hashPassword(body.password);
 	const name = body.name;
 	const pronouns = body.pronouns;
-	const preferWhatsapp = body.preferWhatsapp;
+	const preferWhatsapp = !!body.preferWhatsapp;
 	const whatsapp = body.whatsapp;
 	const newUser = new User({username, password, name, pronouns, profilePicture, preferWhatsapp, whatsapp});
 	
@@ -79,7 +79,7 @@ async function edit(req, res) {
 	
 	
 	let profilePicture = currentUser.profilePicture;
-	if (file != undefined) {
+	if (file !== undefined) {
 		profilePicture = file.filename + '.jpg';
 		await sharp(file.path).rotate()
 			.jpeg({quality: 80})

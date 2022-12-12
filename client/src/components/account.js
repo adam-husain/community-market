@@ -11,7 +11,7 @@ function Account({user, profileImage, loginFn, apiV1}) {
 	
 	const navigate = useNavigate();
 	
-	if (user.name != undefined) {
+	if (user.name !== undefined) {
 		navigate('/profile');
 	}
 	
@@ -124,10 +124,13 @@ function Account({user, profileImage, loginFn, apiV1}) {
 		setIsLoading(false);
 		
 		if (result.data.status) {
-			navigate('/account#login');
+			//navigate('/account#login');
+			toggleForms();
+			document.getElementById('username').value = username;
+			document.getElementById('password').value = password;
 		}
 		else {
-			setAlertMessage('Could not register! Try again later.')
+			setAlertMessage('Could not register! Try again later.');
 		}
 	}
 	
@@ -141,7 +144,7 @@ function Account({user, profileImage, loginFn, apiV1}) {
 	}
 	
 	const showLoginFirst = () => {
-		return window.location.hash == '#login'
+		return window.location.hash === '#login'
 	}
 	
 	return (
@@ -158,12 +161,12 @@ function Account({user, profileImage, loginFn, apiV1}) {
 					<Form method='post' onSubmit={loginSubmit} className='my-5'>
 						<Form.Group className="mb-3">
 							<Form.Label>Username</Form.Label>
-							<Form.Control name='username' type='text' placeholder='Username' required/>
+							<Form.Control id='username' name='username' type='text' placeholder='Username' required/>
 						</Form.Group>
 						
 						<Form.Group className="mb-3">
 							<Form.Label>Password</Form.Label>
-							<Form.Control name='password' type="password" placeholder="Password" required/>
+							<Form.Control id='password' name='password' type="password" placeholder="Password" required/>
 						</Form.Group>
 						
 						<Button variant="secondary" type="submit">

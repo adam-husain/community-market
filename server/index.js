@@ -4,8 +4,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require("path");
 const fs = require('fs');
-
 const https = require('https');
+const http = require('http');
+
+const isDev = false;
+
 const privateKey = fs.readFileSync('cert/private.key', 'utf8');
 const certificate = fs.readFileSync('cert/certificate.crt', 'utf8');
 
@@ -14,7 +17,13 @@ const credentials = {key: privateKey, cert: certificate};
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 443;
+let port;
+if (!isDev) {
+	port = process.env.PORT || 443;
+}
+else {
+	port = 80;
+}
 
 app.use(cors());
 app.keepalive = false;
@@ -64,15 +73,26 @@ app.get('/public/product/:file',
 		res.sendFile(path.join(file))
 	});
 
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-app.get('/:page', function (req, res) {
-	res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+if (!isDev) {
+	app.use(express.static(path.join(__dirname, 'build')));
+	app.get('/', function (req, res) {
+		res.sendFile(path.join(__dirname, 'build', 'index.html'));
+	});
+	app.get('/:page', function (req, res) {
+		res.sendFile(path.join(__dirname, 'build', 'index.html'));
+	});
+	app.get('/smr', function (req, res) {
+		res.sendFile(path.join(__dirname, 'build', 'index.html'));
+	});
 
-const server = https.createServer(credentials, app);
-server.listen(port, () => {
-	console.log("server starting on port : " + port)
-});
+	const server = https.createServer(credentials, app);
+	server.listen(port, () => {
+		console.log("server starting on port : " + port)
+	});
+}
+else {
+	const server = http.createServer(app);
+	server.listen(port, () => {
+		console.log("server starting on port : " + port)
+	});
+}

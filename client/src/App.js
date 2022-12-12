@@ -25,10 +25,14 @@ import EditProduct from "./components/editProduct";
 import Contact from "./components/contact";
 
 function App() {
-	
-	const apiV1 = 'https://myresidence.shop/api/v1/';
-	const profileImage = 'https://myresidence.shop/public/profile/';
-	const productImage = 'https://myresidence.shop/public/product/';
+
+	const isDev = false;
+	const domainUrl = 'https://myresidence.shop/';
+	const localUrl = 'http://localhost/';
+	const mainUrl = isDev ? localUrl : domainUrl;
+	const apiV1 = mainUrl + 'api/v1/';
+	const profileImage = mainUrl + 'public/profile/';
+	const productImage = mainUrl + 'public/product/';
 	
 	const cookies = new Cookies();
 	const [residences, setResidences] = useState([]);
@@ -60,7 +64,8 @@ function App() {
 	
 	function error(message = 'Error! Cannot connect to database\nTry again later') {
 		setErrorMessage(message)
-		document.getElementsByClassName('errorPage')[0].classList.add('show');
+		const errorPage = document.getElementsByClassName('errorPage')[0];
+		if (errorPage) errorPage.classList.add('show');
 	}
 	
 	function cookieLogin() {
