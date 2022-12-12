@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Alert, Button, Container, Form, InputGroup} from "react-bootstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
@@ -13,7 +13,7 @@ function EditProduct({residences, productImage, apiV1, user, refresh, editFn}) {
 	const [alertMessage, setAlertMessage] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	
-	if (user.name == undefined) {
+	if (user.name === undefined) {
 		navigate('/market');
 	}
 	
@@ -32,7 +32,6 @@ function EditProduct({residences, productImage, apiV1, user, refresh, editFn}) {
 				setCurrentProduct(product);
 			}
 			else {
-				console.log(response.data);
 				navigate('/market');
 			}
 		});

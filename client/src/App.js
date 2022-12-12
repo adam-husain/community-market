@@ -121,7 +121,7 @@ function App() {
 	
 	
 	function login(user) {
-		const session = user.sessions[user.sessions.length - 1]._id;
+		const session = user.sessions[user.sessions.length - 1].session;
 		// Set cookie for 600 days
 		cookies.set('session', session, {path: '/', maxAge: 51840000});
 		setUser(user);
